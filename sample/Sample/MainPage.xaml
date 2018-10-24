@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
+             x:Class="Sample.MainPage">
+
+    <Grid Margin="10">
+        <!-- Place new controls here -->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+      
+        <controls:TextBox Placeholder="Name"/>
+
+        <controls:TextBox Placeholder="Error" 
+                          ErrorText="An Error occured"
+                          HasError="True"
+                          Grid.Row="1"/>
+
+        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="2">
+            <controls:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Text}"/>
+                </DataTemplate>
+            </controls:ItemsControl.ItemTemplate>
+        </controls:ItemsControl>
+
+        <controls:FloatingActionButton
+            Grid.RowSpan="3"
+            VerticalOptions="End" 
+            Image="Icon.png"
+            Color="#0F3057"
+            Margin="20"
+            HorizontalOptions="End"
+            Clicked="FloatingActionButton_Clicked"/>
+    </Grid>
+
+</ContentPage>
