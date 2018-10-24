@@ -27,6 +27,7 @@
                     Font="16"
                     VerticalOptions="Center"
                     Grid.Row="1"
+                    InputTransparent="True"
                     TextColor="{TemplateBinding Path=PlaceholderColor, Mode=OneWay}"
                     Text="{TemplateBinding Path=Placeholder, Mode=OneWay}"/>
 
