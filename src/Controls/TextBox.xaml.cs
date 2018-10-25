@@ -24,7 +24,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             BindableProperty.Create(nameof(PlaceholderColor), typeof(Color), typeof(TextBox), Color.Gray);
 
         public static readonly BindableProperty TextProperty =
-            BindableProperty.Create(nameof(Text), typeof(string), typeof(TextBox), null);
+            BindableProperty.Create(nameof(Text), typeof(string), typeof(TextBox), propertyChanged: TextChanged);
 
         public static readonly BindableProperty BorderColorProperty =
             BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(TextBox), Color.Accent, propertyChanged: BorderColorChanged);
@@ -145,6 +145,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         private static void HasErrorChanged(BindableObject bindableObject, object oldColor, object newColor)
         {
             (bindableObject as TextBox)?.InvalidateBorderColor();
+            (bindableObject as TextBox)?.InvalidateErrorMessageVisibility();
         }
 
         private static void BorderColorChanged(BindableObject bindableObject, object oldColor, object newColor)
@@ -157,27 +158,33 @@ namespace IS.Toolkit.XamarinForms.Controls
             (bindableObject as TextBox)?.InvalidateBorderColor();
         }
 
-        private async void Entry_Focused(object sender, FocusEventArgs e)
+        private void Entry_Focused(object sender, FocusEventArgs e)
         {
-            PlaceholderView.FontSize = 10;
-            ErrorMessageView.IsVisible = HasError;
-            await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, 250, Easing.CubicOut);
+            InvalidateErrorMessageVisibility();
+            InvalidatePlaceholderPosition(true);
         }
 
         private void Entry_Unfocused(object sender, FocusEventArgs e)
         {
-            ErrorMessageView.IsVisible = false;
+            InvalidateErrorMessageVisibility();
             InvalidatePlaceholderPosition(true);
         }
 
         private async void InvalidatePlaceholderPosition(bool withAnimation)
         {
-            if (string.IsNullOrEmpty(Text))
+            if (string.IsNullOrEmpty(Text) && EntryView.IsFocused == false)
             {
                 if (PlaceholderView.Y != 0)
                 {
                     PlaceholderView.FontSize = 16;
-                    await ViewExtensions.TranslateTo(PlaceholderView, 0, 0, withAnimation ? (uint)250 : (uint)0, Easing.CubicOut);
+                    if (withAnimation)
+                    {
+                        await ViewExtensions.TranslateTo(PlaceholderView, 0, 0, (uint)250, Easing.CubicOut);
+                    }
+                    else
+                    {
+                        PlaceholderView.TranslationY = 0;
+                    }
                 }
             }
             else
@@ -185,9 +192,21 @@ namespace IS.Toolkit.XamarinForms.Controls
                 PlaceholderView.FontSize = 10;
                 if (PlaceholderView.Y != -20)
                 {
-                    await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, 0, Easing.CubicOut);
+                    if (withAnimation)
+                    {
+                        await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, (uint)250, Easing.CubicOut);
+                    }
+                    else
+                    {
+                        PlaceholderView.TranslationY = -20;
+                    }
                 }
             }
+        }
+
+        private void InvalidateErrorMessageVisibility()
+        {
+            ErrorMessageView.IsVisible = HasError;
         }
 
         internal Label PlaceholderView
