@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IS.Toolkit.XamarinForms.Controls.Expander"
+             x:Name="this">
+    <ContentView.Content>
+        <Grid>
+            <BoxView BackgroundColor="{Binding BorderColor, Source={x:Reference this}}"
+                     CornerRadius="{Binding CornerRadius, Source={x:Reference this}}"/>
+            <Grid Margin="{Binding BorderWidth, Source={x:Reference this}}">
+                <BoxView BackgroundColor="{Binding BackgroundColor, Source={x:Reference this}}"
+                         CornerRadius="{Binding CornerRadius, Source={x:Reference this}}" />
+                <Grid RowSpacing="0"
+                      ColumnSpacing="10"
+                      Padding="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+<!-- BEGIN HEADER -->
+                    <Image Grid.Row="0"
+                           Grid.Column="0"
+                           WidthRequest="32"
+                           Source="{Binding LeftIcon, Source={x:Reference this}}"
+                           Aspect="AspectFit" />
+                    <Image Grid.Row="0"
+                           Grid.Column="2"
+                           WidthRequest="32"
+                           Source="{Binding RightIcon, Source={x:Reference this}}"
+                           Aspect="AspectFit"
+                           x:Name="RightIconImage" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Text="{Binding HeaderText, Source={x:Reference this}}"
+                           TextColor="{Binding HeaderTextColor, Source={x:Reference this}}"
+                           FontFamily="{Binding HeaderFontFamily, Source={x:Reference this}}"
+                           FontAttributes="{Binding HeaderFontAttributes, Source={x:Reference this}}"
+                           VerticalOptions="Center" />
+                    
+                    <Button Grid.Row="0"
+                            Grid.ColumnSpan="3"
+                            BackgroundColor="Transparent"
+                            Clicked="Expander_Clicked" />
+                    <!-- END HEADER -->
+
+                    <StackLayout Grid.Row="1"
+                                 Grid.ColumnSpan="3"
+                                 IsClippedToBounds="True"
+                                 x:Name="ExpanderContainer">
+
+                        <BoxView IsVisible="{Binding HasSeparator, Source={x:Reference this}}"
+                                 HeightRequest="{Binding SeparatorHeight, Source={x:Reference this}}"
+                                 BackgroundColor="{Binding SeparatorColor, Source={x:Reference this}}"
+                                 Margin="0,5"/>
+                        <ContentView x:Name="ExpanderContent" />
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

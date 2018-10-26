@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controls\dropdown.png" />
+    <None Remove="Controls\Expander.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.46" PrivateAssets="All" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
@@ -24,6 +33,9 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Update="Controls\Expander\Expander.xaml.Cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
@@ -31,6 +43,12 @@
   
   <ItemGroup>
     <Folder Include="Controls\Android\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\Expander\Expander.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

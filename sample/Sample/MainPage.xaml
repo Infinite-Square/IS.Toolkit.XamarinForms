@@ -9,7 +9,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -19,17 +20,32 @@
                           ErrorText="An Error occured"
                           HasError="True"
                           Grid.Row="1"/>
+        
+        <controls:Expander HeaderText="HeaderText"
+                           HeaderTextColor="Black"
+                           BackgroundColor="#eeeeee"
+                           LeftIcon="Icon.png"
+                           Grid.Row="2"
+                           CornerRadius="10"
+                           IsOpen="True"
+                           Animated="False">
+            <controls:Expander.ExtendedContent>
+                <Label Text="CONTENT"
+                       FontAttributes="Bold" />
+            </controls:Expander.ExtendedContent>
+        </controls:Expander>
 
-        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="2">
+        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="3">
             <controls:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Text="{Binding Text}"/>
                 </DataTemplate>
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
+        
 
         <controls:FloatingActionButton
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             VerticalOptions="End" 
             Image="Icon.png"
             Color="#0F3057"
