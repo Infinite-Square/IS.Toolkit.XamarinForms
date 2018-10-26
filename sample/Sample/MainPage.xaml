@@ -23,12 +23,12 @@
         
         <controls:Expander HeaderText="HeaderText"
                            HeaderTextColor="Black"
-                           BackgroundColor="#eeeeee"
+                           BackgroundColor="WhiteSmoke"
                            LeftIcon="Icon.png"
                            Grid.Row="2"
                            CornerRadius="10"
-                           IsOpen="True"
-                           Animated="False">
+                           IsOpen="False"
+                           Animated="True">
             <controls:Expander.ExtendedContent>
                 <Label Text="CONTENT"
                        FontAttributes="Bold" />

@@ -251,6 +251,11 @@ namespace IS.Toolkit.XamarinForms.Controls
             if (control.OriginalContentHeight == default)
             {
                 control.OriginalContentHeight = control.ExpanderContainer.Height;
+                if (!control.IsOpen)
+                {
+                    // If not open, need to init container size
+                    control.ExpanderContainer.HeightRequest = 0;
+                }
             }
         }
 
@@ -276,7 +281,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 var control = (Expander)bindable;
                 var isOpen = (bool)newValue;
 
-                control.RightIconImage.RotateTo(isOpen ? 180 : 0);
+                control.RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
                 if (control.ExtendedContent != null)
                 {
                     var animate = new Animation(
@@ -286,7 +291,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                     animate.Commit(
                         owner: control.ExpanderContainer,
                         name: "ExpanderAnimation",
-                        length: control.Animated ? checked((uint)250) : checked((uint)0));
+                        length: control.Animated ? checked((uint)150) : checked((uint)0));
                 }
             }
         }
