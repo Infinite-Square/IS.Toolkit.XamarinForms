@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.46" PrivateAssets="All" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <DefineConstants>$(DefineConstants);IOS</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+    <DefineConstants>$(DefineConstants);UWP</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Update="Controls\Expander\Expander.xaml.Cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\FloatingActionButton.xaml.cs">
+      <DependentUpon>FloatingActionButton.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Controls\Android\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\Expander\Expander.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+</Project>

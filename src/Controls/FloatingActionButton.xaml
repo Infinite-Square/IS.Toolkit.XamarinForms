@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IS.Toolkit.XamarinForms.Controls.FloatingActionButton">
+  <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                          Tapped="TapGestureReconizerTapped"
+                                          />
+                </Grid.GestureRecognizers>
+
+                <Frame
+                    x:Name="_frame"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    BorderColor="{TemplateBinding Path=Color, Mode=OneWay}"
+                    BackgroundColor="{TemplateBinding Path=Color, Mode=OneWay}"
+                    Margin="0"
+                    Padding="0">
+                    <Image x:Name="_image" 
+                           Source="{TemplateBinding Path=Image, Mode=OneWay}"
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand"/>
+                </Frame>
+
+            </Grid>
+        </ControlTemplate>
+
+    </ContentView.ControlTemplate>
+</ContentView>
