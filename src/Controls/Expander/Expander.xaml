@@ -61,7 +61,7 @@
                                  BackgroundColor="{TemplateBinding SeparatorColor}"
                                  Margin="0,5"/>
                             <ContentView x:Name="ExpanderContent"
-                                         Content="{TemplateBinding ExtendedContent}" />
+                                         Content="{TemplateBinding ExtendedContent,Mode=OneWay}" />
                     </StackLayout>
                 </Grid>
             </Grid>
