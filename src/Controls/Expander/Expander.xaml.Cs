@@ -1,6 +1,6 @@
+using IS.Toolkit.XamarinForms.Controls.Utils;
 using System;
 using System.Reflection;
-using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +10,8 @@ namespace IS.Toolkit.XamarinForms.Controls
     public partial class Expander : ContentView
     {
         private double _originalContentHeight;
+        private StackLayout _expanderContainer;
+        private Image _rightIconImage;
 
         public Expander()
         {
@@ -221,40 +223,18 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty ExtendedContentProperty = BindableProperty.Create(
             propertyName: nameof(ExtendedContent),
             returnType: typeof(View),
-            declaringType: typeof(Expander),
-            propertyChanged: ContentPropertyChanged);
+            declaringType: typeof(Expander));
 
-        private static void ContentPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private void ExpanderContent_SizeChanged(object sender, EventArgs e)
         {
-            var control = (Expander)bindable;
-            var value = (View)newValue;
-
-            if (control == null || control.ExpanderContent == null || ReferenceEquals(newValue, control))
-            {
-                // View is null or not changed
-                return;
-            }
-
-            // Update content
-            control.ExpanderContent.Content = (View)newValue;
-        }
-
-        private static void ExpanderContent_SizeChanged(object sender, EventArgs e)
-        {
-            var view = sender as View;
-            if (!(view.Parent.Parent.Parent.Parent is Expander control))
-            {
-                return;
-            }
-
             // Only at initialization
-            if (control._originalContentHeight == default)
+            if (_originalContentHeight == default)
             {
-                control._originalContentHeight = control.ExpanderContainer.Height;
-                if (!control.IsOpen)
+                _originalContentHeight = ExpanderContainer.Height;
+                if (!IsOpen)
                 {
                     // If not open, need to init container size
-                    control.ExpanderContainer.HeightRequest = 0;
+                    ExpanderContainer.HeightRequest = 0;
                 }
             }
         }
@@ -280,19 +260,23 @@ namespace IS.Toolkit.XamarinForms.Controls
             {
                 var control = (Expander)bindable;
                 var isOpen = (bool)newValue;
+                control.IsOpenChanged(isOpen);
+            }
+        }
 
-                control.RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
-                if (control.ExtendedContent != null)
-                {
-                    var animate = new Animation(
-                        callback: d => control.ExpanderContainer.HeightRequest = d,
-                        start: isOpen ? 0 : control._originalContentHeight,
-                        end: isOpen ? control._originalContentHeight : 0);
-                    animate.Commit(
-                        owner: control.ExpanderContainer,
-                        name: "ExpanderAnimation",
-                        length: control.Animated ? 150u : 0u);
-                }
+        private void IsOpenChanged(bool isOpen)
+        {
+            RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
+            if (ExtendedContent != null)
+            {
+                var animate = new Animation(
+                    callback: d => ExpanderContainer.HeightRequest = d,
+                    start: isOpen ? 0 : _originalContentHeight,
+                    end: isOpen ? _originalContentHeight : 0);
+                animate.Commit(
+                    owner: ExpanderContainer,
+                    name: "ExpanderAnimation",
+                    length: Animated ? 150u : 0u);
             }
         }
 
@@ -388,6 +372,32 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
         #endregion
+
+        internal StackLayout ExpanderContainer
+        {
+            get
+            {
+                if (_expanderContainer == null)
+                {
+                    _expanderContainer = this.GetTemplateChild<StackLayout>("ExpanderContainer");
+                }
+
+                return _expanderContainer;
+            }
+        }
+
+        internal Image RightIconImage
+        {
+            get
+            {
+                if (_rightIconImage == null)
+                {
+                    _rightIconImage = this.GetTemplateChild<Image>("RightIconImage");
+                }
+
+                return _rightIconImage;
+            }
+        }
 
         private void Expander_Clicked(object sender, EventArgs e)
         {
