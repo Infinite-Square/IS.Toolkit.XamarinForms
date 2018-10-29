@@ -10,13 +10,13 @@ namespace Sample
         {
             InitializeComponent();
 
-            // _itemsControl.ItemsSource = new List<Data>()
-            // {
-            //    new Data() { Text = "C#" },
-            //    new Data() { Text = "VB" },
-            //    new Data() { Text = "JavaScript" },
-            //    new Data() { Text = "test" },
-            // };
+            _itemsControl.ItemsSource = new List<Data>()
+             {
+                new Data() { Text = "C#" },
+                new Data() { Text = "VB" },
+                new Data() { Text = "JavaScript" },
+                new Data() { Text = "test" },
+             };
         }
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)

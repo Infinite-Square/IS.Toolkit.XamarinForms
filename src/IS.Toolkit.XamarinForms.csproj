@@ -4,12 +4,7 @@
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Controls\dropdown.png" />
-    <None Remove="Controls\Expander.xaml" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
   </ItemGroup>

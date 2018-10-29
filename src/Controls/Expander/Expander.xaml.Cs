@@ -9,7 +9,7 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Expander : ContentView
     {
-        private double OriginalContentHeight { get; set; }
+        private double _originalContentHeight;
 
         public Expander()
         {
@@ -236,7 +236,10 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             // Update content
             control.ExpanderContent.Content = (View)newValue;
-            control.ExpanderContainer.SizeChanged += ExpanderContent_SizeChanged;
+            if (control._originalContentHeight == default)
+            {
+                control.ExpanderContainer.SizeChanged += ExpanderContent_SizeChanged;
+            }
         }
 
         private static void ExpanderContent_SizeChanged(object sender, EventArgs e)
@@ -248,9 +251,9 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
 
             // Only at initialization
-            if (control.OriginalContentHeight == default)
+            if (control._originalContentHeight == default)
             {
-                control.OriginalContentHeight = control.ExpanderContainer.Height;
+                control._originalContentHeight = control.ExpanderContainer.Height;
                 if (!control.IsOpen)
                 {
                     // If not open, need to init container size
@@ -286,12 +289,12 @@ namespace IS.Toolkit.XamarinForms.Controls
                 {
                     var animate = new Animation(
                         callback: d => control.ExpanderContainer.HeightRequest = d,
-                        start: isOpen ? 0 : control.OriginalContentHeight,
-                        end: isOpen ? control.OriginalContentHeight : 0);
+                        start: isOpen ? 0 : control._originalContentHeight,
+                        end: isOpen ? control._originalContentHeight : 0);
                     animate.Commit(
                         owner: control.ExpanderContainer,
                         name: "ExpanderAnimation",
-                        length: control.Animated ? checked((uint)150) : checked((uint)0));
+                        length: control.Animated ? 150u : 0u);
                 }
             }
         }
