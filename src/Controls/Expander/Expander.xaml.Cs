@@ -14,6 +14,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         public Expander()
         {
             InitializeComponent();
+            ExpanderContainer.SizeChanged += ExpanderContent_SizeChanged;
         }
 
         #region BackgroundColor
@@ -236,10 +237,6 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             // Update content
             control.ExpanderContent.Content = (View)newValue;
-            if (control._originalContentHeight == default)
-            {
-                control.ExpanderContainer.SizeChanged += ExpanderContent_SizeChanged;
-            }
         }
 
         private static void ExpanderContent_SizeChanged(object sender, EventArgs e)
