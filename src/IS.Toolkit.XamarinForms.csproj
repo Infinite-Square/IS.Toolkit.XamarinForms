@@ -4,6 +4,10 @@
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.46" PrivateAssets="All" />
@@ -24,6 +28,9 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Update="Controls\Expander\Expander.xaml.Cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
@@ -31,6 +38,12 @@
   
   <ItemGroup>
     <Folder Include="Controls\Android\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\Expander\Expander.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>
