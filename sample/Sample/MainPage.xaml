@@ -58,7 +58,7 @@
             Size="60"
             Grid.RowSpan="4"
             VerticalOptions="End" 
-            IsOpen="True"
+            IsOpen="False"
             Image="Icon.png"
             Margin="20"/>
     </Grid>

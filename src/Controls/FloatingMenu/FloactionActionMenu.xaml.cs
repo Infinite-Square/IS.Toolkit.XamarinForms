@@ -20,22 +20,6 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         public FloatingActionMenu()
         {
             InitializeComponent();
-            ItemsLayout.SizeChanged += ItemsLayout_SizeChanged;
-        }
-
-        private void ItemsLayout_SizeChanged(object sender, EventArgs e)
-        {
-            // Only at initialization
-            if (_originalContentHeight == default(double) || !_isAnimating)
-            {
-                _originalContentHeight = ItemsLayout.Bounds.Height;
-                if (!IsOpen)
-                {
-                    // If not open, need to init container size
-                    ItemsLayout.HeightRequest = 0;
-                    ItemsLayout.Opacity = 0;
-                }
-            }
         }
 
         #region Items
@@ -43,7 +27,17 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
             propertyName: nameof(Items),
             returnType: typeof(List<Item>),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(List<Item>));
+            defaultValue: default(List<Item>),
+            propertyChanged: ItemsPropertyChanged);
+
+        private static void ItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable != null && newValue != null)
+            {
+                var control = (FloatingActionMenu)bindable;
+                control.InitOriginalContentHeight(control.Items.Count * (control.ItemSize + 10));
+            }
+        }
 
         public List<Item> Items
         {
@@ -173,13 +167,11 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                 var control = (FloatingActionMenu)bindable;
                 control._originalContentHeight = default;
                 control.ItemSize = 2 * control.Size / 3;
-                control.ItemsMargin = new Thickness(0, 0, control.Size / 4, 0);
-
-                // if (control.ItemsLayout != null && control.ItemsLayout.Bounds.Height != -1)
-                // {
-                //    control._originalContentHeight = control.ItemsLayout.Bounds.Height;
-                // }
-                control.ItemsLayout.ForceLayout();
+                control.ItemsMargin = new Thickness(0, 0, (control.Size / 2) - (control.ItemSize / 2), 0);
+                if (control.Items != default)
+                {
+                    control.InitOriginalContentHeight(control.Items.Count * (control.ItemSize + 10));
+                }
             }
         }
 
@@ -196,31 +188,24 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         }
 
         public double ItemSize { get; set; } = 50;
-        public Thickness ItemsMargin { get; set; } = new Thickness(0, 0, 17.5, 0);
+        public Thickness ItemsMargin { get; set; } = new Thickness(0, 0, 10, 0);
         #endregion
 
-        // #region BackgroundColor
-        // public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(
-        //    propertyName: nameof(BackgroundColor),
-        //    returnType: typeof(Color),
-        //    declaringType: typeof(FloatingActionMenu),
-        //    defaultValue: Color.FromHex("#80ffffff"));
-
-        // public new Color BackgroundColor
-        // {
-        //    get
-        //    {
-        //        return (Color)GetValue(BackgroundColorProperty);
-        //    }
-        //    set
-        //    {
-        //        SetValue(BackgroundColorProperty, value);
-        //    }
-        // }
-        // #endregion
         private void FloatingActionButton_Clicked(object sender, EventArgs e)
         {
             IsOpen = !IsOpen;
+        }
+
+        private void InitOriginalContentHeight(double size)
+        {
+            _originalContentHeight = size;
+
+            if (!IsOpen)
+            {
+                // If not open, need to init container size
+                ItemsLayout.HeightRequest = 0;
+                ItemsLayout.Opacity = 0;
+            }
         }
     }
 }

@@ -28,7 +28,9 @@
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="End"
                                  Margin="0,5">
-                        <ContentView BackgroundColor="{Binding BackgroundColor}" VerticalOptions="Center" Padding="4,2">
+                        <ContentView BackgroundColor="{Binding BackgroundColor}"
+                                     VerticalOptions="Center"
+                                     Padding="4,2">
                             <Label Text="{Binding Label}"
                                    TextColor="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"
                                    VerticalOptions="Center" />
