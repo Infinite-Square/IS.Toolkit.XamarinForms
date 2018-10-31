@@ -17,6 +17,33 @@ namespace Sample
                 new Data() { Text = "JavaScript" },
                 new Data() { Text = "test" },
              };
+
+            fab.Items = new List<IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item>()
+            {
+                new IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item()
+                {
+                    BackgroundColor = Color.FromHex("#B3ffffff"),
+                    Color = Color.CadetBlue,
+                    Label = "Text",
+                    Icon = "Icon.png",
+                    Action = new Command(() => { System.Diagnostics.Debug.WriteLine("Item Clicked"); })
+                },
+                new IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item()
+                {
+                    BackgroundColor = Color.DarkGray,
+                    Color = Color.LightPink,
+                    Label = "Text 1",
+                    Icon = "Icon.png",
+                    Action = new Command(() => { System.Diagnostics.Debug.WriteLine("Item 1 Clicked"); })
+                },
+                new IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item()
+                {
+                    Color = Color.PaleVioletRed,
+                    Label = "Text 2",
+                    Icon = "Icon.png",
+                    Action = new Command(() => { System.Diagnostics.Debug.WriteLine("Item 2 Clicked"); })
+                }
+            };
         }
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)

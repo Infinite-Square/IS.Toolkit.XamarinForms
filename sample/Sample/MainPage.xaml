@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
+             xmlns:fab="clr-namespace:IS.Toolkit.XamarinForms.Controls.FloatingMenu;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
 
     <Grid Margin="10">
@@ -44,14 +45,22 @@
         </controls:ItemsControl>
         
 
-        <controls:FloatingActionButton
+        <!--<controls:FloatingActionButton
             Grid.RowSpan="4"
             VerticalOptions="End" 
             Image="Icon.png"
             Color="#0F3057"
             Margin="20"
             HorizontalOptions="End"
-            Clicked="FloatingActionButton_Clicked"/>
+            Clicked="FloatingActionButton_Clicked"/>-->
+        <fab:FloatingActionMenu
+            x:Name="fab"
+            Size="60"
+            Grid.RowSpan="4"
+            VerticalOptions="End" 
+            IsOpen="True"
+            Image="Icon.png"
+            Margin="20"/>
     </Grid>
 
 </ContentPage>
