@@ -17,6 +17,13 @@ namespace Sample
                 new Data() { Text = "JavaScript" },
                 new Data() { Text = "test" },
              };
+
+            segmentedControl.Items = new List<string>
+            {
+                "Item 1",
+                "Item 2",
+                "Item 3"
+            };
         }
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)
