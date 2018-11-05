@@ -101,7 +101,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         #region SelectedItemBackgroundColor
         public static readonly BindableProperty SelectedItemBackgroundColorProperty = BindableProperty.Create(
-            propertyName: nameof(BorderColor),
+            propertyName: nameof(SelectedItemBackgroundColor),
             returnType: typeof(Color),
             declaringType: typeof(SegmentedControl),
             defaultValue: Color.Accent);
@@ -250,6 +250,8 @@ namespace IS.Toolkit.XamarinForms.Controls
         public void ItemClicked(string item)
         {
             SelectedItem = item;
+
+            // Don't know how to do better, so if you have any idea..
             BuildLayout();
         }
     }
