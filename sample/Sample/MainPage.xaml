@@ -11,10 +11,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
-        <controls:TextBox Placeholder="Name"/>
+        <controls:TextBox Placeholder="Name" Grid.Row="0"/>
 
         <controls:TextBox Placeholder="Error" 
                           ErrorText="An Error occured"
@@ -35,17 +36,26 @@
             </controls:Expander.ExtendedContent>
         </controls:Expander>
 
-        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="3">
+        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="4">
             <controls:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Text="{Binding Text}"/>
                 </DataTemplate>
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
-        
 
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Checkbox" Grid.Column="0"/>
+            <controls:Checkbox Grid.Column="1"
+                               Margin="10"/>
+        </Grid>
+        
         <controls:FloatingActionButton
-            Grid.RowSpan="4"
+            Grid.RowSpan="5"
             VerticalOptions="End" 
             Image="Icon.png"
             Color="#0F3057"
