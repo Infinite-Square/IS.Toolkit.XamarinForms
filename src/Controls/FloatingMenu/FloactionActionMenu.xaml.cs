@@ -15,7 +15,6 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
     public partial class FloatingActionMenu : ContentView
     {
         private double _originalContentHeight;
-        private bool _isAnimating;
 
         public FloatingActionMenu()
         {
@@ -93,29 +92,30 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         #endregion
 
         #region IsOpen
-        public static readonly BindableProperty OpenedProperty = BindableProperty.Create(
+        public static readonly BindableProperty IsOpenProperty = BindableProperty.Create(
             propertyName: nameof(IsOpen),
             returnType: typeof(bool),
             declaringType: typeof(FloatingActionMenu),
             defaultValue: true,
             propertyChanged: IsOpenPropertyChanged);
 
-        private static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static async void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable != null && newValue != null)
             {
                 var control = (FloatingActionMenu)bindable;
                 var isOpen = (bool)newValue;
-                control.IsOpenChangedAsync(isOpen);
+                await control.IsOpenChangedAsync(isOpen);
             }
         }
 
-        private async Task IsOpenChangedAsync(bool isOpen)
+        private Task<bool> IsOpenChangedAsync(bool isOpen)
         {
+            var taskCompletionSource = new TaskCompletionSource<bool>();
+
             // RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
             if (Items != null && _originalContentHeight != default)
             {
-                _isAnimating = true;
                 var animate = new Animation(
                     callback: d => ItemsLayout.HeightRequest = d,
                     start: isOpen ? 0 : _originalContentHeight,
@@ -133,21 +133,20 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                     owner: ItemsLayout,
                     name: "ExpanderFadeAnimation",
                     length: 150u);
-
-                await Task.Delay(200);
-                _isAnimating = false;
             }
+
+            return taskCompletionSource.Task;
         }
 
         public bool IsOpen
         {
             get
             {
-                return (bool)GetValue(OpenedProperty);
+                return (bool)GetValue(IsOpenProperty);
             }
             set
             {
-                SetValue(OpenedProperty, value);
+                SetValue(IsOpenProperty, value);
             }
         }
         #endregion
