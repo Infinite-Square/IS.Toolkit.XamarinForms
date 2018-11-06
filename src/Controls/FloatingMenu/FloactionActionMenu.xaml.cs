@@ -91,6 +91,46 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         }
         #endregion
 
+        #region FilterBackgroundColor
+        public static readonly BindableProperty FilterBackgroundColorProperty = BindableProperty.Create(
+            propertyName: nameof(FilterBackgroundColor),
+            returnType: typeof(Color),
+            declaringType: typeof(FloatingActionMenu),
+            defaultValue: Color.FromHex("#B3ffffff"));
+
+        public Color FilterBackgroundColor
+        {
+            get
+            {
+                return (Color)GetValue(FilterBackgroundColorProperty);
+            }
+            set
+            {
+                SetValue(FilterBackgroundColorProperty, value);
+            }
+        }
+        #endregion
+
+        #region Padding
+        public static new readonly BindableProperty PaddingProperty = BindableProperty.Create(
+            propertyName: nameof(Padding),
+            returnType: typeof(Thickness),
+            declaringType: typeof(FloatingActionMenu),
+            defaultValue: default(Thickness));
+
+        public new Thickness Padding
+        {
+            get
+            {
+                return (Thickness)GetValue(PaddingProperty);
+            }
+            set
+            {
+                SetValue(PaddingProperty, value);
+            }
+        }
+        #endregion
+
         #region IsOpen
         public static readonly BindableProperty IsOpenProperty = BindableProperty.Create(
             propertyName: nameof(IsOpen),
@@ -132,6 +172,15 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                 animate2.Commit(
                     owner: ItemsLayout,
                     name: "ExpanderFadeAnimation",
+                    length: 150u);
+
+                var animate3 = new Animation(
+                    callback: d => OpacityFilter.Opacity = d,
+                    start: isOpen ? 0 : 1,
+                    end: isOpen ? 1 : 0);
+                animate3.Commit(
+                    owner: OpacityFilter,
+                    name: "ExpanderOpacityFilterAnimation",
                     length: 150u);
             }
 
@@ -204,6 +253,7 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                 // If not open, need to init container size
                 ItemsLayout.HeightRequest = 0;
                 ItemsLayout.Opacity = 0;
+                OpacityFilter.Opacity = 0;
             }
         }
     }

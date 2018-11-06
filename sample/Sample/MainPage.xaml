@@ -5,7 +5,7 @@
              xmlns:fab="clr-namespace:IS.Toolkit.XamarinForms.Controls.FloatingMenu;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
 
-    <Grid Margin="10">
+    <Grid Padding="10">
         <!-- Place new controls here -->
 
         <Grid.RowDefinitions>
@@ -57,10 +57,11 @@
             x:Name="fab"
             Size="60"
             Grid.RowSpan="4"
-            VerticalOptions="End" 
             IsOpen="False"
             Image="Icon.png"
-            Margin="20"/>
+            FilterBackgroundColor="#B3000000"
+            Padding="20"
+            Margin="-10"/>
     </Grid>
 
 </ContentPage>
