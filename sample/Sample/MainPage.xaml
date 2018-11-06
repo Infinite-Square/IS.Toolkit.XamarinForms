@@ -11,6 +11,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -42,7 +43,16 @@
                 </DataTemplate>
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
-        
+
+        <controls:Picker x:Name="_picker" 
+                         Grid.Row="4"
+                         SelectedItemChanged="Picker_SelectedItemChanged"
+                         Placeholder="Select a value..."
+                         Title="Picker : "
+                         IsClearable="True"
+                         BackgroundColor="Wheat"
+                         BorderColor="Red"/>
+
 
         <controls:FloatingActionButton
             Grid.RowSpan="4"

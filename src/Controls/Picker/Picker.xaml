@@ -1,10 +1,94 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS.Toolkit.XamarinForms.Controls.Picker.Picker">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+             x:Class="IS.Toolkit.XamarinForms.Controls.Picker"
+             x:Name="this">
+    <ContentView.Content>
+        <Grid ColumnSpacing="10"
+              x:Name="_grid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+
+            <Label Text="{Binding Title, Source={x:Reference this}}"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   TextColor="{Binding TitleTextColor, Source={x:Reference this}}"
+                   FontSize="{Binding TitleFontSize, Source={x:Reference this}}"
+                   FontFamily="{Binding TitleFontFamily, Source={x:Reference this}}"
+                   FontAttributes="{Binding TitleFontAttributes, Source={x:Reference this}}"
+                   IsVisible="{Binding HasTitle, Source={x:Reference this}}" />
+
+            <Frame HasShadow="False"
+                   Padding="10"
+                   BorderColor="{Binding BorderColor, Source={x:Reference this}}"
+                   CornerRadius="{Binding CornerRadius, Source={x:Reference this}}"
+                   BackgroundColor="{Binding BackgroundColor, Source={x:Reference this}}"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3">
+                <Grid x:Name="content">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"
+                           x:Name="_selectedItemLabel"
+                           LineBreakMode="TailTruncation"
+                           VerticalOptions="Center"
+                           Text="{Binding SelectedText, Source={x:Reference this}}"
+                           TextColor="{Binding TextColor, Source={x:Reference this}}"
+                           FontFamily="{Binding FontFamily, Source={x:Reference this}}"
+                           FontAttributes="{Binding FontAttributes, Source={x:Reference this}}"
+                           FontSize="{Binding FontSize, Source={x:Reference this}}" />
+
+                    <Label Grid.Column="0"
+                           LineBreakMode="TailTruncation"
+                           VerticalOptions="Center"
+                           IsVisible="{Binding ShowPlaceholder, Source={x:Reference this}}"
+                           Text="{Binding Placeholder, Source={x:Reference this}}"
+                           TextColor="{Binding PlaceholderTextColor, Source={x:Reference this}}"
+                           FontFamily="{Binding PlaceholderFontFamily, Source={x:Reference this}}"
+                           FontAttributes="{Binding PlaceholderFontAttributes, Source={x:Reference this}}"
+                           FontSize="{Binding PlaceholderFontSize, Source={x:Reference this}}" />
+                </Grid>
+            </Frame>
+
+            <Image Grid.Column="2"
+                   Grid.Row="1"
+                   Source="{Binding IconSource, Source={x:Reference this}}"
+                   Aspect="AspectFit"
+                   VerticalOptions="Center"
+                   Margin="0,0,10,0" />
+
+            <Picker x:Name="_picker"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="2"
+                    Opacity="0"
+                    HeightRequest="1"
+                    ItemsSource="{Binding ItemsSource, Source={x:Reference this}}"
+                    ItemDisplayBinding="{Binding Label}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+
+            <Image Grid.Column="1"
+                   Grid.Row="1"
+                   Source="{Binding ClearIconSource, Source={x:Reference this}}"
+                   Aspect="AspectFit"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsClearableAndHasValue, Source={x:Reference this}}" />
+
+            <Button Grid.Column="1"
+                    Grid.Row="1"
+                    IsVisible="{Binding IsClearableAndHasValue, Source={x:Reference this}}"
+                    Clicked="Clear_Clicked"
+                    BackgroundColor="Transparent" />
+
+        </Grid>
+    </ContentView.Content>
 </ContentView>

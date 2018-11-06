@@ -4,9 +4,14 @@
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controls\Picker\close.png" />
+  </ItemGroup>
   
   <ItemGroup>
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+    <EmbeddedResource Include="Controls\Picker\close.png" />
   </ItemGroup>
 
   <ItemGroup>
