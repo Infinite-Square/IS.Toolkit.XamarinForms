@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
+             xmlns:fab="clr-namespace:IS.Toolkit.XamarinForms.Controls.FloatingMenu;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
 
-    <Grid Margin="10">
+    <Grid Padding="10">
         <!-- Place new controls here -->
 
         <Grid.RowDefinitions>
@@ -12,10 +13,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
-        <controls:TextBox Placeholder="Name"/>
+        <controls:TextBox Placeholder="Name" Grid.Row="0"/>
 
         <controls:TextBox Placeholder="Error" 
                           ErrorText="An Error occured"
@@ -36,7 +39,18 @@
             </controls:Expander.ExtendedContent>
         </controls:Expander>
 
-        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="3">
+        <controls:SegmentedControl Grid.Row="3"
+                                   x:Name="segmentedControl" 
+                                   SelectedItem="Item 1"
+                                   CornerRadius="10"
+                                   BackgroundColor="#e6e0e0"
+                                   SelectedItemBackgroundColor="#333333"
+                                   TextColor="#aaaaaa"
+                                   SelectedItemTextColor="White"
+                                   BorderWidth="3"
+                                   BorderColor="#e6e0e0"/>
+
+        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="4">
             <controls:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Text="{Binding Text}"/>
@@ -53,15 +67,26 @@
                          BackgroundColor="Wheat"
                          BorderColor="Red"/>
 
-
-        <controls:FloatingActionButton
-            Grid.RowSpan="4"
-            VerticalOptions="End" 
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Checkbox" Grid.Column="0"/>
+            <controls:Checkbox Grid.Column="1"
+                               Margin="10"/>
+        </Grid>
+        
+        
+        <fab:FloatingActionMenu
+            x:Name="fab"
+            Size="60"
+            Grid.RowSpan="7"
+            IsOpen="False"
             Image="Icon.png"
-            Color="#0F3057"
-            Margin="20"
-            HorizontalOptions="End"
-            Clicked="FloatingActionButton_Clicked"/>
+            FilterBackgroundColor="#B3000000"
+            Padding="20"
+            Margin="-10"/>
     </Grid>
 
 </ContentPage>
