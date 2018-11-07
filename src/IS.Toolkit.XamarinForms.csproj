@@ -4,8 +4,15 @@
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controls\Checkbox\checkbox_empty.png" />
+    <None Remove="Controls\Checkbox\checkbox_fill.png" />
+  </ItemGroup>
   
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
+    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
   </ItemGroup>
 

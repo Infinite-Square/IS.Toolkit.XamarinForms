@@ -13,10 +13,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
-        <controls:TextBox Placeholder="Name"/>
+        <controls:TextBox Placeholder="Name" Grid.Row="0"/>
 
         <controls:TextBox Placeholder="Error" 
                           ErrorText="An Error occured"
@@ -55,11 +57,22 @@
                 </DataTemplate>
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Checkbox" Grid.Column="0"/>
+            <controls:Checkbox Grid.Column="1"
+                               Margin="10"/>
+        </Grid>
+        
         
         <fab:FloatingActionMenu
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="4"
+            Grid.RowSpan="7"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
