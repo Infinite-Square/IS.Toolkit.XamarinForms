@@ -213,19 +213,22 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             ItemsLayout.ColumnDefinitions.Clear();
             ItemsLayout.Children.Clear();
-            foreach (var x in Items.Select((item, index) => new { item, index }))
+
+            for (int index = 0; index < Items.Count; index++)
             {
+                var currentValue = Items[index];
+
                 var item = new SegmentItem
                 {
-                    BindingContext = x.item
+                    BindingContext = currentValue
                 };
 
-                item.Build(SelectedItemBackgroundColor, SelectedItemTextColor, SelectedItem);
+                item.Build(SelectedItemBackgroundColor, SelectedItemTextColor, CornerRadius, TextColor, SelectedItem, currentValue, ItemCommand);
 
                 ItemsLayout.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
                 ItemsLayout.Children.Add(
                     item,
-                    left: x.index,
+                    left: index,
                     top: 0);
             }
         }
@@ -233,58 +236,68 @@ namespace IS.Toolkit.XamarinForms.Controls
         public void ItemClicked(string item)
         {
             SelectedItem = item;
-
-            // Don't know how to do better, so if you have any idea..
-            BuildLayout();
             InvalidateSelection();
         }
 
         private void InvalidateSelection()
         {
-            foreach (var item in ItemsLayout.Children)
+            foreach (var segment in ItemsLayout.Children.OfType<SegmentItem>())
             {
-                if (item.BindingContext == SelectedItem)
-                {
-
-                }
-                else
-                {
-
-                }
+                segment.InvalidateSelection(SelectedItem, TextColor, SelectedItemBackgroundColor, SelectedItemTextColor);
             }
         }
     }
 
     public class SegmentItem : Grid
     {
+        private BoxView _boxView;
+        private Label _label;
+        private Button _button;
 
-        public void Build(Color selectedItemBackgroundColor, Color selectedItemTextColor, string selectedItem)
+        public void Build(
+            Color selectedItemBackgroundColor,
+            Color selectedItemTextColor,
+            CornerRadius cornerRadius,
+            Color textColor,
+            string selectedItem,
+            string value,
+            ICommand itemCommand)
         {
-            item.Children.Add(new BoxView
+            _boxView = new BoxView
             {
-                CornerRadius = CornerRadius,
-                BackgroundColor = SelectedItem == x.item ? SelectedItemBackgroundColor : Color.Transparent
-            });
-            item.Children.Add(new Label
+                CornerRadius = cornerRadius,
+            };
+
+            _label = new Label
             {
-                Text = x.item,
-                TextColor = selectedItem == x.item ? selectedItemTextColor : TextColor,
+                Text = value,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
-            });
-            item.Children.Add(new Button
+            };
+
+            _button = new Button
             {
                 BackgroundColor = Color.Transparent,
-                Command = ItemCommand,
-                CommandParameter = x.item
-            });
+                Command = itemCommand,
+                CommandParameter = value
+            };
+
+            Children.Add(_boxView);
+            Children.Add(_label);
+            Children.Add(_button);
+
+            InvalidateSelection(selectedItem, textColor, selectedItemBackgroundColor, selectedItemTextColor);
         }
 
-
-        public void InvalidateSelection(string selectedItem)
+        public void InvalidateSelection(
+            string selectedItem,
+            Color textColor,
+            Color selectedItemBackgroundColor,
+            Color selectedItemTextColor)
         {
-
+            var value = BindingContext as string;
+            _label.TextColor = selectedItem == value ? selectedItemTextColor : textColor;
+            _boxView.BackgroundColor = selectedItem == value ? selectedItemBackgroundColor : Color.Transparent;
         }
-
     }
 }
