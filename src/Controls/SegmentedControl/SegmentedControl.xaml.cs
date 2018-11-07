@@ -12,7 +12,7 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SegmentedControl : ContentView
     {
-        public ICommand ItemCommand { get; set; }
+        internal ICommand ItemCommand { get; set; }
         public SegmentedControl()
         {
             InitializeComponent();
@@ -222,10 +222,6 @@ namespace IS.Toolkit.XamarinForms.Controls
 
                 item.Build(SelectedItemBackgroundColor, SelectedItemTextColor, SelectedItem);
 
-                // var tap = new TapGestureRecognizer();
-                // tap.Command = ItemCommand;
-                // tap.CommandParameter = item;
-                // item.GestureRecognizers.Add(tap);
                 ItemsLayout.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
                 ItemsLayout.Children.Add(
                     item,
