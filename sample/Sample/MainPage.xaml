@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -36,7 +37,18 @@
             </controls:Expander.ExtendedContent>
         </controls:Expander>
 
-        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="3">
+        <controls:SegmentedControl Grid.Row="3"
+                                   x:Name="segmentedControl" 
+                                   SelectedItem="Item 1"
+                                   CornerRadius="10"
+                                   BackgroundColor="#e6e0e0"
+                                   SelectedItemBackgroundColor="#333333"
+                                   TextColor="#aaaaaa"
+                                   SelectedItemTextColor="White"
+                                   BorderWidth="3"
+                                   BorderColor="#e6e0e0"/>
+
+        <controls:ItemsControl x:Name="_itemsControl" Grid.Row="4">
             <controls:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Text="{Binding Text}"/>
@@ -44,15 +56,6 @@
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
         
-
-        <!--<controls:FloatingActionButton
-            Grid.RowSpan="4"
-            VerticalOptions="End" 
-            Image="Icon.png"
-            Color="#0F3057"
-            Margin="20"
-            HorizontalOptions="End"
-            Clicked="FloatingActionButton_Clicked"/>-->
         <fab:FloatingActionMenu
             x:Name="fab"
             Size="60"

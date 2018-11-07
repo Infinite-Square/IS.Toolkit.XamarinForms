@@ -18,6 +18,12 @@ namespace Sample
                 new Data() { Text = "test" },
              };
 
+            segmentedControl.Items = new List<string>
+            {
+                "Item 1",
+                "Item 2",
+                "Item 3"
+
             fab.Items = new List<IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item>()
             {
                 new IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item()
