@@ -15,7 +15,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -73,7 +72,7 @@
         <fab:FloatingActionMenu
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="6"
+            Grid.RowSpan="7"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"

@@ -50,6 +50,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             get => (StackOrientation)GetValue(OrientationProperty);
             set => SetValue(OrientationProperty, value);
+        }
 
         public double Spacing
         {
@@ -77,8 +78,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 (Layout)ItemsLayout.CreateContent() :
                 new StackLayout()
                 {
-                    Spacing = 0,
-                    Orientation = Orientation
+                    Orientation = Orientation,
                     Spacing = Spacing
                 };
 
