@@ -139,7 +139,7 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
             defaultValue: true,
             propertyChanged: IsOpenPropertyChanged);
 
-        private static async void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable != null && newValue != null)
             {
@@ -179,7 +179,11 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                 animate3.Commit(
                     owner: OpacityFilter,
                     name: "ExpanderOpacityFilterAnimation",
-                    length: 150u);
+                    length: 150u,
+                    finished: (arg, value) =>
+                    {
+                        OpacityFilter.IsVisible = isOpen;
+                    });
             }
         }
 
