@@ -2,16 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
+             xmlns:fab="clr-namespace:IS.Toolkit.XamarinForms.Controls.FloatingMenu;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
 
-    <Grid Margin="10">
+    <Grid Padding="10">
         <!-- Place new controls here -->
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -36,6 +40,17 @@
             </controls:Expander.ExtendedContent>
         </controls:Expander>
 
+        <controls:SegmentedControl Grid.Row="3"
+                                   x:Name="segmentedControl" 
+                                   SelectedItem="Item 1"
+                                   CornerRadius="10"
+                                   BackgroundColor="#e6e0e0"
+                                   SelectedItemBackgroundColor="#333333"
+                                   TextColor="#aaaaaa"
+                                   SelectedItemTextColor="White"
+                                   BorderWidth="3"
+                                   BorderColor="#e6e0e0"/>
+
         <controls:ItemsControl x:Name="_itemsControl" Grid.Row="4">
             <controls:ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -44,7 +59,7 @@
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
@@ -54,14 +69,16 @@
                                Margin="10"/>
         </Grid>
         
-        <controls:FloatingActionButton
-            Grid.RowSpan="5"
-            VerticalOptions="End" 
+        
+        <fab:FloatingActionMenu
+            x:Name="fab"
+            Size="60"
+            Grid.RowSpan="6"
+            IsOpen="False"
             Image="Icon.png"
-            Color="#0F3057"
-            Margin="20"
-            HorizontalOptions="End"
-            Clicked="FloatingActionButton_Clicked"/>
+            FilterBackgroundColor="#B3000000"
+            Padding="20"
+            Margin="-10"/>
     </Grid>
 
 </ContentPage>
