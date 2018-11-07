@@ -5,7 +5,8 @@
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls"
              x:Name="this">
     <ContentView.Content>
-        <Grid>
+        <Grid ColumnSpacing="0" 
+              RowSpacing="0">
             <BoxView BackgroundColor="{Binding BorderColor, Source={x:Reference this}}"
                      CornerRadius="{Binding CornerRadius, Source={x:Reference this}}" />
 
@@ -14,6 +15,8 @@
                      Margin="{Binding BorderWidth, Source={x:Reference this}}" />
 
             <Grid x:Name="ItemsLayout"
+                  ColumnSpacing="0" 
+                  RowSpacing="0"
                   Margin="{Binding BorderWidth, Source={x:Reference this}}" />
         </Grid>
     </ContentView.Content>

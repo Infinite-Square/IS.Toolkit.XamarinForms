@@ -215,25 +215,12 @@ namespace IS.Toolkit.XamarinForms.Controls
             ItemsLayout.Children.Clear();
             foreach (var x in Items.Select((item, index) => new { item, index }))
             {
-                var item = new Grid();
-                item.Children.Add(new BoxView
+                var item = new SegmentItem
                 {
-                    CornerRadius = CornerRadius,
-                    BackgroundColor = SelectedItem == x.item ? SelectedItemBackgroundColor : Color.Transparent
-                });
-                item.Children.Add(new Label
-                {
-                    Text = x.item,
-                    TextColor = SelectedItem == x.item ? SelectedItemTextColor : TextColor,
-                    HorizontalOptions = LayoutOptions.Center,
-                    VerticalOptions = LayoutOptions.Center
-                });
-                item.Children.Add(new Button
-                {
-                    BackgroundColor = Color.Transparent,
-                    Command = ItemCommand,
-                    CommandParameter = x.item
-                });
+                    BindingContext = x.item
+                };
+
+                item.Build(SelectedItemBackgroundColor, SelectedItemTextColor, SelectedItem);
 
                 // var tap = new TapGestureRecognizer();
                 // tap.Command = ItemCommand;
@@ -253,6 +240,55 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             // Don't know how to do better, so if you have any idea..
             BuildLayout();
+            InvalidateSelection();
         }
+
+        private void InvalidateSelection()
+        {
+            foreach (var item in ItemsLayout.Children)
+            {
+                if (item.BindingContext == SelectedItem)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+        }
+    }
+
+    public class SegmentItem : Grid
+    {
+
+        public void Build(Color selectedItemBackgroundColor, Color selectedItemTextColor, string selectedItem)
+        {
+            item.Children.Add(new BoxView
+            {
+                CornerRadius = CornerRadius,
+                BackgroundColor = SelectedItem == x.item ? SelectedItemBackgroundColor : Color.Transparent
+            });
+            item.Children.Add(new Label
+            {
+                Text = x.item,
+                TextColor = selectedItem == x.item ? selectedItemTextColor : TextColor,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center
+            });
+            item.Children.Add(new Button
+            {
+                BackgroundColor = Color.Transparent,
+                Command = ItemCommand,
+                CommandParameter = x.item
+            });
+        }
+
+
+        public void InvalidateSelection(string selectedItem)
+        {
+
+        }
+
     }
 }
