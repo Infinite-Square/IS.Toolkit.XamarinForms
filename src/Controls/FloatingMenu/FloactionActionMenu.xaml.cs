@@ -145,14 +145,12 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
             {
                 var control = (FloatingActionMenu)bindable;
                 var isOpen = (bool)newValue;
-                await control.IsOpenChangedAsync(isOpen);
+                control.IsOpenChanged(isOpen);
             }
         }
 
-        private Task<bool> IsOpenChangedAsync(bool isOpen)
+        private void IsOpenChanged(bool isOpen)
         {
-            var taskCompletionSource = new TaskCompletionSource<bool>();
-
             // RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
             if (Items != null && _originalContentHeight != default)
             {
@@ -183,8 +181,6 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                     name: "ExpanderOpacityFilterAnimation",
                     length: 150u);
             }
-
-            return taskCompletionSource.Task;
         }
 
         public bool IsOpen
