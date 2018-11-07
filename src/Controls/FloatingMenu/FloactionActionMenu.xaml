@@ -23,6 +23,7 @@
 
             <ctrls:ItemsControl x:Name="ItemsLayout"
                                 Grid.Row="0"
+                                Spacing="5"
                                 HorizontalOptions="End"
                                 VerticalOptions="End"
                                 ItemsSource="{Binding Items, Source={x:Reference this}}"

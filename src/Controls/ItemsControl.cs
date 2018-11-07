@@ -17,6 +17,9 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty ItemsLayoutProperty =
             BindableProperty.Create(nameof(ItemsLayout), typeof(DataTemplate), typeof(ItemsControl), propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsLayoutPropertyChanged());
 
+        public static readonly BindableProperty SpacingProperty =
+            BindableProperty.Create(nameof(Spacing), typeof(double), typeof(ItemsControl), defaultValue: 0.0, propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsLayoutPropertyChanged());
+
         public IEnumerable ItemsSource
         {
             get
@@ -41,6 +44,12 @@ namespace IS.Toolkit.XamarinForms.Controls
             set => SetValue(ItemsLayoutProperty, value);
         }
 
+        public double Spacing
+        {
+            get => (double)GetValue(SpacingProperty);
+            set => SetValue(SpacingProperty, value);
+        }
+
         protected virtual View CreateItem(object item)
         {
             if (ItemTemplate == null)
@@ -61,7 +70,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 (Layout)ItemsLayout.CreateContent() :
                 new StackLayout()
                 {
-                    Spacing = 0
+                    Spacing = Spacing
                 };
 
             if (Content is Layout<View> viewLayout)
