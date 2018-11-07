@@ -5,15 +5,10 @@
     <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
 
+ 
   <ItemGroup>
-    <None Remove="Controls\Checkbox\checkbox_empty.png" />
-    <None Remove="Controls\Checkbox\checkbox_fill.png" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+    <EmbeddedResource Include="Controls\Picker\close.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +44,9 @@
   
   <ItemGroup>
     <EmbeddedResource Update="Controls\Expander\Expander.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Picker\Picker.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">

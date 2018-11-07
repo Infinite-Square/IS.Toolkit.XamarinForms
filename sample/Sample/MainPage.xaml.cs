@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS.Toolkit.XamarinForms.Controls;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -51,11 +52,26 @@ namespace Sample
                     Action = new Command(() => { System.Diagnostics.Debug.WriteLine("Item 2 Clicked"); })
                 }
             };
+
+            var list = new List<AvailableValue>()
+            {
+                new AvailableValue() { Label = "Text 1", Value = "Text 1" },
+                new AvailableValue() { Label = "Text 2", Value = "Text 2" },
+                new AvailableValue() { Label = "Text 3", Value = "Text 3" },
+                new AvailableValue() { Label = "Text 4", Value = "Text 4" }
+            };
+            _picker.ItemsSource = list;
+            _picker.SelectedItem = list[2];
         }
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)
         {
             Console.WriteLine("FAB Clicked");
+        }
+
+        private void Picker_SelectedItemChanged(object sender, object e)
+        {
+            var newValue = e as string;
         }
     }
 

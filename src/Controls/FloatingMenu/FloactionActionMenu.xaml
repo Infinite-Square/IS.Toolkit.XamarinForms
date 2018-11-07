@@ -13,7 +13,7 @@
 
     <Grid>
         <BoxView BackgroundColor="{Binding FilterBackgroundColor, Source={x:Reference this}}"
-                 InputTransparent="True"
+                 IsVisible="False"
                  x:Name="OpacityFilter"/>
         <Grid Padding="{Binding Padding, Source={x:Reference this}}">
             <Grid.RowDefinitions>

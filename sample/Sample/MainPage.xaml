@@ -58,7 +58,16 @@
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
 
-        <Grid Grid.Row="5">
+        <controls:Picker x:Name="_picker" 
+                         Grid.Row="5"
+                         SelectedItemChanged="Picker_SelectedItemChanged"
+                         Placeholder="Select a value..."
+                         Title="Picker : "
+                         IsClearable="True"
+                         BackgroundColor="Wheat"
+                         BorderColor="Red"/>
+
+        <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
@@ -67,7 +76,6 @@
             <controls:Checkbox Grid.Column="1"
                                Margin="10"/>
         </Grid>
-        
         
         <fab:FloatingActionMenu
             x:Name="fab"
