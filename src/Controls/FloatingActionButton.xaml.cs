@@ -27,6 +27,9 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty CommandParameterProperty =
             BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(FloatingActionButton), null);
 
+        public static readonly BindableProperty SizeProperty =
+            BindableProperty.Create(nameof(Size), typeof(double), typeof(FloatingActionButton), 50.0);
+
         public Color Color
         {
             get
@@ -72,6 +75,18 @@ namespace IS.Toolkit.XamarinForms.Controls
             set
             {
                 SetValue(CommandParameterProperty, value);
+            }
+        }
+
+        public double Size
+        {
+            get
+            {
+                return (double)GetValue(SizeProperty);
+            }
+            set
+            {
+                SetValue(SizeProperty, value);
             }
         }
 

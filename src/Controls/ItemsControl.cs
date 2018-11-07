@@ -19,6 +19,8 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public static readonly BindableProperty OrientationProperty =
             BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(ItemsControl), defaultValue: StackOrientation.Vertical,  propertyChanged: (s, n, o) => ((ItemsControl)s).OnOrientationPropertyChanged());
+        public static readonly BindableProperty SpacingProperty =
+            BindableProperty.Create(nameof(Spacing), typeof(double), typeof(ItemsControl), defaultValue: 0.0, propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsLayoutPropertyChanged());
 
         public IEnumerable ItemsSource
         {
@@ -48,6 +50,11 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             get => (StackOrientation)GetValue(OrientationProperty);
             set => SetValue(OrientationProperty, value);
+
+        public double Spacing
+        {
+            get => (double)GetValue(SpacingProperty);
+            set => SetValue(SpacingProperty, value);
         }
 
         protected virtual View CreateItem(object item)
@@ -72,6 +79,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 {
                     Spacing = 0,
                     Orientation = Orientation
+                    Spacing = Spacing
                 };
 
             if (Content is Layout<View> viewLayout)
