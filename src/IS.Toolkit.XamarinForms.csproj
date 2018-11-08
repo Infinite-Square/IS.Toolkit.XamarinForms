@@ -3,17 +3,15 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
+    <Version>1.0.0-alpha001</Version>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
+ 
   <ItemGroup>
-    <None Remove="Controls\Checkbox\checkbox_empty.png" />
-    <None Remove="Controls\Checkbox\checkbox_fill.png" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+    <EmbeddedResource Include="Controls\Picker\close.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,10 +43,14 @@
   
   <ItemGroup>
     <Folder Include="Controls\Android\" />
+    <Folder Include="Behavior\" />
   </ItemGroup>
   
   <ItemGroup>
     <EmbeddedResource Update="Controls\Expander\Expander.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Picker\Picker.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
