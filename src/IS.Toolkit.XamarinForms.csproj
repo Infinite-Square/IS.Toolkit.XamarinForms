@@ -11,6 +11,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
     <EmbeddedResource Include="Controls\Picker\close.png" />
+    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
+    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,10 +43,6 @@
     <Compile Update="Controls\FloatingMenu\FloatingActionMenu.xaml.cs">
       <DependentUpon>FloatingActionMenu.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Behavior\" />
   </ItemGroup>
   
   <ItemGroup>
