@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace Sample.iOS
+namespace Sample.IOS
 {
     public class Application
     {
