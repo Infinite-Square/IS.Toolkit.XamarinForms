@@ -81,16 +81,18 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
-            <Label Text="Checkbox" Grid.Column="0"/>
+            <Label Text="Checkbox"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
             <controls:Checkbox Grid.Column="1"
                                Margin="10"/>
         </Grid>
 
         <fab:FloatingActionMenu
-            IsVisible="False"
+            IsVisible="True"
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="7"
+            Grid.RowSpan="8"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
