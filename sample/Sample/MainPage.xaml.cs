@@ -27,7 +27,7 @@ namespace Sample
             };
 
             fab.Items = new List<IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item>()
-            {
+             {
                 new IS.Toolkit.XamarinForms.Controls.FloatingMenu.Item()
                 {
                     BackgroundColor = Color.FromHex("#B3ffffff"),
@@ -51,8 +51,7 @@ namespace Sample
                     Icon = "Icon.png",
                     Action = new Command(() => { System.Diagnostics.Debug.WriteLine("Item 2 Clicked"); })
                 }
-            };
-
+             };
             var list = new List<AvailableValue>()
             {
                 new AvailableValue() { Label = "Text 1", Value = "Text 1" },
