@@ -38,6 +38,9 @@
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\FloatingMenu\FloatingActionMenu.xaml.cs">
+      <DependentUpon>FloatingActionMenu.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup>
@@ -54,7 +57,7 @@
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingMenu\FloactionActionMenu.xaml">
+    <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
