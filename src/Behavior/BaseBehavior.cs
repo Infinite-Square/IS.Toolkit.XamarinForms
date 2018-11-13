@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace DispaX.UI.Views.Behavior
+namespace IS.Toolkit.XamarinForms.Behavior
 {
     public class BaseBehavior<T> : Behavior<T>
         where T : BindableObject
