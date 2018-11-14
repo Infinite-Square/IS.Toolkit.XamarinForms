@@ -3,7 +3,7 @@ using System.Collections;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace DispaX.UI.Views.Behavior
+namespace IS.Toolkit.XamarinForms.Behavior
 {
     public class InfiniteScrollBehavior : BaseBehavior<ListView>
     {
