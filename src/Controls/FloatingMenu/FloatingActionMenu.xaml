@@ -1,71 +1,74 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS.Toolkit.XamarinForms.Controls.FloatingMenu.FloatingActionMenu"
-             xmlns:ctrls="clr-namespace:IS.Toolkit.XamarinForms.Controls"
-             xmlns:utils="clr-namespace:IS.Toolkit.XamarinForms.Controls.Utils"
-             x:Name="this">
-    <ContentView.Resources>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="IS.Toolkit.XamarinForms.Controls.FloatingMenu.FloatingActionMenu"
+      xmlns:ctrls="clr-namespace:IS.Toolkit.XamarinForms.Controls"
+      xmlns:utils="clr-namespace:IS.Toolkit.XamarinForms.Controls.Utils"
+      InputTransparent="True"
+      CascadeInputTransparent="False"
+      x:Name="this">
+    <Grid.Resources>
         <ResourceDictionary>
             <utils:ColorLuminanceConverter x:Key="colorConverter" />
         </ResourceDictionary>
-    </ContentView.Resources>
+    </Grid.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        
-        <BoxView BackgroundColor="{Binding FilterBackgroundColor, Source={x:Reference this}}"
-                 Grid.RowSpan="2"
-                 IsVisible="False"
-                 x:Name="OpacityFilter">
-            <BoxView.GestureRecognizers>
-                <TapGestureRecognizer 
-                    Tapped="OpacityFilter_Tapped" 
-                    NumberOfTapsRequired="1"/>
-            </BoxView.GestureRecognizers>
-        </BoxView>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <BoxView BackgroundColor="{Binding FilterBackgroundColor, Source={x:Reference this}}"
+             Grid.RowSpan="3"
+             InputTransparent="True"
+             x:Name="OpacityFilter">
+        <BoxView.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OpacityFilter_Tapped"
+                                  NumberOfTapsRequired="1" />
+        </BoxView.GestureRecognizers>
+    </BoxView>
 
 
-        <ctrls:ItemsControl x:Name="ItemsLayout"
-                                Grid.Row="0"
-                                Spacing="5"
-                                HorizontalOptions="End"
+    <ctrls:ItemsControl x:Name="ItemsLayout"
+                        Grid.Row="1"
+                        Spacing="5"
+                        InputTransparent="True"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        ItemsSource="{Binding Items, Source={x:Reference this}}"
+                        Margin="{Binding ItemsMargin, Source={x:Reference this}}"
+                        Padding="{Binding Padding, Source={x:Reference this}}">
+        <ctrls:ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="End"
+                             Margin="0,5">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpacityFilter_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                    <ContentView BackgroundColor="{Binding BackgroundColor}"
+                                 VerticalOptions="Center"
+                                 Padding="4,2">
+                        <Label Text="{Binding Label}"
+                               TextColor="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"
+                               VerticalOptions="Center" />
+                    </ContentView>
+                    <ctrls:FloatingActionButton Color="{Binding Color}"
+                                                Image="{Binding Icon}"
+                                                Command="{Binding Action}"
+                                                Size="{Binding ItemSize, Source={x:Reference this}}" />
+                </StackLayout>
+            </DataTemplate>
+        </ctrls:ItemsControl.ItemTemplate>
+    </ctrls:ItemsControl>
+
+    <ctrls:FloatingActionButton Grid.Row="2"
                                 VerticalOptions="End"
-                                ItemsSource="{Binding Items, Source={x:Reference this}}"
-                                Margin="{Binding ItemsMargin, Source={x:Reference this}}"
-                                Padding="{Binding Padding, Source={x:Reference this}}">
-
-            <ctrls:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal"
-                                     HorizontalOptions="End"
-                                     Margin="0,5">
-                        <ContentView BackgroundColor="{Binding BackgroundColor}"
-                                         VerticalOptions="Center"
-                                         Padding="4,2">
-                            <Label Text="{Binding Label}"
-                                       TextColor="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"
-                                       VerticalOptions="Center" />
-                        </ContentView>
-                        <ctrls:FloatingActionButton Color="{Binding Color}"
-                                                        Image="{Binding Icon}"
-                                                        Command="{Binding Action}"
-                                                        Size="{Binding ItemSize, Source={x:Reference this}}" />
-                    </StackLayout>
-                </DataTemplate>
-            </ctrls:ItemsControl.ItemTemplate>
-        </ctrls:ItemsControl>
-
-        <ctrls:FloatingActionButton Grid.Row="1"
-                                        VerticalOptions="End"
-                                        HorizontalOptions="End"
-                                        Padding="{Binding Padding, Source={x:Reference this}}"
-                                        Size="{Binding Size, Source={x:Reference this}}"
-                                        Color="{Binding Color, Source={x:Reference this}}"
-                                        Image="{Binding Image, Source={x:Reference this}}"
-                                        Clicked="FloatingActionButton_Clicked"/>
-    </Grid>
-</ContentView>
+                                HorizontalOptions="End"
+                                Padding="{Binding Padding, Source={x:Reference this}}"
+                                Size="{Binding Size, Source={x:Reference this}}"
+                                Color="{Binding Color, Source={x:Reference this}}"
+                                Image="{Binding Image, Source={x:Reference this}}"
+                                Clicked="FloatingActionButton_Clicked" />
+</Grid>
