@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FloatingActionMenu : ContentView
+    public partial class FloatingActionMenu : Grid
     {
         private double _originalContentHeight;
 
@@ -19,9 +19,9 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         #region Items
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
             propertyName: nameof(Items),
-            returnType: typeof(IEnumerable<Item>),
+            returnType: typeof(IEnumerable<FloatingActionMenuItem>),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(IEnumerable<Item>),
+            defaultValue: default(IEnumerable<FloatingActionMenuItem>),
             propertyChanged: ItemsPropertyChanged);
 
         private static void ItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -33,11 +33,11 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
             }
         }
 
-        public IEnumerable<Item> Items
+        public IEnumerable<FloatingActionMenuItem> Items
         {
             get
             {
-                return (IEnumerable<Item>)GetValue(ItemsProperty);
+                return (IEnumerable<FloatingActionMenuItem>)GetValue(ItemsProperty);
             }
             set
             {
@@ -177,25 +177,8 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                     length: 150u,
                     finished: (arg, value) =>
                     {
-                        OpacityFilter.IsVisible = isOpen;
+                        OpacityFilter.InputTransparent = !isOpen;
                     });
-            }
-
-            if (IsOpen)
-            {
-                OpacityFilter.IsVisible = true;
-                ItemsLayout.IsVisible = true;
-
-                OpacityFilter.InputTransparent = false;
-                ItemsLayout.InputTransparent = false;
-            }
-            else
-            {
-                // If not open, need to init container size
-                ItemsLayout.IsVisible = false;
-                OpacityFilter.IsVisible = false;
-                OpacityFilter.InputTransparent = true;
-                ItemsLayout.InputTransparent = true;
             }
         }
 
@@ -259,6 +242,15 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         private void InitOriginalContentHeight(double size)
         {
             _originalContentHeight = size;
+
+            if (!IsOpen)
+            {
+                ItemsLayout.HeightRequest = 0;
+                OpacityFilter.HeightRequest = 0;
+                OpacityFilter.Opacity = 0;
+                OpacityFilter.InputTransparent = true;
+                ItemsLayout.Opacity = 0;
+            }
         }
 
         private void OpacityFilter_Tapped(object sender, EventArgs e)

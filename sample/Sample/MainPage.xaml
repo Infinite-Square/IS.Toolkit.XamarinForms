@@ -87,7 +87,7 @@
             <controls:Checkbox Grid.Column="1"
                                Margin="10"/>
         </Grid>
-
+        
         <fab:FloatingActionMenu
             IsVisible="True"
             x:Name="fab"
@@ -99,16 +99,17 @@
             Padding="20"
             Margin="-10">
             <fab:FloatingActionMenu.Items>
-                <x:Array Type="{x:Type fab:Item}" x:Key="array">
-                    <fab:Item  BackgroundColor="#B3ffffff"
+                <x:Array Type="{x:Type fab:FloatingActionMenuItem}" x:Key="array">
+                    <fab:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
                                Color="CadetBlue"
                                Label="Text"
-                               Icon="Icon.png"/>
-                    <fab:Item  BackgroundColor="DarkGray"
+                               Icon="Icon.png"
+                               />
+                    <fab:FloatingActionMenuItem  BackgroundColor="DarkGray"
                                Color="LightPink"
                                Label="Text 1"
                                Icon="Icon.png"/>
-                    <fab:Item  BackgroundColor="#B3ffffff"
+                    <fab:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
                                Color="CadetBlue"
                                Label="Text" 
                                Icon="Icon.png"/>
