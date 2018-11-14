@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,9 +19,9 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         #region Items
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
             propertyName: nameof(Items),
-            returnType: typeof(List<Item>),
+            returnType: typeof(IEnumerable<Item>),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(List<Item>),
+            defaultValue: default(IEnumerable<Item>),
             propertyChanged: ItemsPropertyChanged);
 
         private static void ItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -34,15 +29,15 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
             if (bindable != null && newValue != null)
             {
                 var control = (FloatingActionMenu)bindable;
-                control.InitOriginalContentHeight(control.Items.Count * (control.ItemSize + 10));
+                control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
             }
         }
 
-        public List<Item> Items
+        public IEnumerable<Item> Items
         {
             get
             {
-                return (List<Item>)GetValue(ItemsProperty);
+                return (IEnumerable<Item>)GetValue(ItemsProperty);
             }
             set
             {
@@ -185,6 +180,23 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                         OpacityFilter.IsVisible = isOpen;
                     });
             }
+
+            if (IsOpen)
+            {
+                OpacityFilter.IsVisible = true;
+                ItemsLayout.IsVisible = true;
+
+                OpacityFilter.InputTransparent = false;
+                ItemsLayout.InputTransparent = false;
+            }
+            else
+            {
+                // If not open, need to init container size
+                ItemsLayout.IsVisible = false;
+                OpacityFilter.IsVisible = false;
+                OpacityFilter.InputTransparent = true;
+                ItemsLayout.InputTransparent = true;
+            }
         }
 
         public bool IsOpen
@@ -218,7 +230,7 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
                 control.ItemsMargin = new Thickness(0, 0, (control.Size / 2) - (control.ItemSize / 2), 0);
                 if (control.Items != default)
                 {
-                    control.InitOriginalContentHeight(control.Items.Count * (control.ItemSize + 10));
+                    control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
                 }
             }
         }
@@ -247,14 +259,11 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         private void InitOriginalContentHeight(double size)
         {
             _originalContentHeight = size;
+        }
 
-            if (!IsOpen)
-            {
-                // If not open, need to init container size
-                ItemsLayout.HeightRequest = 0;
-                ItemsLayout.Opacity = 0;
-                OpacityFilter.Opacity = 0;
-            }
+        private void OpacityFilter_Tapped(object sender, EventArgs e)
+        {
+            IsOpen = false;
         }
     }
 }

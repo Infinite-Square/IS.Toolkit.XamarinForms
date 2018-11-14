@@ -3,20 +3,21 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
-    <Version>1.0.0-alpha001</Version>
+    <Version>1.0.0-alpha003</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
-
  
   <ItemGroup>
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
     <EmbeddedResource Include="Controls\Picker\close.png" />
+    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
+    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.46" PrivateAssets="All" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
 
@@ -39,10 +40,9 @@
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Controls\Android\" />
+    <Compile Update="Controls\FloatingMenu\FloatingActionMenu.xaml.cs">
+      <DependentUpon>FloatingActionMenu.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup>
@@ -55,9 +55,30 @@
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingMenu\FloactionActionMenu.xaml">
+    <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Controls\Expander\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\FloatingActionButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\FloatingMenu\FloactionActionMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\Picker\Picker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\SegmentedControl\SegmentedControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\TextBox\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>
