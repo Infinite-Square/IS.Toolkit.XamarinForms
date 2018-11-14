@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -122,9 +119,9 @@ namespace IS.Toolkit.XamarinForms.Controls
         #region Items
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
             propertyName: nameof(Items),
-            returnType: typeof(List<string>),
+            returnType: typeof(IEnumerable<string>),
             declaringType: typeof(SegmentedControl),
-            defaultValue: default(List<string>),
+            defaultValue: default(IEnumerable<string>),
             propertyChanged: ItemsPropertyChanged);
 
         private static void ItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -136,11 +133,11 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
-        public List<string> Items
+        public IEnumerable<string> Items
         {
             get
             {
-                return (List<string>)GetValue(ItemsProperty);
+                return (IEnumerable<string>)GetValue(ItemsProperty);
             }
             set
             {
@@ -214,9 +211,9 @@ namespace IS.Toolkit.XamarinForms.Controls
             ItemsLayout.ColumnDefinitions.Clear();
             ItemsLayout.Children.Clear();
 
-            for (int index = 0; index < Items.Count; index++)
+            for (int index = 0; index < Items.Count(); index++)
             {
-                var currentValue = Items[index];
+                var currentValue = Items.ElementAt(index);
 
                 var item = new SegmentItem
                 {

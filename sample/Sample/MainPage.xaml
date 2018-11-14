@@ -15,6 +15,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -48,7 +49,15 @@
                                    TextColor="#aaaaaa"
                                    SelectedItemTextColor="White"
                                    BorderWidth="3"
-                                   BorderColor="#e6e0e0"/>
+                                   BorderColor="#e6e0e0">
+            <controls:SegmentedControl.Items>
+                <x:Array Type="{x:Type x:String}" x:Key="array">
+                    <x:String>Item 1</x:String>
+                    <x:String>Item 2</x:String>
+                    <x:String>Item 3</x:String>
+                </x:Array>
+            </controls:SegmentedControl.Items>
+        </controls:SegmentedControl>
 
         <controls:ItemsControl x:Name="_itemsControl" Grid.Row="4">
             <controls:ItemsControl.ItemTemplate>
@@ -72,20 +81,40 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
-            <Label Text="Checkbox" Grid.Column="0"/>
+            <Label Text="Checkbox"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
             <controls:Checkbox Grid.Column="1"
                                Margin="10"/>
         </Grid>
-        
+
         <fab:FloatingActionMenu
+            IsVisible="True"
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="7"
+            Grid.RowSpan="8"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
             Padding="20"
-            Margin="-10"/>
+            Margin="-10">
+            <fab:FloatingActionMenu.Items>
+                <x:Array Type="{x:Type fab:Item}" x:Key="array">
+                    <fab:Item  BackgroundColor="#B3ffffff"
+                               Color="CadetBlue"
+                               Label="Text"
+                               Icon="Icon.png"/>
+                    <fab:Item  BackgroundColor="DarkGray"
+                               Color="LightPink"
+                               Label="Text 1"
+                               Icon="Icon.png"/>
+                    <fab:Item  BackgroundColor="#B3ffffff"
+                               Color="CadetBlue"
+                               Label="Text" 
+                               Icon="Icon.png"/>
+                </x:Array>
+            </fab:FloatingActionMenu.Items>
+        </fab:FloatingActionMenu>
     </Grid>
 
 </ContentPage>

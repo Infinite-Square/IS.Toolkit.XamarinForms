@@ -11,6 +11,6 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         public Color BackgroundColor { get; set; } = Color.Transparent;
         public string Label { get; set; }
         public ImageSource Icon { get; set; }
-        public Command Action { get; set; }
+        public Command Command { get; set; }
     }
 }
