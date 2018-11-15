@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
+namespace IS.Toolkit.XamarinForms.Controls
 {
     public class FloatingActionMenuItem
     {

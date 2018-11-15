@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Grid xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      x:Class="IS.Toolkit.XamarinForms.Controls.FloatingMenu.FloatingActionMenu"
+      x:Class="IS.Toolkit.XamarinForms.Controls.FloatingActionMenu"
       xmlns:ctrls="clr-namespace:IS.Toolkit.XamarinForms.Controls"
       xmlns:utils="clr-namespace:IS.Toolkit.XamarinForms.Controls.Utils"
       InputTransparent="True"
@@ -33,7 +33,6 @@
     <ctrls:ItemsControl x:Name="ItemsLayout"
                         Grid.Row="1"
                         Spacing="5"
-                        InputTransparent="True"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         ItemsSource="{Binding Items, Source={x:Reference this}}"
@@ -44,20 +43,17 @@
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="End"
                              Margin="0,5">
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OpacityFilter_Tapped" />
-                    </StackLayout.GestureRecognizers>
-                    <ContentView BackgroundColor="{Binding BackgroundColor}"
+                    <ContentView BackgroundColor="{Binding BackgroundColor, Mode=OneWay}"
                                  VerticalOptions="Center"
                                  Padding="4,2">
-                        <Label Text="{Binding Label}"
+                        <Label Text="{Binding Label, Mode=OneWay}"
                                TextColor="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"
                                VerticalOptions="Center" />
                     </ContentView>
-                    <ctrls:FloatingActionButton Color="{Binding Color}"
-                                                Image="{Binding Icon}"
-                                                Command="{Binding Action}"
-                                                Size="{Binding ItemSize, Source={x:Reference this}}" />
+                    <ctrls:FloatingActionButton Color="{Binding Color, Mode=OneWay}"
+                                                Image="{Binding Icon, Mode=OneWay}"
+                                                Command="{Binding Command, Mode=OneWay}"
+                                                Size="{Binding ItemSize, Source={x:Reference this}, Mode=OneWay}" />
                 </StackLayout>
             </DataTemplate>
         </ctrls:ItemsControl.ItemTemplate>

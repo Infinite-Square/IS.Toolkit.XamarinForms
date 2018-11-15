@@ -4,7 +4,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
+namespace IS.Toolkit.XamarinForms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenu : Grid
