@@ -27,8 +27,9 @@ namespace Sample
                 new AvailableValue() { Label = "Text 4", Value = "Text 4" }
             };
 
-            _picker.ItemsSource = list;
-            _picker.SelectedItem = list[2];
+            // _picker.ItemsSource = list;
+            // _picker.SelectedItem = list[2];
+            // _picker.SelectedItem = DateTime.Now.AddDays(-15);
         }
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)

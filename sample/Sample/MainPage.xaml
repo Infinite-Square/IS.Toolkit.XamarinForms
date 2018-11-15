@@ -74,7 +74,8 @@
                          Title="Picker : "
                          IsClearable="True"
                          BackgroundColor="Wheat"
-                         BorderColor="Red"/>
+                         BorderColor="Red"
+                         Type="TimePicker"/>
 
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
