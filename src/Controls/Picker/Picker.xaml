@@ -75,6 +75,20 @@
                     ItemsSource="{Binding ItemsSource, Source={x:Reference this}}"
                     ItemDisplayBinding="{Binding Label}"
                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            <DatePicker x:Name="_datePicker"
+                        IsVisible="False"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="2"
+                        Opacity="0"
+                        HeightRequest="1"
+                        DateSelected="DatePicker_DateSelectedChanged" />
+            <TimePicker x:Name="_timePicker"
+                        IsVisible="False"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="2"
+                        Opacity="0"
+                        HeightRequest="1"
+                        PropertyChanged="TimePicker_PropertyChanged"/>
 
             <Image Grid.Column="1"
                    Grid.Row="1"

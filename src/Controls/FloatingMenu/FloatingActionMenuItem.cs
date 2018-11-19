@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
+namespace IS.Toolkit.XamarinForms.Controls
 {
     public class FloatingActionMenuItem
     {
@@ -11,6 +9,6 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         public Color BackgroundColor { get; set; } = Color.Transparent;
         public string Label { get; set; }
         public ImageSource Icon { get; set; }
-        public Command Command { get; set; }
+        public ICommand Command { get; set; }
     }
 }
