@@ -75,6 +75,20 @@
                     ItemsSource="{Binding ItemsSource, Source={x:Reference this}}"
                     ItemDisplayBinding="{Binding Label}"
                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            <DatePicker x:Name="_datePicker"
+                        IsVisible="False"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="2"
+                        Opacity="0"
+                        HeightRequest="1"
+                        DateSelected="DatePicker_DateSelectedChanged" />
+            <TimePicker x:Name="_timePicker"
+                        IsVisible="False"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="2"
+                        Opacity="0"
+                        HeightRequest="1"
+                        PropertyChanged="TimePicker_PropertyChanged"/>
 
             <Image Grid.Column="1"
                    Grid.Row="1"
@@ -87,6 +101,14 @@
                     Grid.Row="1"
                     IsVisible="{Binding IsClearableAndHasValue, Source={x:Reference this}}"
                     Clicked="Clear_Clicked"
+                    BackgroundColor="Transparent" />
+
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    x:Name="_button"
+                    IsVisible="False"
+                    Command="{Binding Command, Source={x:Reference this}}"
                     BackgroundColor="Transparent" />
 
         </Grid>

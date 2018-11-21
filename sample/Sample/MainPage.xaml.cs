@@ -1,6 +1,8 @@
 ﻿using IS.Toolkit.XamarinForms.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Sample
@@ -9,6 +11,7 @@ namespace Sample
     {
         public MainPage()
         {
+            ItemSelectedCommand = new Command(FabMenuClicked);
             InitializeComponent();
 
             _itemsControl.ItemsSource = new List<Data>()
@@ -27,8 +30,28 @@ namespace Sample
                 new AvailableValue() { Label = "Text 4", Value = "Text 4" }
             };
 
-            _picker.ItemsSource = list;
-            _picker.SelectedItem = list[2];
+            // _picker.ItemsSource = list;
+            // _picker.SelectedItem = list[2];
+            // _picker.SelectedItem = DateTime.Now.AddDays(-15);
+            foreach (var item in fab.Items)
+            {
+                item.Command = ItemSelectedCommand;
+            }
+
+            _btnPicker.Command = new Command(() =>
+            {
+                DisplayAlert("Title", "Do whatever you want", "Ok");
+            });
+        }
+
+        public ICommand ItemSelectedCommand
+        {
+            get;
+        }
+
+        private void FabMenuClicked()
+        {
+            Console.WriteLine("FAB Menu Clicked");
         }
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)

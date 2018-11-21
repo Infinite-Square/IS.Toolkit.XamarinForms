@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
-             xmlns:fab="clr-namespace:IS.Toolkit.XamarinForms.Controls.FloatingMenu;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
 
     <Grid Padding="10">
@@ -10,6 +9,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -74,7 +74,8 @@
                          Title="Picker : "
                          IsClearable="True"
                          BackgroundColor="Wheat"
-                         BorderColor="Red"/>
+                         BorderColor="Red"
+                         Type="TimePicker"/>
 
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
@@ -88,33 +89,46 @@
                                Margin="10"/>
         </Grid>
 
-        <fab:FloatingActionMenu
+
+        <controls:Picker x:Name="_btnPicker"
+                         Grid.Row="7"
+                         Placeholder="Select a value..."
+                         Title="Picker button : "
+                         IsClearable="True"
+                         BackgroundColor="Wheat"
+                         BorderColor="Red"
+                         Type="Button" />
+        
+        <controls:FloatingActionMenu
             IsVisible="True"
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="8"
+            Grid.RowSpan="9"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
             Padding="20"
             Margin="-10">
-            <fab:FloatingActionMenu.Items>
-                <x:Array Type="{x:Type fab:Item}" x:Key="array">
-                    <fab:Item  BackgroundColor="#B3ffffff"
-                               Color="CadetBlue"
-                               Label="Text"
-                               Icon="Icon.png"/>
-                    <fab:Item  BackgroundColor="DarkGray"
+            <controls:FloatingActionMenu.Items>
+                <x:Array
+                    Type="{x:Type controls:FloatingActionMenuItem}" 
+                         x:Key="array">
+                    <controls:FloatingActionMenuItem 
+                        BackgroundColor="#B3ffffff"
+                        Color="CadetBlue"
+                        Label="Text"
+                        Icon="Icon.png"/>
+                    <controls:FloatingActionMenuItem  BackgroundColor="DarkGray"
                                Color="LightPink"
                                Label="Text 1"
                                Icon="Icon.png"/>
-                    <fab:Item  BackgroundColor="#B3ffffff"
+                    <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
                                Color="CadetBlue"
                                Label="Text" 
                                Icon="Icon.png"/>
                 </x:Array>
-            </fab:FloatingActionMenu.Items>
-        </fab:FloatingActionMenu>
+            </controls:FloatingActionMenu.Items>
+        </controls:FloatingActionMenu>
     </Grid>
 
 </ContentPage>

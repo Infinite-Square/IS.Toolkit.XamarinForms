@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,6 +19,22 @@ namespace IS.Toolkit.XamarinForms.Controls
         private void RaiseSelectedItemChanged(object value)
         {
             SelectedItemChanged?.Invoke(this, value);
+        }
+
+        private void TimePicker_Focused(object sender, FocusEventArgs e)
+        {
+            if (SelectedItem == null)
+            {
+                SelectedItem = DateTime.Now.TimeOfDay;
+            }
+        }
+
+        private void DatePicker_Focused(object sender, FocusEventArgs e)
+        {
+            if (SelectedItem == null)
+            {
+                SelectedItem = DateTime.Now;
+            }
         }
 
         public Picker()
@@ -208,44 +224,97 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         #region SelectedValue
 
-            #region SelectedItem
-            public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(
-                propertyName: nameof(SelectedItem),
-                returnType: typeof(AvailableValue),
-                declaringType: typeof(Picker),
-                defaultValue: default(AvailableValue),
-                    propertyChanged: SelectedItemPropertyChanged);
+        #region SelectedItem
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(
+            propertyName: nameof(ItemsSource),
+            returnType: typeof(object),
+            declaringType: typeof(Picker),
+            defaultBindingMode: BindingMode.TwoWay,
+            propertyChanged: SelectedItem_PropertyChanged);
 
-            private static void SelectedItemPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        /// <summary>
+        /// Selected item type will be AvailableValue if Type if default.
+        /// DateTime if Type is DatePicker
+        /// TimeSpan if Type if TimePicker
+        /// </summary>
+        public object SelectedItem
+        {
+            get => GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
+        }
+
+        private static void SelectedItem_PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (Picker)bindable;
+            if (newValue != null)
             {
-                if (bindable != null)
+                if (control.Type == PickerType.Default)
                 {
-                    var control = (Picker)bindable;
-                    control.OnPropertyChanged(nameof(control.SelectedText));
-                    control.OnPropertyChanged(nameof(control.ShowPlaceholder));
-                    control.OnPropertyChanged(nameof(control.IsClearableAndHasValue));
+                    if (control.ItemsSource != null)
+                    {
+                        var index = control.ItemsSource.IndexOf(control.ItemsSource.Where(item => item.Value.Equals(newValue)).FirstOrDefault());
+                        control._picker.SelectedIndex = index;
+                    }
+                    else
+                    {
+                        control._picker.SelectedIndex = -1;
+                    }
+                }
+
+                if (control.Type == PickerType.DatePicker)
+                {
+                    control._datePicker.Date = (DateTime)newValue;
+                    control.DatePicker_DateSelectedChanged(control._datePicker, new DateChangedEventArgs(default(DateTime), (DateTime)newValue));
+                }
+
+                if (control.Type == PickerType.TimePicker)
+                {
+                    control._timePicker.Time = (TimeSpan)newValue;
                 }
             }
-
-            public AvailableValue SelectedItem
+            else
             {
-                get
-                {
-                    return (AvailableValue)GetValue(SelectedItemProperty);
-                }
-                set
-                {
-                    SetValue(SelectedItemProperty, value);
-                }
+                control.SelectedItem = null;
             }
-            #endregion
 
-            #region SelectedValue
-            public string SelectedText => SelectedItem?.Label;
-            #endregion
+            control.OnPropertyChanged(nameof(IsClearableAndHasValue));
+            control.OnPropertyChanged(nameof(control.SelectedText));
+            control.OnPropertyChanged(nameof(control.ShowPlaceholder));
+            control.RaiseSelectedItemChanged(control.SelectedItem);
+        }
+        #endregion
 
-            #region TextColor
-            public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
+        #region SelectedValue
+        public string SelectedText
+        {
+            get
+            {
+                // If null, then no text displayed
+                if (SelectedItem == null)
+                {
+                    return string.Empty;
+                }
+
+                // Else displayed text depends on type
+                switch (Type)
+                {
+                    case PickerType.Default:
+                        return ((AvailableValue)SelectedItem).Label;
+                    case PickerType.Button:
+                        return ((AvailableValue)SelectedItem).Label;
+                    case PickerType.DatePicker:
+                        return ((DateTime)SelectedItem).ToShortDateString();
+                    case PickerType.TimePicker:
+                        return ((TimeSpan)SelectedItem).ToString(@"hh\:mm");
+                }
+
+                return null;
+            }
+        }
+        #endregion
+
+        #region TextColor
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
                 propertyName: nameof(TextColor),
                 returnType: typeof(Color),
                 declaringType: typeof(Picker),
@@ -508,16 +577,143 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        #region Command
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+            propertyName: nameof(Command),
+            returnType: typeof(ICommand),
+            declaringType: typeof(Picker),
+            defaultValue: default(ICommand));
+
+        public ICommand Command
+        {
+            get
+            {
+                return (ICommand)GetValue(CommandProperty);
+            }
+            set
+            {
+                SetValue(CommandProperty, value);
+            }
+        }
+        #endregion
+
+        #region PickerType
+        public static readonly BindableProperty PickerTypeProperty = BindableProperty.Create(
+            propertyName: nameof(Type),
+            returnType: typeof(PickerType),
+            declaringType: typeof(Picker),
+            defaultValue: PickerType.Default,
+            propertyChanged: PickerTypeChanged);
+
+        private static void PickerTypeChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = bindable as Picker;
+            var type = (PickerType)newValue;
+            var tapGesture = new TapGestureRecognizer();
+            switch (type)
+            {
+                case PickerType.Default:
+                    control._picker.IsVisible = true;
+                    control._datePicker.IsVisible = false;
+                    control._timePicker.IsVisible = false;
+                    control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._picker.Focus();
+                    break;
+                case PickerType.DatePicker:
+                    control._datePicker.IsVisible = true;
+                    control._timePicker.IsVisible = false;
+                    control._picker.IsVisible = false;
+                    control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._datePicker.Focus();
+                    break;
+                case PickerType.TimePicker:
+                    control._timePicker.IsVisible = true;
+                    control._datePicker.IsVisible = false;
+                    control._picker.IsVisible = false;
+                    control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._timePicker.Focus();
+                    break;
+                case PickerType.Button:
+                    control._timePicker.IsVisible = false;
+                    control._datePicker.IsVisible = false;
+                    control._picker.IsVisible = false;
+                    control._button.IsVisible = true;
+                    break;
+            }
+
+            control._grid.GestureRecognizers.Add(tapGesture);
+        }
+
+        public PickerType Type
+        {
+            get
+            {
+                return (PickerType)GetValue(PickerTypeProperty);
+            }
+            set
+            {
+                SetValue(PickerTypeProperty, value);
+            }
+        }
+
+        public enum PickerType
+        {
+            /// <summary>
+            /// Default picker type is Picker. Needs to pass items source as List<AvailableValue> where Value is your object and Label is the text that will shown. SelectedItem is AvailableValue
+            /// </summary>
+            Default,
+
+            /// <summary>
+            /// SelectedItem is DateTime
+            /// </summary>
+            DatePicker,
+
+            /// <summary>
+            /// SelectedItem is TimeSpan
+            /// </summary>
+            TimePicker,
+
+            /// <summary>
+            /// SelectedItem is AvailableValue
+            /// </summary>
+            Button
+        }
+        #endregion
+
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedItem = (sender as Xamarin.Forms.Picker).SelectedItem as AvailableValue;
-            RaiseSelectedItemChanged(SelectedItem.Value);
+            SelectedItem = ((AvailableValue)_picker.SelectedItem)?.Value;
         }
 
         private void Clear_Clicked(object sender, EventArgs e)
         {
             SelectedItem = null;
             RaiseSelectedItemChanged(null);
+        }
+
+        private void DatePicker_DateSelectedChanged(object sender, DateChangedEventArgs e)
+        {
+            if (e.NewDate == null)
+            {
+                SelectedItem = null;
+                return;
+            }
+
+            SelectedItem = e.NewDate.Date;
+        }
+
+        private void TimePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(TimePicker.Time))
+            {
+                if (_timePicker.Time == null)
+                {
+                    SelectedItem = null;
+                    return;
+                }
+
+                SelectedItem = _timePicker.Time;
+            }
         }
     }
 }
