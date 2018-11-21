@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -300,6 +300,8 @@ namespace IS.Toolkit.XamarinForms.Controls
                 {
                     case PickerType.Default:
                         return ((AvailableValue)SelectedItem).Label;
+                    case PickerType.Button:
+                        return ((AvailableValue)SelectedItem).Label;
                     case PickerType.DatePicker:
                         return ((DateTime)SelectedItem).ToShortDateString();
                     case PickerType.TimePicker:
@@ -575,6 +577,26 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        #region Command
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+            propertyName: nameof(Command),
+            returnType: typeof(ICommand),
+            declaringType: typeof(Picker),
+            defaultValue: default(ICommand));
+
+        public ICommand Command
+        {
+            get
+            {
+                return (ICommand)GetValue(CommandProperty);
+            }
+            set
+            {
+                SetValue(CommandProperty, value);
+            }
+        }
+        #endregion
+
         #region PickerType
         public static readonly BindableProperty PickerTypeProperty = BindableProperty.Create(
             propertyName: nameof(Type),
@@ -587,24 +609,39 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             var control = bindable as Picker;
             var type = (PickerType)newValue;
+            var tapGesture = new TapGestureRecognizer();
             switch (type)
             {
                 case PickerType.Default:
                     control._picker.IsVisible = true;
                     control._datePicker.IsVisible = false;
                     control._timePicker.IsVisible = false;
+                    control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._picker.Focus();
                     break;
                 case PickerType.DatePicker:
                     control._datePicker.IsVisible = true;
                     control._timePicker.IsVisible = false;
                     control._picker.IsVisible = false;
+                    control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._datePicker.Focus();
                     break;
                 case PickerType.TimePicker:
                     control._timePicker.IsVisible = true;
                     control._datePicker.IsVisible = false;
                     control._picker.IsVisible = false;
+                    control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._timePicker.Focus();
+                    break;
+                case PickerType.Button:
+                    control._timePicker.IsVisible = false;
+                    control._datePicker.IsVisible = false;
+                    control._picker.IsVisible = false;
+                    control._button.IsVisible = true;
                     break;
             }
+
+            control._grid.GestureRecognizers.Add(tapGesture);
         }
 
         public PickerType Type
@@ -621,9 +658,25 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public enum PickerType
         {
+            /// <summary>
+            /// Default picker type is Picker. Needs to pass items source as List<AvailableValue> where Value is your object and Label is the text that will shown. SelectedItem is AvailableValue
+            /// </summary>
             Default,
+
+            /// <summary>
+            /// SelectedItem is DateTime
+            /// </summary>
             DatePicker,
-            TimePicker
+
+            /// <summary>
+            /// SelectedItem is TimeSpan
+            /// </summary>
+            TimePicker,
+
+            /// <summary>
+            /// SelectedItem is AvailableValue
+            /// </summary>
+            Button
         }
         #endregion
 

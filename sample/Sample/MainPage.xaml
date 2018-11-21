@@ -15,6 +15,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -89,11 +90,20 @@
         </Grid>
 
 
+        <controls:Picker x:Name="_btnPicker"
+                         Grid.Row="7"
+                         Placeholder="Select a value..."
+                         Title="Picker button : "
+                         IsClearable="True"
+                         BackgroundColor="Wheat"
+                         BorderColor="Red"
+                         Type="Button" />
+        
         <controls:FloatingActionMenu
             IsVisible="True"
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="8"
+            Grid.RowSpan="9"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
