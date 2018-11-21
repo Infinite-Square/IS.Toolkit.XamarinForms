@@ -609,6 +609,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             var control = bindable as Picker;
             var type = (PickerType)newValue;
+            var tapGesture = new TapGestureRecognizer();
             switch (type)
             {
                 case PickerType.Default:
@@ -616,18 +617,21 @@ namespace IS.Toolkit.XamarinForms.Controls
                     control._datePicker.IsVisible = false;
                     control._timePicker.IsVisible = false;
                     control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._picker.Focus();
                     break;
                 case PickerType.DatePicker:
                     control._datePicker.IsVisible = true;
                     control._timePicker.IsVisible = false;
                     control._picker.IsVisible = false;
                     control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._datePicker.Focus();
                     break;
                 case PickerType.TimePicker:
                     control._timePicker.IsVisible = true;
                     control._datePicker.IsVisible = false;
                     control._picker.IsVisible = false;
                     control._button.IsVisible = false;
+                    tapGesture.Tapped += (s, e) => control._timePicker.Focus();
                     break;
                 case PickerType.Button:
                     control._timePicker.IsVisible = false;
@@ -636,6 +640,8 @@ namespace IS.Toolkit.XamarinForms.Controls
                     control._button.IsVisible = true;
                     break;
             }
+
+            control._grid.GestureRecognizers.Add(tapGesture);
         }
 
         public PickerType Type
