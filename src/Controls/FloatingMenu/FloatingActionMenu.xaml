@@ -53,7 +53,8 @@
                     <ctrls:FloatingActionButton Color="{Binding Color, Mode=OneWay}"
                                                 Image="{Binding Icon, Mode=OneWay}"
                                                 Command="{Binding Command, Mode=OneWay}"
-                                                Size="{Binding ItemSize, Source={x:Reference this}, Mode=OneWay}" />
+                                                Size="{Binding ItemSize, Source={x:Reference this}, Mode=OneWay}"
+                                                ItemPadding="{Binding ItemsPadding, Source={x:Reference this}, Mode=OneWay}" />
                 </StackLayout>
             </DataTemplate>
         </ctrls:ItemsControl.ItemTemplate>
@@ -66,5 +67,6 @@
                                 Size="{Binding Size, Source={x:Reference this}}"
                                 Color="{Binding Color, Source={x:Reference this}}"
                                 Image="{Binding Image, Source={x:Reference this}}"
-                                Clicked="FloatingActionButton_Clicked" />
+                                Clicked="FloatingActionButton_Clicked"
+                                ItemPadding="{Binding ItemsPadding, Source={x:Reference this}, Mode=OneWay}" />
 </Grid>

@@ -30,6 +30,9 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty SizeProperty =
             BindableProperty.Create(nameof(Size), typeof(double), typeof(FloatingActionButton), 50.0);
 
+        public static readonly BindableProperty ItemPaddingProperty =
+            BindableProperty.Create(nameof(ItemPadding), typeof(Thickness), typeof(FloatingActionButton), default(Thickness));
+
         public Color Color
         {
             get
@@ -87,6 +90,18 @@ namespace IS.Toolkit.XamarinForms.Controls
             set
             {
                 SetValue(SizeProperty, value);
+            }
+        }
+
+        public Thickness ItemPadding
+        {
+            get
+            {
+                return (Thickness)GetValue(ItemPaddingProperty);
+            }
+            set
+            {
+                SetValue(ItemPaddingProperty, value);
             }
         }
 

@@ -27,7 +27,8 @@
                     <Image x:Name="_image"
                            Source="{TemplateBinding Path=Image, Mode=OneWay}"
                            HorizontalOptions="CenterAndExpand"
-                           VerticalOptions="CenterAndExpand" />
+                           VerticalOptions="CenterAndExpand" 
+                           Margin="{TemplateBinding Path=ItemPadding, Mode=OneWay}"/>
                 </Frame>
 
             </Grid>
