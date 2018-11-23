@@ -1,6 +1,7 @@
 ﻿using IS.Toolkit.XamarinForms.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,18 +10,20 @@ namespace Sample
 {
     public partial class MainPage : ContentPage
     {
+        private ObservableCollection<Data> _data;
         public MainPage()
         {
             ItemSelectedCommand = new Command(FabMenuClicked);
             InitializeComponent();
-
-            _itemsControl.ItemsSource = new List<Data>()
+            _data = new ObservableCollection<Data>()
              {
                 new Data() { Text = "C#" },
                 new Data() { Text = "VB" },
                 new Data() { Text = "JavaScript" },
-                new Data() { Text = "test" },
+                new Data() { Text = "C++" },
              };
+
+            _itemsControl.ItemsSource = _data;
 
             var list = new List<AvailableValue>()
             {
@@ -52,11 +55,7 @@ namespace Sample
         private void FabMenuClicked()
         {
             Console.WriteLine("FAB Menu Clicked");
-        }
-
-        private void FloatingActionButton_Clicked(object sender, EventArgs e)
-        {
-            Console.WriteLine("FAB Clicked");
+            _data.Add(new Data() { Text = "Added" });
         }
 
         private void Picker_SelectedItemChanged(object sender, object e)
