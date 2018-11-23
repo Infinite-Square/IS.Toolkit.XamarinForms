@@ -108,7 +108,8 @@
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
             Padding="20"
-            Margin="-10">
+            Margin="-10"
+            ItemsPadding="10">
             <controls:FloatingActionMenu.Items>
                 <x:Array
                     Type="{x:Type controls:FloatingActionMenuItem}" 

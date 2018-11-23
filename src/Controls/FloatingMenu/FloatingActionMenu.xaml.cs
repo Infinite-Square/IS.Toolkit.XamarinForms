@@ -234,6 +234,26 @@ namespace IS.Toolkit.XamarinForms.Controls
         public Thickness ItemsMargin { get; set; } = new Thickness(0, 0, 10, 0);
         #endregion
 
+        #region ItemsPadding
+        public static readonly BindableProperty ItemsPaddingProperty = BindableProperty.Create(
+            propertyName: nameof(ItemsPadding),
+            returnType: typeof(Thickness),
+            declaringType: typeof(FloatingActionMenu),
+            defaultValue: default(Thickness));
+
+        public Thickness ItemsPadding
+        {
+            get
+            {
+                return (Thickness)GetValue(ItemsPaddingProperty);
+            }
+            set
+            {
+                SetValue(ItemsPaddingProperty, value);
+            }
+        }
+        #endregion
+
         private void FloatingActionButton_Clicked(object sender, EventArgs e)
         {
             IsOpen = !IsOpen;
