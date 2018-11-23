@@ -40,6 +40,11 @@ namespace Sample
             {
                 item.Command = ItemSelectedCommand;
             }
+
+            _btnPicker.Command = new Command(() =>
+            {
+                DisplayAlert("Title", "Do whatever you want", "Ok");
+            });
         }
 
         public ICommand ItemSelectedCommand
