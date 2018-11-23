@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Specialized;
 using Xamarin.Forms;
 
 // From : https://github.com/andreinitescu/XFItemsControl/blob/master/XFItemsControl/XFItemsControl/ItemsControl.cs
@@ -9,16 +10,16 @@ namespace IS.Toolkit.XamarinForms.Controls
         private Layout<View> _itemsLayout;
 
         public static readonly BindableProperty ItemsSourceProperty =
-            BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ItemsControl), propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsSourcePropertyChanged());
+            BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ItemsControl), propertyChanged: ItemsSourceChanged);
 
         public static readonly BindableProperty ItemTemplateProperty =
-            BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsControl), propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemTemplatePropertyChanged());
+            BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsControl), propertyChanged: ItemTemplateChanged);
 
         public static readonly BindableProperty ItemsLayoutProperty =
-            BindableProperty.Create(nameof(ItemsLayout), typeof(DataTemplate), typeof(ItemsControl), propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsLayoutPropertyChanged());
+            BindableProperty.Create(nameof(ItemsLayout), typeof(DataTemplate), typeof(ItemsControl), propertyChanged: ItemsLayoutChanged);
 
         public static readonly BindableProperty OrientationProperty =
-            BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(ItemsControl), defaultValue: StackOrientation.Vertical,  propertyChanged: (s, n, o) => ((ItemsControl)s).OnOrientationPropertyChanged());
+            BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(ItemsControl), defaultValue: StackOrientation.Vertical, propertyChanged: (s, n, o) => ((ItemsControl)s).OnOrientationPropertyChanged());
         public static readonly BindableProperty SpacingProperty =
             BindableProperty.Create(nameof(Spacing), typeof(double), typeof(ItemsControl), defaultValue: 0.0, propertyChanged: (s, n, o) => ((ItemsControl)s).OnItemsLayoutPropertyChanged());
 
@@ -26,7 +27,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             get
             {
-               return (IEnumerable)GetValue(ItemsSourceProperty);
+                return (IEnumerable)GetValue(ItemsSourceProperty);
             }
             set
             {
@@ -92,6 +93,36 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
+        private static void ItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as ItemsControl).OnItemsSourceChanged(oldValue, newValue);
+        }
+
+        private void OnItemsSourceChanged(object oldValue, object newValue)
+        {
+            if (oldValue is INotifyCollectionChanged oldCollection)
+            {
+                oldCollection.CollectionChanged -= Collection_CollectionChanged;
+            }
+
+            if (newValue is INotifyCollectionChanged newCollection)
+            {
+                newCollection.CollectionChanged += Collection_CollectionChanged;
+            }
+
+            OnItemsSourcePropertyChanged();
+        }
+
+        private static void ItemTemplateChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as ItemsControl).OnItemsSourcePropertyChanged();
+        }
+
+        private static void ItemsLayoutChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            (bindable as ItemsControl).OnItemsSourcePropertyChanged();
+        }
+
         private void OnItemsSourcePropertyChanged()
         {
             if (_itemsLayout == null)
@@ -107,6 +138,14 @@ namespace IS.Toolkit.XamarinForms.Controls
                 {
                     _itemsLayout.Children.Add(CreateItem(item));
                 }
+            }
+        }
+
+        private void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_itemsLayout != null)
+            {
+                OnItemsSourcePropertyChanged();
             }
         }
 
