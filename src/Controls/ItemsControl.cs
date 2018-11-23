@@ -115,12 +115,12 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         private static void ItemTemplateChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as ItemsControl).OnItemsSourcePropertyChanged();
+            (bindable as ItemsControl).OnItemTemplatePropertyChanged();
         }
 
         private static void ItemsLayoutChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as ItemsControl).OnItemsSourcePropertyChanged();
+            (bindable as ItemsControl).OnItemsLayoutPropertyChanged();
         }
 
         private void OnItemsSourcePropertyChanged()

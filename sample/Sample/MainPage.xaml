@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
       
@@ -67,8 +68,23 @@
             </controls:ItemsControl.ItemTemplate>
         </controls:ItemsControl>
 
+        <controls:ItemsControl x:Name="_itemsWrappedControl" Grid.Row="5">
+            <controls:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Text}"/>
+                </DataTemplate>
+            </controls:ItemsControl.ItemTemplate>
+            <controls:ItemsControl.ItemsLayout>
+                <DataTemplate>
+                    <controls:WrapLayout 
+                                Spacing="10"
+                                UniformColumns="3" />
+                </DataTemplate>
+            </controls:ItemsControl.ItemsLayout>
+        </controls:ItemsControl>
+
         <controls:Picker x:Name="_picker" 
-                         Grid.Row="5"
+                         Grid.Row="6"
                          SelectedItemChanged="Picker_SelectedItemChanged"
                          Placeholder="Select a value..."
                          Title="Picker : "
@@ -77,7 +93,7 @@
                          BorderColor="Red"
                          Type="TimePicker"/>
 
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />
@@ -91,7 +107,7 @@
 
 
         <controls:Picker x:Name="_btnPicker"
-                         Grid.Row="7"
+                         Grid.Row="8"
                          Placeholder="Select a value..."
                          Title="Picker button : "
                          IsClearable="True"
@@ -103,7 +119,7 @@
             IsVisible="True"
             x:Name="fab"
             Size="60"
-            Grid.RowSpan="9"
+            Grid.RowSpan="10"
             IsOpen="False"
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"

@@ -24,6 +24,7 @@ namespace Sample
              };
 
             _itemsControl.ItemsSource = _data;
+            _itemsWrappedControl.ItemsSource = _data;
 
             var list = new List<AvailableValue>()
             {
