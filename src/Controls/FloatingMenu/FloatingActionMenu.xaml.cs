@@ -277,5 +277,10 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             IsOpen = false;
         }
+
+        private void ItemClicked(object sender, EventArgs e)
+        {
+            IsOpen = false;
+        }
     }
 }
