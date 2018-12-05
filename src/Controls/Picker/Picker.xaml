@@ -97,11 +97,6 @@
                    VerticalOptions="Center"
                    IsVisible="{Binding IsClearableAndHasValue, Source={x:Reference this}}" />
 
-            <Button Grid.Column="1"
-                    Grid.Row="1"
-                    IsVisible="{Binding IsClearableAndHasValue, Source={x:Reference this}}"
-                    Clicked="Clear_Clicked"
-                    BackgroundColor="Transparent" />
 
             <Button Grid.Row="1"
                     Grid.Column="0"
@@ -111,6 +106,11 @@
                     Command="{Binding Command, Source={x:Reference this}}"
                     BackgroundColor="Transparent" />
 
+            <Button Grid.Column="1"
+                    Grid.Row="1"
+                    IsVisible="{Binding IsClearableAndHasValue, Source={x:Reference this}}"
+                    Clicked="Clear_Clicked"
+                    BackgroundColor="Transparent" />
         </Grid>
     </ContentView.Content>
 </ContentView>
