@@ -301,7 +301,12 @@ namespace IS.Toolkit.XamarinForms.Controls
                     case PickerType.Default:
                         return ((AvailableValue)SelectedItem).Label;
                     case PickerType.Button:
-                        return ((AvailableValue)SelectedItem).Label;
+                        if (SelectedItem.GetType() == typeof(AvailableValue))
+                        {
+                            return ((AvailableValue)SelectedItem).Label;
+                        }
+
+                        return (string)SelectedItem;
                     case PickerType.DatePicker:
                         return ((DateTime)SelectedItem).ToShortDateString();
                     case PickerType.TimePicker:
@@ -638,6 +643,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                     control._datePicker.IsVisible = false;
                     control._picker.IsVisible = false;
                     control._button.IsVisible = true;
+                    control._grid.GestureRecognizers.Clear();
                     break;
             }
 
