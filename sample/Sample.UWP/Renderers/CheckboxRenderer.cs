@@ -15,8 +15,6 @@ namespace Sample.UWP.Renderers
 {
     public class CheckboxRenderer : ViewRenderer<ISCheckbox, CheckBox>
     {
-        private ISCheckbox RenderedCheckBox => Element as ISCheckbox;
-
         protected override void OnElementChanged(ElementChangedEventArgs<ISCheckbox> e)
         {
             base.OnElementChanged(e);
@@ -26,9 +24,9 @@ namespace Sample.UWP.Renderers
                 if (Control == null)
                 {
                     CheckBox checkBox = new CheckBox();
-                    checkBox.IsChecked = RenderedCheckBox.IsChecked;
+                    checkBox.IsChecked = Element.IsChecked;
                     checkBox.Checked += CheckBox_Checked;
-                    checkBox.Content = RenderedCheckBox.Text;
+                    checkBox.Content = Element.Text;
                     SetNativeControl(checkBox);
                     UpdateTextColor(checkBox);
                     UpdateAccentColor(checkBox);
@@ -55,7 +53,7 @@ namespace Sample.UWP.Renderers
             }
             else if (e.PropertyName.Equals(nameof(ISCheckbox.Text)))
             {
-                Control.Content = RenderedCheckBox.Text;
+                Control.Content = Element.Text;
             }
             else if (e.PropertyName.Equals(nameof(ISCheckbox.TextColor)))
             {
@@ -66,10 +64,10 @@ namespace Sample.UWP.Renderers
         private void UpdateAccentColor(CheckBox checkBox)
         {
             checkBox.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(
-                                        (byte)RenderedCheckBox.AccentColor.A,
-                                        (byte)RenderedCheckBox.AccentColor.R,
-                                        (byte)RenderedCheckBox.AccentColor.G,
-                                        (byte)RenderedCheckBox.AccentColor.B));
+                                        (byte)Element.AccentColor.A,
+                                        (byte)Element.AccentColor.R,
+                                        (byte)Element.AccentColor.G,
+                                        (byte)Element.AccentColor.B));
         }
 
         private void UpdateTextColor(CheckBox checkBox)
