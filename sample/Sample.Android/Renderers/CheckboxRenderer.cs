@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using IS.Toolkit.XamarinForms.Controls;
@@ -18,7 +19,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(ISCheckbox), typeof(CheckboxRenderer))]
 namespace Sample.Droid.Renderers
 {
-    public class CheckboxRenderer : ViewRenderer<ISCheckbox, CheckBox>
+    public class CheckboxRenderer : ViewRenderer<ISCheckbox, AppCompatCheckBox>
     {
         private ISCheckbox RenderedCheckBox => Element as ISCheckbox;
 
@@ -34,10 +35,11 @@ namespace Sample.Droid.Renderers
             {
                 if (Control == null)
                 {
-                    UpdateAccentColor();
+                    AppCompatCheckBox checkBox = new AppCompatCheckBox(Context);
+                    checkBox.Checked = RenderedCheckBox.IsChecked;
+                    SetNativeControl(checkBox);
+                    UpdateAccentColor(checkBox);
                 }
-
-                Control.Checked = RenderedCheckBox.IsChecked;
             }
         }
 
@@ -51,13 +53,13 @@ namespace Sample.Droid.Renderers
             }
             else if (e.PropertyName.Equals(nameof(ISCheckbox.AccentColor)))
             {
-                UpdateAccentColor();
+                UpdateAccentColor(Control as AppCompatCheckBox);
             }
         }
 
-        private void UpdateAccentColor()
+        private void UpdateAccentColor(AppCompatCheckBox checkBox)
         {
-            Control?.Background?.SetColorFilter(RenderedCheckBox.AccentColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
+            checkBox?.SetBackgroundColor(RenderedCheckBox.AccentColor.ToAndroid());
         }
     }
 }
