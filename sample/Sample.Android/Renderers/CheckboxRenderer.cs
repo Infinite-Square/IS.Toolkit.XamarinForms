@@ -37,10 +37,18 @@ namespace Sample.Droid.Renderers
                 {
                     AppCompatCheckBox checkBox = new AppCompatCheckBox(Context);
                     checkBox.Checked = RenderedCheckBox.IsChecked;
+                    checkBox.CheckedChange += CheckBox_CheckedChange;
+                    checkBox.Text = RenderedCheckBox.Text;
                     SetNativeControl(checkBox);
+                    UpdateTextColor(checkBox);
                     UpdateAccentColor(checkBox);
                 }
             }
+        }
+
+        private void CheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            Element.IsChecked = e.IsChecked;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -55,11 +63,24 @@ namespace Sample.Droid.Renderers
             {
                 UpdateAccentColor(Control as AppCompatCheckBox);
             }
+            else if (e.PropertyName.Equals(nameof(ISCheckbox.Text)))
+            {
+                Control.Text = RenderedCheckBox.Text;
+            }
+            else if (e.PropertyName.Equals(nameof(ISCheckbox.TextColor)))
+            {
+                UpdateTextColor(Control as AppCompatCheckBox);
+            }
         }
 
         private void UpdateAccentColor(AppCompatCheckBox checkBox)
         {
             checkBox?.SetBackgroundColor(RenderedCheckBox.AccentColor.ToAndroid());
+        }
+
+        private void UpdateTextColor(AppCompatCheckBox checkBox)
+        {
+            checkBox?.SetTextColor(RenderedCheckBox.TextColor.ToAndroid());
         }
     }
 }

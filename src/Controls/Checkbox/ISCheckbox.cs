@@ -15,6 +15,20 @@ namespace IS.Toolkit.XamarinForms.Controls
                                                         false,
                                                         BindingMode.TwoWay);
 
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(ISCheckbox), Color.White);
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ISCheckbox), Color.Black);
+        public Color TextColor
+        {
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
+        }
+
         public bool IsChecked
         {
             get => (bool)GetValue(IsCheckedBindableProperty);
