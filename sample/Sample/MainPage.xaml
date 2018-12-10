@@ -120,7 +120,7 @@
                          BorderColor="Red"
                          Type="Button" />
             
-            <controls:ISCheckbox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" AccentColor="Red" TextColor="Red" Text="Nera"/>
+            <controls:ISCheckbox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" AccentColor="Red" TextColor="Blue" Text="Nera"/>
         </Grid>
         
         <controls:FloatingActionMenu
@@ -133,6 +133,7 @@
             FilterBackgroundColor="#B3000000"
             Padding="20"
             Margin="-10"
+            MainButtonToItemMargin="0, -30, 0, 0"
             ItemsPadding="10">
             <controls:FloatingActionMenu.Items>
                 <x:Array

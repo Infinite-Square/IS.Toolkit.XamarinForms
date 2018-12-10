@@ -29,7 +29,6 @@
         </BoxView.GestureRecognizers>
     </BoxView>
 
-
     <ctrls:ItemsControl x:Name="ItemsLayout"
                         Grid.Row="1"
                         Spacing="5"
@@ -64,6 +63,7 @@
     <ctrls:FloatingActionButton Grid.Row="2"
                                 VerticalOptions="End"
                                 HorizontalOptions="End"
+                                Margin="{Binding MainButtonToItemMargin, Source={x:Reference this}}"
                                 Padding="{Binding Padding, Source={x:Reference this}}"
                                 Size="{Binding Size, Source={x:Reference this}}"
                                 Color="{Binding Color, Source={x:Reference this}}"

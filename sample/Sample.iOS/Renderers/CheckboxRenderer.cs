@@ -6,13 +6,13 @@ using System.Text;
 
 using Foundation;
 using IS.Toolkit.XamarinForms.Controls;
-using Sample.iOS.Renderers;
+using Sample.IOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(ISCheckbox), typeof(CheckboxRenderer))]
-namespace Sample.iOS.Renderers
+namespace Sample.IOS.Renderers
 {
     public class CheckboxRenderer : ViewRenderer<ISCheckbox, UISwitch>
     {
