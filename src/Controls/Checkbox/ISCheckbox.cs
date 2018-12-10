@@ -15,7 +15,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                                                         false,
                                                         BindingMode.TwoWay);
 
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(ISCheckbox), Color.White);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(ISCheckbox), default(string));
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
