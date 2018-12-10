@@ -120,7 +120,7 @@
                          BorderColor="Red"
                          Type="Button" />
             
-            <controls:ISCheckbox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" TextColor="Red" Text="Nera"/>
+            <controls:ISCheckbox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" AccentColor="Red" TextColor="Red" Text="Nera"/>
         </Grid>
         
         <controls:FloatingActionMenu
