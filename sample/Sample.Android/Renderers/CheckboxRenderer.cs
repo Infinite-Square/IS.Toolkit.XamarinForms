@@ -65,7 +65,7 @@ namespace Sample.Droid.Renderers
             }
             else if (e.PropertyName.Equals(nameof(IS.Toolkit.XamarinForms.Controls.CheckBox.AccentColor)))
             {
-                Control.ForegroundTintList = UpdateAccentColor(Element.AccentColor);
+                Control.BackgroundTintList = UpdateAccentColor(Element.AccentColor);
             }
             else if (e.PropertyName.Equals(nameof(IS.Toolkit.XamarinForms.Controls.CheckBox.Text)))
             {

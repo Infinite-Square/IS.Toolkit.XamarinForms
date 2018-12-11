@@ -20,14 +20,14 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-      
+
         <controls:TextBox Placeholder="Name" Grid.Row="0"/>
 
         <controls:TextBox Placeholder="Error" 
                           ErrorText="An Error occured"
                           HasError="True"
                           Grid.Row="1"/>
-        
+
         <controls:Expander HeaderText="HeaderText"
                            HeaderTextColor="Black"
                            BackgroundColor="WhiteSmoke"
