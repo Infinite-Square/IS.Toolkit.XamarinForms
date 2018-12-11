@@ -49,6 +49,8 @@ namespace Sample.Droid.Renderers
         private void CheckBox_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             Element.IsChecked = e.IsChecked;
+            Element.InvokeCheckChanged(e.IsChecked);
+            Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -8,6 +8,13 @@ namespace IS.Toolkit.XamarinForms.Controls
 {
     public class Checkbox : View
     {
+        public class CheckChangedEventArg : EventArgs
+        {
+            public bool IsChecked { get; set; }
+        }
+
+        public event EventHandler OnCheckChange;
+
         public static readonly BindableProperty IsCheckedBindableProperty = BindableProperty.Create(
                                                         nameof(IsChecked),
                                                         typeof(bool),
@@ -54,6 +61,11 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             get => (object)GetValue(CheckedCommandArguementProperty);
             set => SetValue(CheckedCommandArguementProperty, value);
+        }
+
+        public void InvokeCheckChanged(bool isChecked)
+        {
+            OnCheckChange?.Invoke(this, new CheckChangedEventArg { IsChecked = isChecked });
         }
     }
 }
