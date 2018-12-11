@@ -30,6 +30,7 @@ namespace Sample.UWP.Renderers
 
                     checkBox.IsChecked = Element.IsChecked;
                     checkBox.Checked += CheckBox_Checked;
+                    checkBox.Unchecked += CheckBox_Unchecked;
                     _contentText.Text = Element.Text;
                     UpdateTextColor();
                     checkBox.Content = _contentText;
@@ -37,6 +38,13 @@ namespace Sample.UWP.Renderers
                     UpdateAccentColor(checkBox);
                 }
             }
+        }
+
+        private void CheckBox_Unchecked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Element.IsChecked = (bool)Control.IsChecked;
+            Element.InvokeCheckChanged((bool)Control.IsChecked);
+            Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -65,6 +66,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public void InvokeCheckChanged(bool isChecked)
         {
+            Debug.WriteLine("Checked");
             OnCheckChange?.Invoke(this, new CheckChangedEventArg { IsChecked = isChecked });
         }
     }

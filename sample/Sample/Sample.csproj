@@ -17,7 +17,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\IS.Toolkit.XamarinForms.csproj" />
   </ItemGroup>
-
+<PropertyGroup>
+    <DebugType>pdbonly</DebugType>
+</PropertyGroup>
   <ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
