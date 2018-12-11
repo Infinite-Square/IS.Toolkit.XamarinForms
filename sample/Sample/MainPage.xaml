@@ -97,32 +97,22 @@
         <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Text="Checkbox"
                    VerticalOptions="Center"
                    Grid.Column="0"/>
-            <controls:Checkbox Grid.Column="1"
-                               Margin="10"/>
+            <controls:Checkbox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" AccentColor="Red" TextColor="Blue" Text="Nera"/>
         </Grid>
 
-
-        <Grid Grid.Row="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <controls:Picker x:Name="_btnPicker"
+        <controls:Picker x:Name="_btnPicker" Grid.Row="8"
                          Placeholder="Select a value..."
                          Title="Picker button : "
                          IsClearable="True"
                          BackgroundColor="Wheat"
                          BorderColor="Red"
                          Type="Button" />
-            
-            <controls:ISCheckbox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" AccentColor="Red" TextColor="Blue" Text="Nera"/>
-        </Grid>
-        
+
         <controls:FloatingActionMenu
             IsVisible="True"
             x:Name="fab"
@@ -133,7 +123,6 @@
             FilterBackgroundColor="#B3000000"
             Padding="20"
             Margin="-10"
-            MainButtonToItemMargin="0, -30, 0, 0"
             ItemsPadding="10">
             <controls:FloatingActionMenu.Items>
                 <x:Array

@@ -1,102 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS.Toolkit.XamarinForms.Controls
 {
-    public class Checkbox : ContentView
+    public class Checkbox : View
     {
-        public Checkbox()
-        {
-            Content = new Image()
-            {
-                Source = CheckboxEmptyIcon,
-                Aspect = Aspect.AspectFit
-            };
+        public static readonly BindableProperty IsCheckedBindableProperty = BindableProperty.Create(
+                                                        nameof(IsChecked),
+                                                        typeof(bool),
+                                                        typeof(Checkbox),
+                                                        false,
+                                                        BindingMode.TwoWay);
 
-            var tapped = new TapGestureRecognizer();
-            tapped.Tapped += Tapped_Tapped;
-            GestureRecognizers.Add(tapped);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(Checkbox), default(string));
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
 
-        private void Tapped_Tapped(object sender, EventArgs e)
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(Checkbox), Color.Black);
+        public Color TextColor
         {
-            IsChecked = !IsChecked;
-        }
-
-        #region CheckboxIcon
-        public static readonly BindableProperty CheckboxIconProperty = BindableProperty.Create(
-            propertyName: nameof(CheckboxIcon),
-            returnType: typeof(ImageSource),
-            declaringType: typeof(Checkbox),
-            defaultValue: ImageSource.FromResource("IS.Toolkit.XamarinForms.Controls.Checkbox.checkbox_fill.png", typeof(Expander).GetTypeInfo().Assembly));
-
-        public ImageSource CheckboxIcon
-        {
-            get
-            {
-                return (ImageSource)GetValue(CheckboxIconProperty);
-            }
-            set
-            {
-                SetValue(CheckboxIconProperty, value);
-            }
-        }
-        #endregion
-
-        #region CheckboxEmptyIcon
-        public static readonly BindableProperty CheckboxEmptyIconProperty = BindableProperty.Create(
-            propertyName: nameof(CheckboxEmptyIcon),
-            returnType: typeof(ImageSource),
-            declaringType: typeof(Checkbox),
-            defaultValue: ImageSource.FromResource("IS.Toolkit.XamarinForms.Controls.Checkbox.checkbox_empty.png", typeof(Expander).GetTypeInfo().Assembly));
-
-        public ImageSource CheckboxEmptyIcon
-        {
-            get
-            {
-                return (ImageSource)GetValue(CheckboxEmptyIconProperty);
-            }
-            set
-            {
-                SetValue(CheckboxEmptyIconProperty, value);
-            }
-        }
-        #endregion
-
-        #region IsChecked
-        public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(
-            propertyName: nameof(IsChecked),
-            returnType: typeof(bool),
-            declaringType: typeof(Checkbox),
-            defaultValue: false,
-            propertyChanged: IsCheckedPropertyChanged);
-
-        private static void IsCheckedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable != null && newValue != null)
-            {
-                var control = (Checkbox)bindable;
-                var isOpen = (bool)newValue;
-                (control.Content as Image).Source = isOpen ? control.CheckboxIcon : control.CheckboxEmptyIcon;
-            }
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
         }
 
         public bool IsChecked
         {
-            get
-            {
-                return (bool)GetValue(IsCheckedProperty);
-            }
-            set
-            {
-                SetValue(IsCheckedProperty, value);
-            }
+            get => (bool)GetValue(IsCheckedBindableProperty);
+            set => SetValue(IsCheckedBindableProperty, value);
         }
-        #endregion
+
+        public static readonly BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(Checkbox), Color.CadetBlue);
+        public Color AccentColor
+        {
+            get { return (Color)GetValue(AccentColorProperty); }
+            set { SetValue(AccentColorProperty, value); }
+        }
+
+        public static readonly BindableProperty CheckedCommandProperty = BindableProperty.Create(nameof(CheckedCommand), typeof(ICommand), typeof(Checkbox), null);
+        public ICommand CheckedCommand
+        {
+            get => (ICommand)GetValue(CheckedCommandProperty);
+            set => SetValue(CheckedCommandProperty, value);
+        }
+
+        public static readonly BindableProperty CheckedCommandArguementProperty = BindableProperty.Create(nameof(CheckedCommandArguement), typeof(object), typeof(Checkbox), default(object));
+        public object CheckedCommandArguement
+        {
+            get => (object)GetValue(CheckedCommandArguementProperty);
+            set => SetValue(CheckedCommandArguementProperty, value);
+        }
     }
 }

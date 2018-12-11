@@ -10,14 +10,14 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Xamarin.Forms.Platform.UWP;
 
-[assembly: ExportRenderer(typeof(ISCheckbox), typeof(CheckboxRenderer))]
+[assembly: ExportRenderer(typeof(Checkbox), typeof(CheckboxRenderer))]
 namespace Sample.UWP.Renderers
 {
-    public class CheckboxRenderer : ViewRenderer<ISCheckbox, CheckBox>
+    public class CheckboxRenderer : ViewRenderer<Checkbox, CheckBox>
     {
         private TextBlock _contentText;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<ISCheckbox> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Checkbox> e)
         {
             base.OnElementChanged(e);
 
@@ -48,19 +48,19 @@ namespace Sample.UWP.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(ISCheckbox.IsChecked)))
+            if (e.PropertyName.Equals(nameof(Checkbox.IsChecked)))
             {
                 Control.IsChecked = Element.IsChecked;
             }
-            else if (e.PropertyName.Equals(nameof(ISCheckbox.AccentColor)))
+            else if (e.PropertyName.Equals(nameof(Checkbox.AccentColor)))
             {
                 UpdateAccentColor(Control as CheckBox);
             }
-            else if (e.PropertyName.Equals(nameof(ISCheckbox.Text)))
+            else if (e.PropertyName.Equals(nameof(Checkbox.Text)))
             {
                 Control.Content = Element.Text;
             }
-            else if (e.PropertyName.Equals(nameof(ISCheckbox.TextColor)))
+            else if (e.PropertyName.Equals(nameof(Checkbox.TextColor)))
             {
                 UpdateTextColor();
             }

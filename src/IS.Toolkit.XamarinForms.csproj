@@ -11,8 +11,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
     <EmbeddedResource Include="Controls\Picker\close.png" />
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
   </ItemGroup>
 
   <ItemGroup>

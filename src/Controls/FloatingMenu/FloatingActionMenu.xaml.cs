@@ -241,7 +241,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             declaringType: typeof(FloatingActionMenu),
             defaultValue: default(Thickness));
 
-        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), default(Thickness));
+        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, -33, 0, 0));
 
         public Thickness MainButtonToItemMargin
         {

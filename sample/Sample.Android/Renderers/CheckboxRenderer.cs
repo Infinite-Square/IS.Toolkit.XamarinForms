@@ -16,19 +16,19 @@ using Sample.Droid.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(ISCheckbox), typeof(CheckboxRenderer))]
+[assembly: ExportRenderer(typeof(Checkbox), typeof(CheckboxRenderer))]
 namespace Sample.Droid.Renderers
 {
-    public class CheckboxRenderer : ViewRenderer<ISCheckbox, AppCompatCheckBox>
+    public class CheckboxRenderer : ViewRenderer<Checkbox, AppCompatCheckBox>
     {
-        private ISCheckbox RenderedCheckBox => Element as ISCheckbox;
+        private Checkbox RenderedCheckBox => Element as Checkbox;
 
         public CheckboxRenderer(Context context)
             : base(context)
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<ISCheckbox> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Checkbox> e)
         {
             base.OnElementChanged(e);
             if (e.NewElement != null)
@@ -55,19 +55,19 @@ namespace Sample.Droid.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(ISCheckbox.IsChecked)))
+            if (e.PropertyName.Equals(nameof(Checkbox.IsChecked)))
             {
                 Control.Checked = Element.IsChecked;
             }
-            else if (e.PropertyName.Equals(nameof(ISCheckbox.AccentColor)))
+            else if (e.PropertyName.Equals(nameof(Checkbox.AccentColor)))
             {
                 UpdateAccentColor(Control as AppCompatCheckBox);
             }
-            else if (e.PropertyName.Equals(nameof(ISCheckbox.Text)))
+            else if (e.PropertyName.Equals(nameof(Checkbox.Text)))
             {
                 Control.Text = RenderedCheckBox.Text;
             }
-            else if (e.PropertyName.Equals(nameof(ISCheckbox.TextColor)))
+            else if (e.PropertyName.Equals(nameof(Checkbox.TextColor)))
             {
                 UpdateTextColor(Control as AppCompatCheckBox);
             }
