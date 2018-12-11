@@ -50,7 +50,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             set => SetValue(IsCheckedBindableProperty, value);
         }
 
-        public static readonly BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(CheckBox), Color.CadetBlue);
+        public static readonly BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(CheckBox), Color.Transparent);
         public Color AccentColor
         {
             get { return (Color)GetValue(AccentColorProperty); }

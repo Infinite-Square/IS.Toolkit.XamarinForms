@@ -145,5 +145,4 @@
             </controls:FloatingActionMenu.Items>
         </controls:FloatingActionMenu>
     </Grid>
-
 </ContentPage>

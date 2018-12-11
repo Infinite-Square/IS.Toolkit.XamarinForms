@@ -38,8 +38,8 @@ namespace Sample.IOS.Renderers
 
         public UICheckBox()
         {
-            SetImage(UIImage.FromBundle("checkbox_empty.png"), UIControlState.Normal);
-            SetImage(UIImage.FromBundle("checkbox_fill.png"), UIControlState.Selected);
+            SetImage(UIImage.FromBundle("Renderers/checkbox_empty.png"), UIControlState.Normal);
+            SetImage(UIImage.FromBundle("Renderers/checkbox_fill.png"), UIControlState.Selected);
         }
     }
 }
