@@ -11,12 +11,12 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Checkbox), typeof(CheckboxRenderer))]
+[assembly: ExportRenderer(typeof(CheckBox), typeof(CheckboxRenderer))]
 namespace Sample.IOS.Renderers
 {
-    public class CheckboxRenderer : ViewRenderer<Checkbox, UISwitch>
+    public class CheckboxRenderer : ViewRenderer<CheckBox, UISwitch>
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<Checkbox> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<CheckBox> e)
         {
             base.OnElementChanged(e);
 
@@ -41,17 +41,17 @@ namespace Sample.IOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(Checkbox.IsChecked)))
+            if (e.PropertyName.Equals(nameof(CheckBox.IsChecked)))
             {
                 Control.On = Element.IsChecked;
             }
-            else if (e.PropertyName.Equals(nameof(Checkbox.AccentColor)))
+            else if (e.PropertyName.Equals(nameof(CheckBox.AccentColor)))
             {
             }
-            else if (e.PropertyName.Equals(nameof(Checkbox.Text)))
+            else if (e.PropertyName.Equals(nameof(CheckBox.Text)))
             {
             }
-            else if (e.PropertyName.Equals(nameof(Checkbox.TextColor)))
+            else if (e.PropertyName.Equals(nameof(CheckBox.TextColor)))
             {
             }
         }

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace IS.Toolkit.XamarinForms.Controls
 {
-    public class Checkbox : View
+    public class CheckBox : View
     {
         public class CheckChangedEventArg : EventArgs
         {
@@ -19,18 +19,25 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty IsCheckedBindableProperty = BindableProperty.Create(
                                                         nameof(IsChecked),
                                                         typeof(bool),
-                                                        typeof(Checkbox),
+                                                        typeof(CheckBox),
                                                         false,
                                                         BindingMode.TwoWay);
 
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(Checkbox), default(string));
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CheckBox), default(string));
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(Checkbox), Color.Black);
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(float), typeof(CheckBox), default(float));
+        public float FontSize
+        {
+            get { return (float)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
+
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CheckBox), Color.Black);
         public Color TextColor
         {
             get { return (Color)GetValue(TextColorProperty); }
@@ -43,21 +50,21 @@ namespace IS.Toolkit.XamarinForms.Controls
             set => SetValue(IsCheckedBindableProperty, value);
         }
 
-        public static readonly BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(Checkbox), Color.CadetBlue);
+        public static readonly BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(CheckBox), Color.CadetBlue);
         public Color AccentColor
         {
             get { return (Color)GetValue(AccentColorProperty); }
             set { SetValue(AccentColorProperty, value); }
         }
 
-        public static readonly BindableProperty CheckedCommandProperty = BindableProperty.Create(nameof(CheckedCommand), typeof(ICommand), typeof(Checkbox), null);
+        public static readonly BindableProperty CheckedCommandProperty = BindableProperty.Create(nameof(CheckedCommand), typeof(ICommand), typeof(CheckBox), null);
         public ICommand CheckedCommand
         {
             get => (ICommand)GetValue(CheckedCommandProperty);
             set => SetValue(CheckedCommandProperty, value);
         }
 
-        public static readonly BindableProperty CheckedCommandArguementProperty = BindableProperty.Create(nameof(CheckedCommandArguement), typeof(object), typeof(Checkbox), default(object));
+        public static readonly BindableProperty CheckedCommandArguementProperty = BindableProperty.Create(nameof(CheckedCommandArguement), typeof(object), typeof(CheckBox), default(object));
         public object CheckedCommandArguement
         {
             get => (object)GetValue(CheckedCommandArguementProperty);
@@ -66,7 +73,6 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public void InvokeCheckChanged(bool isChecked)
         {
-            Debug.WriteLine("Checked");
             OnCheckChange?.Invoke(this, new CheckChangedEventArg { IsChecked = isChecked });
         }
     }
