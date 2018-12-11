@@ -102,7 +102,7 @@
             <Label Text="Checkbox"
                    VerticalOptions="Center"
                    Grid.Column="0"/>
-            <controls:CheckBox Grid.Column="1" IsChecked="True" FontSize="50" HeightRequest="100" WidthRequest="100" AccentColor="Blue" TextColor="Blue" Text="Nera"/>
+            <controls:CheckBox Grid.Column="1" IsChecked="True" FontSize="50" HeightRequest="100" WidthRequest="100" TextColor="Blue" Text="Nera"/>
         </Grid>
 
         <controls:Picker x:Name="_btnPicker" Grid.Row="8"

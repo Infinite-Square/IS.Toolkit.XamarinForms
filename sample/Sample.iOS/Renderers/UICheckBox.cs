@@ -15,7 +15,7 @@ namespace Sample.IOS.Renderers
             set => SetTitle(value, UIControlState.Normal);
         }
 
-        public bool Checked
+        public bool IsChecked
         {
             get => Selected;
             set => Selected = value;
@@ -38,6 +38,8 @@ namespace Sample.IOS.Renderers
 
         public UICheckBox()
         {
+            SetImage(UIImage.FromBundle("checkbox_empty.png"), UIControlState.Normal);
+            SetImage(UIImage.FromBundle("checkbox_fill.png"), UIControlState.Selected);
         }
     }
 }
