@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Widget;
@@ -38,10 +39,10 @@ namespace Sample.Droid.Renderers
                     AppCompatCheckBox checkBox = new AppCompatCheckBox(Context);
                     checkBox.Checked = RenderedCheckBox.IsChecked;
                     checkBox.CheckedChange += CheckBox_CheckedChange;
+                    checkBox.BackgroundTintList = UpdateAccentColor(Element.AccentColor);
                     checkBox.Text = RenderedCheckBox.Text;
                     SetNativeControl(checkBox);
                     UpdateTextColor(checkBox);
-                    UpdateAccentColor(checkBox);
                 }
             }
         }
@@ -63,7 +64,7 @@ namespace Sample.Droid.Renderers
             }
             else if (e.PropertyName.Equals(nameof(Checkbox.AccentColor)))
             {
-                UpdateAccentColor(Control as AppCompatCheckBox);
+                Control.ForegroundTintList = UpdateAccentColor(Element.AccentColor);
             }
             else if (e.PropertyName.Equals(nameof(Checkbox.Text)))
             {
@@ -75,9 +76,21 @@ namespace Sample.Droid.Renderers
             }
         }
 
-        private void UpdateAccentColor(AppCompatCheckBox checkBox)
+        private ColorStateList UpdateAccentColor(Color color)
         {
-            checkBox?.SetBackgroundColor(RenderedCheckBox.AccentColor.ToAndroid());
+            return new ColorStateList(
+                new[]
+                {
+                    new[] { -global::Android.Resource.Attribute.StateEnabled },
+                    new[] { -global::Android.Resource.Attribute.StateChecked },
+                    new[] { global::Android.Resource.Attribute.StateChecked }
+                },
+                new int[]
+                {
+                    color.WithSaturation(0.1).ToAndroid(),
+                    color.ToAndroid(),
+                    color.ToAndroid()
+                });
         }
 
         private void UpdateTextColor(AppCompatCheckBox checkBox)

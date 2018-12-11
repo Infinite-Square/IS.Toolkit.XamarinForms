@@ -42,6 +42,8 @@ namespace Sample.UWP.Renderers
         private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Element.IsChecked = (bool)Control.IsChecked;
+            Element.InvokeCheckChanged((bool)Control.IsChecked);
+            Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
