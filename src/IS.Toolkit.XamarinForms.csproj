@@ -56,6 +56,9 @@
     <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Controls\SnackBar\SnackBar.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   
   <ItemGroup>
@@ -77,10 +80,6 @@
     <None Update="Controls\TextBox\TextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Controls\SnackBar\" />
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

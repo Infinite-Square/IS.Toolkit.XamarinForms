@@ -19,6 +19,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="100" />
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <controls:TextBox Placeholder="Name" Grid.Row="0"/>
@@ -144,5 +145,7 @@
                 </x:Array>
             </controls:FloatingActionMenu.Items>
         </controls:FloatingActionMenu>
+
+        <controls:SnackBar />
     </Grid>
 </ContentPage>

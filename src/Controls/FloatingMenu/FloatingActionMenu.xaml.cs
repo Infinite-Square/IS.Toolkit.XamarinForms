@@ -241,14 +241,6 @@ namespace IS.Toolkit.XamarinForms.Controls
             declaringType: typeof(FloatingActionMenu),
             defaultValue: default(Thickness));
 
-        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, -33, 0, 0));
-
-        public Thickness MainButtonToItemMargin
-        {
-            get { return (Thickness)GetValue(MainButtonToItemMarginProperty); }
-            set { SetValue(MainButtonToItemMarginProperty, value); }
-        }
-
         public Thickness ItemsPadding
         {
             get
@@ -260,6 +252,18 @@ namespace IS.Toolkit.XamarinForms.Controls
                 SetValue(ItemsPaddingProperty, value);
             }
         }
+        #endregion
+
+        #region MainButtonToItemMargin
+
+        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, -33, 0, 0));
+
+        public Thickness MainButtonToItemMargin
+        {
+            get { return (Thickness)GetValue(MainButtonToItemMarginProperty); }
+            set { SetValue(MainButtonToItemMarginProperty, value); }
+        }
+
         #endregion
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)
