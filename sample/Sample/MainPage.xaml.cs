@@ -67,7 +67,8 @@ namespace Sample
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            SnackB.Open("Hello Man");
+            SnackB.Message = "Open";
+            SnackB.Open("Open");
         }
     }
 

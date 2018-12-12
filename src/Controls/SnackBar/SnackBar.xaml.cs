@@ -55,22 +55,66 @@ namespace IS.Toolkit.XamarinForms.Controls
             set { SetValue(CloseButtonBackGroundColorProperty, value); }
         }
 
-        public float FadeOutDuration { get; set; }
+        public uint FadeOutDuration { get; set; }
+        public uint FadeInDuration { get; set; }
+
+        #region IsOpen
+        public static readonly BindableProperty IsOpenProperty = BindableProperty.Create("IsOpen", typeof(bool), typeof(SnackBar), false, propertyChanged: IsOpenChanged);
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+
+        private static async void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            bool isOpen;
+
+            if (bindable != null && newValue != null)
+            {
+                var control = (SnackBar)bindable;
+                isOpen = (bool)newValue;
+
+                if (control.IsOpen == false)
+                {
+                    await control.FadeTo(1, control.FadeOutDuration);
+                    control.IsVisible = false;
+                }
+                else
+                {
+                    control.IsVisible = true;
+                    await control.FadeTo(100, control.FadeInDuration);
+                }
+            }
+        }
+
+        #endregion
 
         public SnackBar()
         {
             InitializeComponent();
+            FadeOutDuration = 2000;
+            FadeInDuration = 1000;
+            IsVisible = false;
         }
 
         private void CloseButton_Clicked(object sender, EventArgs e)
         {
-            IsVisible = false;
+            Close();
         }
 
-        public void Open(string message)
+        public async void Close()
         {
-            Message = message;
+            await this.FadeTo(0, FadeOutDuration);
+            IsVisible = false;
+            Message = string.Empty;
+        }
+
+        public async void Open(string message)
+        {
             IsVisible = true;
+            await this.FadeTo(100, FadeOutDuration);
+            Message = message;
         }
     }
 }
