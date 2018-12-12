@@ -64,6 +64,11 @@ namespace Sample
         {
             var newValue = e as string;
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            SnackB.Open("Hello Man");
+        }
     }
 
     public class Data

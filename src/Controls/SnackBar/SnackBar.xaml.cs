@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,60 +11,66 @@ using Xamarin.Forms.Xaml;
 namespace IS.Toolkit.XamarinForms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SnackBar : ContentView
+    public partial class SnackBar : TemplatedView
     {
-        public static readonly BindableProperty SnackBarTappedProperty = BindableProperty.Create(nameof(SnackBarTappedCommand), typeof(ICommand), typeof(SnackBar), default(ICommand));
-        public ICommand SnackBarTappedCommand
-        {
-            get { return (ICommand)GetValue(SnackBarTappedProperty); }
-            set { SetValue(SnackBarTappedProperty, value); }
-        }
-
-        public static readonly BindableProperty CloseOptionTappedProperty = BindableProperty.Create(nameof(CloseOptionTappedCommand), typeof(ICommand), typeof(SnackBar), default(ICommand));
-        public ICommand CloseOptionTappedCommand
-        {
-            get { return (ICommand)GetValue(CloseOptionTappedProperty); }
-            set { SetValue(CloseOptionTappedProperty, value); }
-        }
-
-        public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(SnackBar), default(string));
+        public static readonly BindableProperty MessageProperty = BindableProperty.Create("Message", typeof(string), typeof(SnackBar), default(string));
         public string Message
         {
             get { return (string)GetValue(MessageProperty); }
             set { SetValue(MessageProperty, value); }
         }
 
-        public static readonly BindableProperty CloseTextProperty = BindableProperty.Create(nameof(CloseText), typeof(string), typeof(SnackBar), default(string));
-        public string CloseText
+        public static readonly BindableProperty CloseButtonTextProperty = BindableProperty.Create("CloseButtonText", typeof(string), typeof(SnackBar), "Close");
+        public string CloseButtonText
         {
-            get { return (string)GetValue(CloseTextProperty); }
-            set { SetValue(CloseTextProperty, value); }
+            get { return (string)GetValue(CloseButtonTextProperty); }
+            set { SetValue(CloseButtonTextProperty, value); }
         }
 
-        public static readonly BindableProperty FadeOutDurationProperty = BindableProperty.Create(nameof(FadeOutDuration), typeof(long), typeof(SnackBar), default(double));
-        public long FadeOutDuration
+        public static readonly BindableProperty TapCommandProperty = BindableProperty.Create("TapCommand", typeof(ICommand), typeof(SnackBar), default(ICommand));
+        public ICommand TapCommand
         {
-            get { return (long)GetValue(FadeOutDurationProperty); }
-            set { SetValue(FadeOutDurationProperty, value); }
+            get { return (ICommand)GetValue(TapCommandProperty); }
+            set { SetValue(TapCommandProperty, value); }
         }
 
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(float), typeof(SnackBar), default(float));
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(float), typeof(SnackBar), default(float));
         public float FontSize
         {
             get { return (float)GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
         }
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SnackBar), default(Color));
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SnackBar), default(Color));
         public Color TextColor
         {
             get { return (Color)GetValue(TextColorProperty); }
             set { SetValue(TextColorProperty, value); }
         }
 
+        public static readonly BindableProperty CloseButtonBackGroundColorProperty = BindableProperty.Create("CloseButtonBackGroundColor", typeof(Color), typeof(SnackBar), default(Color));
+        public Color CloseButtonBackGroundColor
+        {
+            get { return (Color)GetValue(CloseButtonBackGroundColorProperty); }
+            set { SetValue(CloseButtonBackGroundColorProperty, value); }
+        }
+
+        public float FadeOutDuration { get; set; }
+
         public SnackBar()
         {
             InitializeComponent();
+        }
+
+        private void CloseButton_Clicked(object sender, EventArgs e)
+        {
+            IsVisible = false;
+        }
+
+        public void Open(string message)
+        {
+            Message = message;
+            IsVisible = true;
         }
     }
 }

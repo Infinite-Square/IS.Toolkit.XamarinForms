@@ -1,23 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS.Toolkit.XamarinForms.Controls.SnackBar"
-             MinimumHeightRequest="{OnPlatform Android=70, iOS=75, UWP=80}"
-             HorizontalOptions="FillAndExpand"
-             BackgroundColor="SkyBlue"
-             x:Name="SnackB"
-             VerticalOptions="End">
-    <ContentView.GestureRecognizers>
-    </ContentView.GestureRecognizers>
-  <ContentView.Content>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-            <Button Grid.Column="1" HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center"/>
-        </Grid>
-  </ContentView.Content>
-</ContentView>
+<TemplatedView xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="IS.Toolkit.XamarinForms.Controls.SnackBar"
+               HeightRequest="50"
+               MinimumWidthRequest="50"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="End"
+                x:Name="SnackB">
+
+    <TemplatedView.ControlTemplate>
+        <ControlTemplate>
+            <Grid BackgroundColor="Red">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Message, Source={x:Reference SnackB}}"
+                       FontSize="{Binding FontSize, Source={x:Reference SnackB}}"
+                       TextColor="{Binding TextColor, Source={x:Reference SnackB}}"/>
+
+                <Button Grid.Column="1" HorizontalOptions="End"
+                        Clicked="CloseButton_Clicked"
+                        FontSize="{Binding FontSisze, Source={x:Reference SnackB}}"
+                        TextColor="{Binding TextColor, Source={x:Reference SnackB}}"
+                        BackgroundColor="{Binding CloseButtonBackGroundColor, Source={x:Reference SnackB}}"
+                        VerticalOptions="Center" Text="{Binding CloseButtonText, Source={x:Reference SnackB}}"/>
+
+            </Grid>
+        </ControlTemplate>
+    </TemplatedView.ControlTemplate>
+
+</TemplatedView>
