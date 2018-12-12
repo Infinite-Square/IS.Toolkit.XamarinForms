@@ -27,7 +27,7 @@
                         Clicked="CloseButton_Clicked" Margin="2"
                         FontFamily="{Binding FontFamily, Source={x:Reference SnackB}}"
                         FontSize="{Binding FontSisze, Source={x:Reference SnackB}}"
-                        TextColor="{Binding TextColor, Source={x:Reference SnackB}}"
+                        TextColor="{Binding ButtonTextColor, Source={x:Reference SnackB}}"
                         BackgroundColor="{Binding CloseButtonBackGroundColor, Source={x:Reference SnackB}}"
                         VerticalOptions="Center" Text="{Binding CloseButtonText, Source={x:Reference SnackB}}"/>
             </Grid>

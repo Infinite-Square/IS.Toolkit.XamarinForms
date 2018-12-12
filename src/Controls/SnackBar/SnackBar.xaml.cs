@@ -55,8 +55,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             set { SetValue(CloseButtonBackGroundColorProperty, value); }
         }
 
-        public uint FadeOutDuration { get; set; }
-        public uint FadeInDuration { get; set; }
+        public uint AnimationDuration { get; set; }
 
         #region IsOpen
         public static readonly BindableProperty IsOpenProperty = BindableProperty.Create("IsOpen", typeof(bool), typeof(SnackBar), false, propertyChanged: IsOpenChanged);
@@ -77,13 +76,13 @@ namespace IS.Toolkit.XamarinForms.Controls
 
                 if (control.IsOpen == false)
                 {
-                    await control.FadeTo(1, control.FadeOutDuration);
+                    await control.FadeTo(1, control.AnimationDuration);
                     control.IsVisible = false;
                 }
                 else
                 {
                     control.IsVisible = true;
-                    await control.FadeTo(100, control.FadeInDuration);
+                    await control.FadeTo(100, control.AnimationDuration);
                 }
             }
         }
@@ -100,8 +99,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         public SnackBar()
         {
             InitializeComponent();
-            FadeOutDuration = 2000;
-            FadeInDuration = 1000;
+            AnimationDuration = 150;
             IsVisible = false;
         }
 
@@ -112,7 +110,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public async void Close()
         {
-            await this.TranslateTo(0, 50, FadeOutDuration);
+            await this.TranslateTo(0, 50, AnimationDuration);
             Message = string.Empty;
             IsVisible = false;
         }
@@ -121,7 +119,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             IsVisible = true;
             Message = message;
-            await this.TranslateTo(0, 0, FadeInDuration);
+            await this.TranslateTo(0, 0, AnimationDuration);
         }
     }
 }
