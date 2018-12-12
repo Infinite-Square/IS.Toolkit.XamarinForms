@@ -2,7 +2,7 @@
 <TemplatedView xmlns="http://xamarin.com/schemas/2014/forms" 
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="IS.Toolkit.XamarinForms.Controls.SnackBar"
-               HeightRequest="50"
+               MinimumHeightRequest="50"
                MinimumWidthRequest="50"
                HorizontalOptions="FillAndExpand"
                VerticalOptions="End"
@@ -10,23 +10,26 @@
 
     <TemplatedView.ControlTemplate>
         <ControlTemplate>
-            <Grid BackgroundColor="Red">
+            <Grid Padding="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Label Text="{Binding Message, Source={x:Reference SnackB}}"
+                       VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                       Margin="2" LineBreakMode="WordWrap"
                        FontSize="{Binding FontSize, Source={x:Reference SnackB}}"
-                       TextColor="{Binding TextColor, Source={x:Reference SnackB}}"/>
+                       TextColor="{Binding TextColor, Source={x:Reference SnackB}}"
+                       FontFamily="{Binding FontFamily, Source={x:Reference SnackB}}"/>
 
                 <Button Grid.Column="1" HorizontalOptions="End"
-                        Clicked="CloseButton_Clicked"
+                        Clicked="CloseButton_Clicked" Margin="2"
+                        FontFamily="{Binding FontFamily, Source={x:Reference SnackB}}"
                         FontSize="{Binding FontSisze, Source={x:Reference SnackB}}"
                         TextColor="{Binding TextColor, Source={x:Reference SnackB}}"
                         BackgroundColor="{Binding CloseButtonBackGroundColor, Source={x:Reference SnackB}}"
                         VerticalOptions="Center" Text="{Binding CloseButtonText, Source={x:Reference SnackB}}"/>
-
             </Grid>
         </ControlTemplate>
     </TemplatedView.ControlTemplate>

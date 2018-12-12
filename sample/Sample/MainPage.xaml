@@ -107,7 +107,7 @@
                 <Label Text="Checkbox"
                    VerticalOptions="Center"
                    Grid.Column="0"/>
-                <controls:CheckBox Grid.Column="1" IsChecked="True" FontSize="50" HeightRequest="100" WidthRequest="100" TextColor="Blue" Text="Nera"/>
+                <controls:CheckBox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" TextColor="Blue" Text="Nera"/>
             </Grid>
 
             <controls:Picker x:Name="_btnPicker" Grid.Row="8"
@@ -152,13 +152,15 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-            <controls:SnackBar x:Name="SnackB" HeightRequest="50" FontSize="30" TextColor="Tan" Message="Snack Bar"/>
-            <Button Text="OpenButton" Clicked="Button_Clicked" Grid.Column="1"/>
+            <controls:SnackBar x:Name="SnackB" HeightRequest="50" FontSize="15" 
+                               BackgroundColor="SkyBlue" TextColor="White" Grid.Row="1"
+                               />
+            <Button x:Name="Obutton" Text="OpenButton" Clicked="Button_Clicked"/>
 
         </Grid>
     </Grid>

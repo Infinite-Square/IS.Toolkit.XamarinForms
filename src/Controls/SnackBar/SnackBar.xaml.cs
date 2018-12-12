@@ -48,7 +48,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             set { SetValue(TextColorProperty, value); }
         }
 
-        public static readonly BindableProperty CloseButtonBackGroundColorProperty = BindableProperty.Create("CloseButtonBackGroundColor", typeof(Color), typeof(SnackBar), default(Color));
+        public static readonly BindableProperty CloseButtonBackGroundColorProperty = BindableProperty.Create("CloseButtonBackGroundColor", typeof(Color), typeof(SnackBar), Color.Transparent);
         public Color CloseButtonBackGroundColor
         {
             get { return (Color)GetValue(CloseButtonBackGroundColorProperty); }
@@ -90,6 +90,13 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         #endregion
 
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(SnackBar), default(string));
+        public string FontFamily
+        {
+            get { return (string)GetValue(FontFamilyProperty); }
+            set { SetValue(FontFamilyProperty, value); }
+        }
+
         public SnackBar()
         {
             InitializeComponent();
@@ -105,16 +112,16 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public async void Close()
         {
-            await this.FadeTo(0, FadeOutDuration);
-            IsVisible = false;
+            await this.TranslateTo(0, 50, FadeOutDuration);
             Message = string.Empty;
+            IsVisible = false;
         }
 
         public async void Open(string message)
         {
             IsVisible = true;
-            await this.FadeTo(100, FadeOutDuration);
             Message = message;
+            await this.TranslateTo(0, 0, FadeInDuration);
         }
     }
 }

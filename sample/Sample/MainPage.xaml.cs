@@ -67,8 +67,7 @@ namespace Sample
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            SnackB.Message = "Open";
-            SnackB.Open("Open");
+            SnackB.Open("Here is the custom snackbar opened in IS control library.");
         }
     }
 
