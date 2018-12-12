@@ -84,11 +84,11 @@ namespace Sample.Droid.Renderers
         private ColorStateList UpdateAccentColor(Color color)
         {
             return new ColorStateList(
-                new[]
+                new int[][]
                 {
-                    new[] { -global::Android.Resource.Attribute.StateEnabled },
-                    new[] { -global::Android.Resource.Attribute.StateChecked },
-                    new[] { global::Android.Resource.Attribute.StateChecked }
+                    new int[] { -global::Android.Resource.Attribute.StateEnabled },
+                    new int[] { -global::Android.Resource.Attribute.StateChecked },
+                    new int[] { global::Android.Resource.Attribute.StateChecked }
                 },
                 new int[]
                 {
