@@ -67,7 +67,8 @@ namespace Sample
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            SnackB.Open("1 Conversation archivee");
+            SnackB.Message = "1 Conversation archivee";
+            SnackB.IsOpen = true;
         }
     }
 

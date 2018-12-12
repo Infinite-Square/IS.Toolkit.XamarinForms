@@ -34,13 +34,6 @@ namespace IS.Toolkit.XamarinForms.Controls
             set { SetValue(CloseButtonTextProperty, value); }
         }
 
-        public static readonly BindableProperty TapCommandProperty = BindableProperty.Create("TapCommand", typeof(ICommand), typeof(SnackBar), default(ICommand));
-        public ICommand TapCommand
-        {
-            get { return (ICommand)GetValue(TapCommandProperty); }
-            set { SetValue(TapCommandProperty, value); }
-        }
-
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(float), typeof(SnackBar), default(float));
         public float FontSize
         {
@@ -72,7 +65,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             set { SetValue(IsOpenProperty, value); }
         }
 
-        private static async void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
         {
             bool isOpen;
 
@@ -83,13 +76,11 @@ namespace IS.Toolkit.XamarinForms.Controls
 
                 if (control.IsOpen == false)
                 {
-                    await control.FadeTo(1, control.AnimationDuration);
-                    control.IsVisible = false;
+                    control.Close();
                 }
                 else
                 {
-                    control.IsVisible = true;
-                    await control.FadeTo(100, control.AnimationDuration);
+                    control.Open(control.Message);
                 }
             }
         }
@@ -119,7 +110,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             await this.TranslateTo(0, 50, AnimationDuration);
             Message = string.Empty;
-            IsVisible = false;
+            IsOpen = IsVisible = false;
         }
 
         public async void Open(string message)
