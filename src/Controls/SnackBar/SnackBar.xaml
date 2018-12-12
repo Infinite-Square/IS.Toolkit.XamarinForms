@@ -18,7 +18,7 @@
 
                 <Label Text="{Binding Message, Source={x:Reference SnackB}}"
                        VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-                       Margin="2" LineBreakMode="WordWrap"
+                       Margin="20, 5, 5, 5" LineBreakMode="WordWrap"
                        FontSize="{Binding FontSize, Source={x:Reference SnackB}}"
                        TextColor="{Binding TextColor, Source={x:Reference SnackB}}"
                        FontFamily="{Binding FontFamily, Source={x:Reference SnackB}}"/>

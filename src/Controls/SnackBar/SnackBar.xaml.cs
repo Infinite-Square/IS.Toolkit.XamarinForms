@@ -13,6 +13,13 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SnackBar : TemplatedView
     {
+        public static readonly BindableProperty ButtonTextColorProperty = BindableProperty.Create("ButtonTextColor", typeof(Color), typeof(SnackBar), default(Color));
+        public Color ButtonTextColor
+        {
+            get { return (Color)GetValue(ButtonTextColorProperty); }
+            set { SetValue(ButtonTextColorProperty, value); }
+        }
+
         public static readonly BindableProperty MessageProperty = BindableProperty.Create("Message", typeof(string), typeof(SnackBar), default(string));
         public string Message
         {

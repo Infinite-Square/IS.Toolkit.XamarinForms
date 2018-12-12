@@ -30,7 +30,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             set { SetValue(TextProperty, value); }
         }
 
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(float), typeof(CheckBox), default(float));
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(float), typeof(CheckBox), 12f);
         public float FontSize
         {
             get { return (float)GetValue(FontSizeProperty); }
