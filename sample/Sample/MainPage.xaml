@@ -9,7 +9,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid Padding="10">            
             <Grid.RowDefinitions>
@@ -118,16 +118,16 @@
                          Type="Button" />
 
             <controls:FloatingActionMenu
-            IsVisible="True"
-            x:Name="fab"
-            Size="60"
-            Grid.RowSpan="11"
-            IsOpen="False"
-            Image="Icon.png"
-            FilterBackgroundColor="#B3000000"
-            Padding="20"
-            Margin="-10"
-            ItemsPadding="10">
+                IsVisible="True"
+                x:Name="fab"
+                Size="60"
+                Grid.RowSpan="11"
+                IsOpen="False"
+                Image="Icon.png"
+                FilterBackgroundColor="#B3000000"
+                Padding="20"
+                Margin="-10"
+                ItemsPadding="10">
                 <controls:FloatingActionMenu.Items>
                     <x:Array
                     Type="{x:Type controls:FloatingActionMenuItem}" 
@@ -153,14 +153,19 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
-
-            <controls:SnackBar x:Name="SnackB" HeightRequest="50" FontSize="12" 
-                               BackgroundColor="#323232" TextColor="White" ButtonTextColor="Orange" CloseButtonText="ANNULER"  Grid.Row="1"
-                               />
-            <Button x:Name="Obutton" Text="OpenButton" Clicked="Button_Clicked"/>
-
+            <Button x:Name="Obutton" 
+                    Text="OpenButton"
+                    Clicked="Button_Clicked"/>
+            
+            <controls:SnackBar x:Name="SnackB" 
+                               HeightRequest="50" 
+                               VerticalOptions="End"
+                               FontSize="12" 
+                               BackgroundColor="#323232"
+                               TextColor="White" 
+                               ButtonTextColor="Orange"
+                               CloseButtonText="ANNULER"/>
         </Grid>
     </Grid>
 </ContentPage>
