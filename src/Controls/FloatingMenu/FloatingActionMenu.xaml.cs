@@ -86,6 +86,13 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        public static readonly BindableProperty IsRotateAnimationEnabledProperty = BindableProperty.Create(nameof(IsRotateAnimationEnabled), typeof(bool), typeof(FloatingActionButton), default(bool));
+        public bool IsRotateAnimationEnabled
+        {
+            get { return (bool)GetValue(IsRotateAnimationEnabledProperty); }
+            set { SetValue(IsRotateAnimationEnabledProperty, value); }
+        }
+
         #region FilterBackgroundColor
         public static readonly BindableProperty FilterBackgroundColorProperty = BindableProperty.Create(
             propertyName: nameof(FilterBackgroundColor),
@@ -146,6 +153,15 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         private void IsOpenChanged(bool isOpen)
         {
+            if (isOpen && IsRotateAnimationEnabled)
+            {
+                FAB.RotateAnimation();
+            }
+            else if (!isOpen && IsRotateAnimationEnabled)
+            {
+                FAB.RestoreRotationAnimation();
+            }
+
             // RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
             if (Items != null && _originalContentHeight != default)
             {
