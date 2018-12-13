@@ -30,8 +30,8 @@
     </BoxView>
 
     <ctrls:ItemsControl x:Name="ItemsLayout"
-                        Grid.Row="1"
-                        Spacing="5"
+                        Grid.Row="1" Opacity="0.5"
+                        Spacing="5" InputTransparent="True" CascadeInputTransparent="False"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         ItemsSource="{Binding Items, Source={x:Reference this}}"
