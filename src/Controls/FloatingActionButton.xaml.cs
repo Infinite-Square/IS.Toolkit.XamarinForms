@@ -120,12 +120,12 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public async void RotateAnimation()
         {
-            await this.RotateTo(45, 700);
+            await this.RotateTo(45, 250);
         }
 
         public async void RestoreRotationAnimation()
         {
-            await this.RotateTo(0, 700);
+            await this.RotateTo(0, 250);
         }
     }
 }

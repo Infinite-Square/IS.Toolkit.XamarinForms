@@ -30,7 +30,6 @@
                            VerticalOptions="CenterAndExpand" 
                            Margin="{TemplateBinding Path=ItemPadding, Mode=OneWay}"/>
                 </Frame>
-                <BoxView HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="30" BackgroundColor="Red"/>
 
             </Grid>
         </ControlTemplate>
