@@ -6,6 +6,7 @@
       xmlns:utils="clr-namespace:IS.Toolkit.XamarinForms.Controls.Utils"
       InputTransparent="True"
       CascadeInputTransparent="False"
+      RowSpacing="0"
       x:Name="this">
     
     <Grid.Resources>
@@ -17,11 +18,16 @@
     <Grid.RowDefinitions>
         <RowDefinition Height="*" />
         <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="50"/>
+    </Grid.ColumnDefinitions>
 
     <BoxView BackgroundColor="{Binding FilterBackgroundColor, Source={x:Reference this}}"
-             Grid.RowSpan="3"
+             Grid.RowSpan="2"
+             Grid.ColumnSpan="3"
              InputTransparent="True"
              x:Name="OpacityFilter">
         <BoxView.GestureRecognizers>
@@ -31,18 +37,18 @@
     </BoxView>
 
     <ctrls:ItemsControl x:Name="ItemsLayout"
-                        Grid.Row="1" Opacity="0.5"
-                        Spacing="5" InputTransparent="True" CascadeInputTransparent="False"
+                        Opacity="0.5"
+                        Grid.Column="1"
+                        InputTransparent="True" 
+                        CascadeInputTransparent="False"
                         HorizontalOptions="End"
                         VerticalOptions="End"
-                        ItemsSource="{Binding Items, Source={x:Reference this}}"
-                        Margin="{Binding ItemsMargin, Source={x:Reference this}}"
-                        Padding="{Binding Padding, Source={x:Reference this}}">
+                        ItemsSource="{Binding Items, Source={x:Reference this}}">
         <ctrls:ItemsControl.ItemTemplate>
             <DataTemplate>
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="End"
-                             Margin="0,5">
+                             Margin="0">
                     <ContentView BackgroundColor="{Binding BackgroundColor, Mode=OneWay}"
                                  VerticalOptions="Center"
                                  Padding="4,2">
@@ -54,22 +60,21 @@
                                                 Image="{Binding Icon, Mode=OneWay}"
                                                 Command="{Binding Command, Mode=OneWay}"
                                                 Size="{Binding ItemSize, Source={x:Reference this}, Mode=OneWay}"
-                                                ItemPadding="{Binding ItemsPadding, Source={x:Reference this}, Mode=OneWay}"
                                                 Clicked="ItemClicked"/>
                 </StackLayout>
             </DataTemplate>
         </ctrls:ItemsControl.ItemTemplate>
     </ctrls:ItemsControl>
 
-    <ctrls:FloatingActionButton Grid.Row="2"
+    <Grid Grid.Row="1" BackgroundColor="Pink"/>
+    <ctrls:FloatingActionButton Grid.Row="1"
+                        Grid.Column="1"
                                 x:Name="FAB"
                                 VerticalOptions="End"
                                 HorizontalOptions="End"
                                 Margin="{Binding MainButtonToItemMargin, Source={x:Reference this}}"
-                                Padding="{Binding Padding, Source={x:Reference this}}"
                                 Size="{Binding Size, Source={x:Reference this}}"
                                 Color="{Binding Color, Source={x:Reference this}}"
                                 Image="{Binding Image, Source={x:Reference this}}"
-                                Clicked="FloatingActionButton_Clicked"
-                                ItemPadding="{Binding ItemsPadding, Source={x:Reference this}, Mode=OneWay}"/>
+                                Clicked="FloatingActionButton_Clicked"/>
 </Grid>

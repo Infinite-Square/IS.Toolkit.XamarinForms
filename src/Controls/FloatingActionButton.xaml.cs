@@ -17,19 +17,14 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public static readonly BindableProperty ColorProperty =
            BindableProperty.Create(nameof(Color), typeof(Color), typeof(FloatingActionButton), Color.Accent);
-
         public static readonly BindableProperty ImageProperty =
             BindableProperty.Create(nameof(Image), typeof(ImageSource), typeof(FloatingActionButton), null);
-
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(FloatingActionButton), null);
-
         public static readonly BindableProperty CommandParameterProperty =
             BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(FloatingActionButton), null);
-
         public static readonly BindableProperty SizeProperty =
             BindableProperty.Create(nameof(Size), typeof(double), typeof(FloatingActionButton), 50.0);
-
         public static readonly BindableProperty ItemPaddingProperty =
             BindableProperty.Create(nameof(ItemPadding), typeof(Thickness), typeof(FloatingActionButton), default(Thickness));
 

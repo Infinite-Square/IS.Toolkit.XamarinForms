@@ -125,7 +125,6 @@
                 IsOpen="False"
                 Image="Icon.png"
                 FilterBackgroundColor="#B3000000"
-                Padding="20"
                 IsRotateAnimationEnabled="True"
                 Margin="-10"
                 ItemsPadding="10">

@@ -9,8 +9,6 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenu : Grid
     {
-        private double _originalContentHeight;
-
         public FloatingActionMenu()
         {
             InitializeComponent();
@@ -21,17 +19,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Items),
             returnType: typeof(IEnumerable<FloatingActionMenuItem>),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(IEnumerable<FloatingActionMenuItem>),
-            propertyChanged: ItemsPropertyChanged);
-
-        private static void ItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable != null && newValue != null)
-            {
-                var control = (FloatingActionMenu)bindable;
-                control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
-            }
-        }
+            defaultValue: default(IEnumerable<FloatingActionMenuItem>));
 
         public IEnumerable<FloatingActionMenuItem> Items
         {
@@ -162,40 +150,39 @@ namespace IS.Toolkit.XamarinForms.Controls
                 FAB.RestoreRotationAnimation();
             }
 
-            // RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
-            if (Items != null && _originalContentHeight != default)
-            {
-                var animate = new Animation(
-                    callback: d => ItemsLayout.HeightRequest = d,
-                    start: isOpen ? 0 : _originalContentHeight,
-                    end: isOpen ? _originalContentHeight : 0);
-                animate.Commit(
-                    owner: ItemsLayout,
-                    name: "ExpanderAnimation",
-                    length: 150u);
+            ////if (Items != null && _originalContentHeight != default)
+            ////{
+            ////    var animate = new Animation(
+            ////        callback: d => ItemsLayout.HeightRequest = d,
+            ////        start: isOpen ? 0 : _originalContentHeight,
+            ////        end: isOpen ? _originalContentHeight : 0);
+            ////    animate.Commit(
+            ////        owner: ItemsLayout,
+            ////        name: "ExpanderAnimation",
+            ////        length: 150u);
 
-                var animate2 = new Animation(
-                    callback: d => ItemsLayout.Opacity = d,
-                    start: isOpen ? 0 : 1,
-                    end: isOpen ? 1 : 0);
-                animate2.Commit(
-                    owner: ItemsLayout,
-                    name: "ExpanderFadeAnimation",
-                    length: 150u);
+            ////    var animate2 = new Animation(
+            ////        callback: d => ItemsLayout.Opacity = d,
+            ////        start: isOpen ? 0 : 1,
+            ////        end: isOpen ? 1 : 0);
+            ////    animate2.Commit(
+            ////        owner: ItemsLayout,
+            ////        name: "ExpanderFadeAnimation",
+            ////        length: 150u);
 
-                var animate3 = new Animation(
-                    callback: d => OpacityFilter.Opacity = d,
-                    start: isOpen ? 0 : 1,
-                    end: isOpen ? 1 : 0);
-                animate3.Commit(
-                    owner: OpacityFilter,
-                    name: "ExpanderOpacityFilterAnimation",
-                    length: 150u,
-                    finished: (arg, value) =>
-                    {
-                        OpacityFilter.InputTransparent = !isOpen;
-                    });
-            }
+            ////    var animate3 = new Animation(
+            ////        callback: d => OpacityFilter.Opacity = d,
+            ////        start: isOpen ? 0 : 1,
+            ////        end: isOpen ? 1 : 0);
+            ////    animate3.Commit(
+            ////        owner: OpacityFilter,
+            ////        name: "ExpanderOpacityFilterAnimation",
+            ////        length: 150u,
+            ////        finished: (arg, value) =>
+            ////        {
+            ////            OpacityFilter.InputTransparent = !isOpen;
+            ////        });
+            ////}
         }
 
         public bool IsOpen
@@ -216,23 +203,22 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Size),
             returnType: typeof(double),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: 70.0,
-            propertyChanged: SizeChanged);
+            defaultValue: 70.0);
 
-        private static new void SizeChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable != null && newValue != null)
-            {
-                var control = (FloatingActionMenu)bindable;
-                control._originalContentHeight = default;
-                control.ItemSize = 2 * control.Size / 3;
-                control.ItemsMargin = new Thickness(0, 0, (control.Size / 2) - (control.ItemSize / 2), 0);
-                if (control.Items != default)
-                {
-                    control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
-                }
-            }
-        }
+        ////private static new void SizeChanged(BindableObject bindable, object oldValue, object newValue)
+        ////{
+        ////    if (bindable != null && newValue != null)
+        ////    {
+        ////        var control = (FloatingActionMenu)bindable;
+        ////        control._originalContentHeight = default;
+        ////        control.ItemSize = 2 * control.Size / 3;
+        ////        control.ItemsMargin = new Thickness(0, 0, (control.Size / 2) - (control.ItemSize / 2), 0);
+        ////        if (control.Items != default)
+        ////        {
+        ////            control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
+        ////        }
+        ////    }
+        ////}
 
         public double Size
         {
@@ -272,7 +258,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         #region MainButtonToItemMargin
 
-        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, -33, 0, 0));
+        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, 0, 0, 0));
 
         public Thickness MainButtonToItemMargin
         {
@@ -287,19 +273,19 @@ namespace IS.Toolkit.XamarinForms.Controls
             IsOpen = !IsOpen;
         }
 
-        private void InitOriginalContentHeight(double size)
-        {
-            _originalContentHeight = size;
+        ////private void InitOriginalContentHeight(double size)
+        ////{
+        ////    _originalContentHeight = size;
 
-            if (!IsOpen)
-            {
-                ItemsLayout.HeightRequest = 0;
-                OpacityFilter.HeightRequest = 0;
-                OpacityFilter.Opacity = 0;
-                OpacityFilter.InputTransparent = true;
-                ItemsLayout.Opacity = 0;
-            }
-        }
+        ////    if (!IsOpen)
+        ////    {
+        ////        ItemsLayout.HeightRequest = 0;
+        ////        OpacityFilter.HeightRequest = 0;
+        ////        OpacityFilter.Opacity = 0;
+        ////        OpacityFilter.InputTransparent = true;
+        ////        ItemsLayout.Opacity = 0;
+        ////    }
+        ////}
 
         private void OpacityFilter_Tapped(object sender, EventArgs e)
         {
