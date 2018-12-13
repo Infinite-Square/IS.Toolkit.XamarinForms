@@ -13,42 +13,42 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SnackBar : TemplatedView
     {
-        public static readonly BindableProperty ButtonTextColorProperty = BindableProperty.Create("ButtonTextColor", typeof(Color), typeof(SnackBar), default(Color));
+        public static readonly BindableProperty ButtonTextColorProperty = BindableProperty.Create(nameof(ButtonTextColor), typeof(Color), typeof(SnackBar), default(Color));
         public Color ButtonTextColor
         {
             get { return (Color)GetValue(ButtonTextColorProperty); }
             set { SetValue(ButtonTextColorProperty, value); }
         }
 
-        public static readonly BindableProperty MessageProperty = BindableProperty.Create("Message", typeof(string), typeof(SnackBar), default(string));
+        public static readonly BindableProperty MessageProperty = BindableProperty.Create(nameof(Message), typeof(string), typeof(SnackBar), default(string));
         public string Message
         {
             get { return (string)GetValue(MessageProperty); }
             set { SetValue(MessageProperty, value); }
         }
 
-        public static readonly BindableProperty CloseButtonTextProperty = BindableProperty.Create("CloseButtonText", typeof(string), typeof(SnackBar), "Close");
+        public static readonly BindableProperty CloseButtonTextProperty = BindableProperty.Create(nameof(CloseButtonText), typeof(string), typeof(SnackBar), "Close");
         public string CloseButtonText
         {
             get { return (string)GetValue(CloseButtonTextProperty); }
             set { SetValue(CloseButtonTextProperty, value); }
         }
 
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(float), typeof(SnackBar), default(float));
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(float), typeof(SnackBar), default(float));
         public float FontSize
         {
             get { return (float)GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
         }
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SnackBar), default(Color));
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SnackBar), default(Color));
         public Color TextColor
         {
             get { return (Color)GetValue(TextColorProperty); }
             set { SetValue(TextColorProperty, value); }
         }
 
-        public static readonly BindableProperty CloseButtonBackGroundColorProperty = BindableProperty.Create("CloseButtonBackGroundColor", typeof(Color), typeof(SnackBar), Color.Transparent);
+        public static readonly BindableProperty CloseButtonBackGroundColorProperty = BindableProperty.Create(nameof(CloseButtonBackGroundColor), typeof(Color), typeof(SnackBar), Color.Transparent);
         public Color CloseButtonBackGroundColor
         {
             get { return (Color)GetValue(CloseButtonBackGroundColorProperty); }
@@ -58,7 +58,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         public uint AnimationDuration { get; set; }
 
         #region IsOpen
-        public static readonly BindableProperty IsOpenProperty = BindableProperty.Create("IsOpen", typeof(bool), typeof(SnackBar), false, propertyChanged: IsOpenChanged);
+        public static readonly BindableProperty IsOpenProperty = BindableProperty.Create(nameof(IsOpen), typeof(bool), typeof(SnackBar), false, propertyChanged: IsOpenChanged);
         public bool IsOpen
         {
             get { return (bool)GetValue(IsOpenProperty); }
@@ -87,7 +87,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         #endregion
 
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(SnackBar), default(string));
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(SnackBar), default(string));
         public string FontFamily
         {
             get { return (string)GetValue(FontFamilyProperty); }

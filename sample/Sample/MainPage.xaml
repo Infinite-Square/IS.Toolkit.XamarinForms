@@ -156,7 +156,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <controls:SnackBar x:Name="SnackB" HeightRequest="50" FontSize="12" 
+            <controls:SnackBar x:Name="SnackB" HeightRequest="50" FontSize="15" 
                                BackgroundColor="#323232" TextColor="White" ButtonTextColor="Orange" CloseButtonText="ANNULER"  Grid.Row="1"
                                />
             <Button x:Name="Obutton" Text="OpenButton" Clicked="Button_Clicked"/>

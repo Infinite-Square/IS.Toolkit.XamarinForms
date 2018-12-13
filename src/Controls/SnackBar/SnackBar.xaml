@@ -5,31 +5,31 @@
                MinimumHeightRequest="50"
                MinimumWidthRequest="50"
                HorizontalOptions="FillAndExpand"
-               VerticalOptions="End"
-                x:Name="SnackB">
+               xmlns:local="clr-namespace:IS.Toolkit.XamarinForms.Controls"
+               VerticalOptions="End">
 
     <TemplatedView.ControlTemplate>
         <ControlTemplate>
-            <Grid Padding="5">
+            <Grid Padding="5" x:DataType="local:SnackBar">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="{Binding Message, Source={x:Reference SnackB}}"
+                <Label Text="{TemplateBinding Message}"
                        VerticalOptions="Center" HorizontalOptions="FillAndExpand"
                        Margin="20, 5, 5, 5" LineBreakMode="WordWrap"
-                       FontSize="{Binding FontSize, Source={x:Reference SnackB}}"
-                       TextColor="{Binding TextColor, Source={x:Reference SnackB}}"
-                       FontFamily="{Binding FontFamily, Source={x:Reference SnackB}}"/>
+                       FontSize="{TemplateBinding FontSize}"
+                       TextColor="{TemplateBinding TextColor}"
+                       FontFamily="{TemplateBinding FontFamily}"/>
 
                 <Button Grid.Column="1" HorizontalOptions="End"
                         Clicked="CloseButton_Clicked" Margin="2"
-                        FontFamily="{Binding FontFamily, Source={x:Reference SnackB}}"
-                        FontSize="{Binding FontSisze, Source={x:Reference SnackB}}"
-                        TextColor="{Binding ButtonTextColor, Source={x:Reference SnackB}}"
-                        BackgroundColor="{Binding CloseButtonBackGroundColor, Source={x:Reference SnackB}}"
-                        VerticalOptions="Center" Text="{Binding CloseButtonText, Source={x:Reference SnackB}}"/>
+                        FontFamily="{TemplateBinding FontFamily}"
+                        FontSize="{TemplateBinding FontSize}"
+                        TextColor="{TemplateBinding ButtonTextColor}"
+                        BackgroundColor="{TemplateBinding CloseButtonBackGroundColor}"
+                        VerticalOptions="Center" Text="{TemplateBinding CloseButtonText}"/>
             </Grid>
         </ControlTemplate>
     </TemplatedView.ControlTemplate>
