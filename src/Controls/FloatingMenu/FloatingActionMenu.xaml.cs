@@ -16,7 +16,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         public FloatingActionMenu()
         {
             InitializeComponent();
-            IsOpen = false;
+            CloseAnimationOnFab();
         }
 
         #region Items
@@ -134,7 +134,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             defaultValue: false,
             propertyChanged: IsOpenPropertyChanged);
 
-        private static async void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable != null && newValue != null)
             {
@@ -142,18 +142,18 @@ namespace IS.Toolkit.XamarinForms.Controls
                 var isOpen = (bool)newValue;
                 if (!control.IsOpen)
                 {
-                    await control.CloseAnimationOnFab().ContinueWith((t) => control.OpacityFilter.IsVisible = false);
+                    control.CloseAnimationOnFab();
                 }
                 else
                 {
-                    await control.OpenFABAnimation();
+                    control.OpenFABAnimation();
                 }
 
                 control.OpacityFilter.InputTransparent = !control.IsOpen;
             }
         }
 
-        private async Task CloseAnimationOnFab()
+        private void CloseAnimationOnFab()
         {
             if (IsRotateAnimationEnabled)
             {
@@ -164,7 +164,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             {
                 if (ItemsLayout.ViewItems != null)
                 {
-                    await OpacityFilter.FadeTo(0, 500);
+                    OpacityFilter.FadeTo(0, 500);
                     int nAnimationCount = 0;
                     for (int i = ItemsLayout.ViewItems.Count - 1; i >= 0; i--)
                     {
@@ -173,7 +173,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                             nAnimationCount++;
                         }
 
-                        await ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i));
+                        ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i));
                     }
 
                     OpacityFilter.IsVisible = false;
@@ -181,19 +181,19 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
-        private async Task OpenFABAnimation()
+        private void OpenFABAnimation()
         {
             if (IsRotateAnimationEnabled)
             {
                 FAB.RotateAnimation();
             }
 
-            await OpacityFilter.FadeTo(0.5, 500);
+            OpacityFilter.FadeTo(0.5, 500);
             OpacityFilter.IsVisible = true;
             ItemsLayout.IsVisible = true;
             foreach (var item in ItemsLayout.ViewItems)
             {
-                await item.TranslateTo(0, 0);
+                item.TranslateTo(0, 0);
             }
         }
 
