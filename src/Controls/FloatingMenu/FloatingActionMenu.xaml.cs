@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -152,20 +153,31 @@ namespace IS.Toolkit.XamarinForms.Controls
                 FAB.RestoreRotationAnimation();
             }
 
-            if (Items != null)
+            if (ItemsLayout != null)
             {
-                if (isOpen)
+                if (ItemsLayout.ViewItems != null)
                 {
-                    foreach (var button in Items)
+                    if (isOpen)
                     {
-                        //////button.TranslateTo(50, _animationSpeed);
+                        int nAnimationCount = 0;
+
+                        for (int i = ItemsLayout.ViewItems.Count - 1; i >= 0; i--)
+                        {
+                            for (int j = ItemsLayout.ViewItems.Count - i; j > 0; j--)
+                            {
+                                nAnimationCount++;
+                            }
+
+                            Debug.WriteLine($"{(ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i)}");
+                            ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i));
+                        }
                     }
-                }
-                else
-                {
-                    foreach (var button in Items)
+                    else
                     {
-                        ////button.TranslateTo(0, _animationSpeed);
+                        foreach (var item in ItemsLayout.ViewItems)
+                        {
+                            item.TranslateTo(0, 0);
+                        }
                     }
                 }
             }

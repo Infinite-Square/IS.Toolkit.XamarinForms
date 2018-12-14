@@ -22,7 +22,7 @@
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition Width="50"/>
+        <ColumnDefinition Width="20"/>
     </Grid.ColumnDefinitions>
 
     <BoxView BackgroundColor="{Binding FilterBackgroundColor, Source={x:Reference this}}"
@@ -48,7 +48,7 @@
             <DataTemplate>
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="End"
-                             Margin="5">
+                             Margin="0,5">
                     <ContentView BackgroundColor="{Binding BackgroundColor, Mode=OneWay}"
                                  VerticalOptions="Center"
                                  Padding="4,2">
@@ -60,6 +60,7 @@
                                                 Image="{Binding Icon, Mode=OneWay}"
                                                 Command="{Binding Command, Mode=OneWay}"
                                                 Size="{Binding ItemSize, Source={x:Reference this}, Mode=OneWay}"
+                                                ItemPadding="{Binding ItemsPadding, Source={x:Reference this}, Mode=OneWay}" 
                                                 Clicked="ItemClicked"/>
                 </StackLayout>
             </DataTemplate>

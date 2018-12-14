@@ -134,16 +134,24 @@
                          x:Key="array">
                         <controls:FloatingActionMenuItem 
                         BackgroundColor="#B3ffffff"
-                        Color="CadetBlue"
-                        Label="Text"
+                        Color="Green"
+                        Label="Text 1"
                         Icon="Icon.png"/>
                         <controls:FloatingActionMenuItem  BackgroundColor="DarkGray"
-                               Color="LightPink"
-                               Label="Text 1"
+                               Color="Red"
+                               Label="Text 2"
                                Icon="Icon.png"/>
                         <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
-                               Color="CadetBlue"
-                               Label="Text" 
+                               Color="Yellow"
+                               Label="Text 3" 
+                               Icon="Icon.png"/>
+                        <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
+                               Color="Orange"
+                               Label="Text 4" 
+                               Icon="Icon.png"/>
+                        <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
+                               Color="Violet"
+                               Label="Text 4" 
                                Icon="Icon.png"/>
                     </x:Array>
                 </controls:FloatingActionMenu.Items>

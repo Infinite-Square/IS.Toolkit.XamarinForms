@@ -38,16 +38,10 @@
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\FloatingMenu\FloatingActionMenu.xaml.cs">
-      <DependentUpon>FloatingActionMenu.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   
   <ItemGroup>
     <EmbeddedResource Update="Controls\Expander\Expander.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenuItem.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\Picker\Picker.xaml">
@@ -55,9 +49,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenu.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SnackBar\SnackBar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
