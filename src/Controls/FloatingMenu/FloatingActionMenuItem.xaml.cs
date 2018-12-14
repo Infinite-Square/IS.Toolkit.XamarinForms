@@ -7,14 +7,14 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
+namespace IS.Toolkit.XamarinForms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenuItem : TemplatedView
     {
         public event EventHandler ButtonClicked;
 
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(FloatingActionMenuItem), default(Color));
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(FloatingActionMenuItem), Color.Accent);
         public Color Color
         {
             get { return (Color)GetValue(ColorProperty); }
@@ -36,13 +36,13 @@ namespace IS.Toolkit.XamarinForms.Controls.FloatingMenu
         }
 
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(FloatingActionMenuItem), default(ICommand));
-        public Type Command
+        public ICommand Command
         {
-            get { return (Type)GetValue(CommandProperty); }
+            get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
 
-        public static readonly BindableProperty LabelBackGroundColorProperty = BindableProperty.Create(nameof(LabelBackGroundColor), typeof(Color), typeof(Command), default(Color));
+        public static readonly BindableProperty LabelBackGroundColorProperty = BindableProperty.Create(nameof(LabelBackGroundColor), typeof(Color), typeof(Command), Color.Transparent);
         public Color LabelBackGroundColor
         {
             get { return (Color)GetValue(LabelBackGroundColorProperty); }
