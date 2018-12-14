@@ -12,11 +12,12 @@ namespace IS.Toolkit.XamarinForms.Controls
     public partial class FloatingActionMenu : Grid
     {
         private int _animationSpeed = 500;
+        private bool _canClose = true;
+        private bool _firstClose = false;
 
         public FloatingActionMenu()
         {
             InitializeComponent();
-            CloseAnimationOnFab();
         }
 
         #region Items
@@ -176,8 +177,18 @@ namespace IS.Toolkit.XamarinForms.Controls
                         ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i));
                     }
 
+                    _firstClose = true;
                     OpacityFilter.IsVisible = false;
                 }
+            }
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            if (!_firstClose)
+            {
+                CloseAnimationOnFab();
             }
         }
 
