@@ -154,7 +154,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
-        private void CloseAnimationOnFab()
+        private async void CloseAnimationOnFab()
         {
             if (IsRotateAnimationEnabled)
             {
@@ -163,9 +163,10 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             if (ItemsLayout != null)
             {
+                List<Task> tasks = new List<Task>();
                 if (ItemsLayout.ViewItems != null)
                 {
-                    OpacityFilter.FadeTo(0, 500);
+                    tasks.Add(OpacityFilter.FadeTo(0, 500));
                     int nAnimationCount = 0;
                     for (int i = ItemsLayout.ViewItems.Count - 1; i >= 0; i--)
                     {
@@ -174,10 +175,12 @@ namespace IS.Toolkit.XamarinForms.Controls
                             nAnimationCount++;
                         }
 
-                        ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i));
+                        tasks.Add(ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i)));
                     }
 
                     _firstClose = true;
+                    await Task.WhenAll(tasks.ToArray());
+                    ItemsLayout.IsVisible = false;
                     OpacityFilter.IsVisible = false;
                 }
             }
@@ -208,94 +211,6 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
-        private async void IsOpenChanged(bool isOpen)
-        {
-            if (isOpen && IsRotateAnimationEnabled)
-            {
-                FAB.RotateAnimation();
-            }
-            else if (!isOpen && IsRotateAnimationEnabled)
-            {
-                FAB.RestoreRotationAnimation();
-            }
-
-            if (ItemsLayout != null)
-            {
-                if (ItemsLayout.ViewItems != null)
-                {
-                    if (!isOpen)
-                    {
-                        Task animations = Task.Run(() =>
-                        {
-                            OpacityFilter.FadeTo(0, 500);
-                            int nAnimationCount = 0;
-                            for (int i = ItemsLayout.ViewItems.Count - 1; i >= 0; i--)
-                            {
-                                for (int j = ItemsLayout.ViewItems.Count - i; j > 0; j--)
-                                {
-                                    nAnimationCount++;
-                                }
-
-                                Debug.WriteLine($"{(ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i)}");
-                                ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i));
-                            }
-                        }).ContinueWith(
-                            (t) =>
-                            OpacityFilter.IsVisible = false);
-                        Device.BeginInvokeOnMainThread(async () =>
-                                                        await animations);
-                        OpacityFilter.IsVisible = false;
-                    }
-                    else
-                    {
-                        await OpacityFilter.FadeTo(0.5, 500);
-                        OpacityFilter.IsVisible = true;
-                        ItemsLayout.IsVisible = true;
-                        foreach (var item in ItemsLayout.ViewItems)
-                        {
-                            item.TranslateTo(0, 0);
-                        }
-                    }
-                }
-            }
-
-            OpacityFilter.InputTransparent = !isOpen;
-
-            ////if (Items != null && _originalContentHeight != default)
-            ////{
-            ////    var animate = new Animation(
-            ////        callback: d => ItemsLayout.HeightRequest = d,
-            ////        start: isOpen ? 0 : _originalContentHeight,
-            ////        end: isOpen ? _originalContentHeight : 0);
-            ////    animate.Commit(
-            ////        owner: ItemsLayout,
-            ////        name: "ExpanderAnimation",
-            ////        length: 150u);
-
-            ////    var animate2 = new Animation(
-            ////        callback: d => ItemsLayout.Opacity = d,
-            ////        start: isOpen ? 0 : 1,
-            ////        end: isOpen ? 1 : 0);
-            ////    animate2.Commit(
-            ////        owner: ItemsLayout,
-            ////        name: "ExpanderFadeAnimation",
-            ////        length: 150u);
-
-            ////    var animate3 = new Animation(
-            ////        callback: d => OpacityFilter.Opacity = d,
-            ////        start: isOpen ? 0 : 1,
-            ////        end: isOpen ? 1 : 0);
-            ////    animate3.Commit(
-            ////        owner: OpacityFilter,
-            ////        name: "ExpanderOpacityFilterAnimation",
-            ////        length: 150u,
-            ////        finished: (arg, value) =>
-            ////        {
-            ////            OpacityFilter.InputTransparent = !isOpen;
-            ////        });
-            ////}
-        }
-
         public bool IsOpen
         {
             get
@@ -315,21 +230,6 @@ namespace IS.Toolkit.XamarinForms.Controls
             returnType: typeof(double),
             declaringType: typeof(FloatingActionMenu),
             defaultValue: 70.0);
-
-        ////private static new void SizeChanged(BindableObject bindable, object oldValue, object newValue)
-        ////{
-        ////    if (bindable != null && newValue != null)
-        ////    {
-        ////        var control = (FloatingActionMenu)bindable;
-        ////        control._originalContentHeight = default;
-        ////        control.ItemSize = 2 * control.Size / 3;
-        ////        control.ItemsMargin = new Thickness(0, 0, (control.Size / 2) - (control.ItemSize / 2), 0);
-        ////        if (control.Items != default)
-        ////        {
-        ////            control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
-        ////        }
-        ////    }
-        ////}
 
         public double Size
         {
@@ -383,20 +283,6 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             IsOpen = !IsOpen;
         }
-
-        ////private void InitOriginalContentHeight(double size)
-        ////{
-        ////    _originalContentHeight = size;
-
-        ////    if (!IsOpen)
-        ////    {
-        ////        ItemsLayout.HeightRequest = 0;
-        ////        OpacityFilter.HeightRequest = 0;
-        ////        OpacityFilter.Opacity = 0;
-        ////        OpacityFilter.InputTransparent = true;
-        ////        ItemsLayout.Opacity = 0;
-        ////    }
-        ////}
 
         private void OpacityFilter_Tapped(object sender, EventArgs e)
         {
