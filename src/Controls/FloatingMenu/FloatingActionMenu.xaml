@@ -37,7 +37,7 @@
     </BoxView>
 
     <ctrls:ItemsControl x:Name="ItemsLayout"
-                        Opacity="0.5"
+                        Margin="0,0,0,5"
                         Grid.Column="1"
                         InputTransparent="True" 
                         CascadeInputTransparent="False"
@@ -48,7 +48,7 @@
             <DataTemplate>
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="End"
-                             Margin="0">
+                             Margin="5">
                     <ContentView BackgroundColor="{Binding BackgroundColor, Mode=OneWay}"
                                  VerticalOptions="Center"
                                  Padding="4,2">
@@ -68,11 +68,11 @@
 
     <Grid Grid.Row="1" BackgroundColor="Pink"/>
     <ctrls:FloatingActionButton Grid.Row="1"
-                        Grid.Column="1"
+                                Grid.Column="1"
                                 x:Name="FAB"
+                                Margin="0,0,0,10"
                                 VerticalOptions="End"
                                 HorizontalOptions="End"
-                                Margin="{Binding MainButtonToItemMargin, Source={x:Reference this}}"
                                 Size="{Binding Size, Source={x:Reference this}}"
                                 Color="{Binding Color, Source={x:Reference this}}"
                                 Image="{Binding Image, Source={x:Reference this}}"

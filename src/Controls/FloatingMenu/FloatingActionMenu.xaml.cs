@@ -9,6 +9,8 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenu : Grid
     {
+        private int _animationSpeed = 500;
+
         public FloatingActionMenu()
         {
             InitializeComponent();
@@ -148,6 +150,24 @@ namespace IS.Toolkit.XamarinForms.Controls
             else if (!isOpen && IsRotateAnimationEnabled)
             {
                 FAB.RestoreRotationAnimation();
+            }
+
+            if (Items != null)
+            {
+                if (isOpen)
+                {
+                    foreach (var button in Items)
+                    {
+                        //////button.TranslateTo(50, _animationSpeed);
+                    }
+                }
+                else
+                {
+                    foreach (var button in Items)
+                    {
+                        ////button.TranslateTo(0, _animationSpeed);
+                    }
+                }
             }
 
             ////if (Items != null && _originalContentHeight != default)
