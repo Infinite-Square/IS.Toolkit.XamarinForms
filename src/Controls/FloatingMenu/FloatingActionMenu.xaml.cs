@@ -9,7 +9,9 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenu : Grid
     {
-        private bool _firstClose;
+        #region Fields
+        private bool _isOpening;
+        #endregion
 
         public FloatingActionMenu()
         {
@@ -166,6 +168,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         private async void CloseAnimationOnFab()
         {
+            _isOpening = false;
             if (IsRotateAnimationEnabled)
             {
                 FAB.RestoreRotationAnimation();
@@ -173,48 +176,65 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             if (ItemsLayout != null)
             {
+                const int animationDuration = 100;
+                ItemsLayout.IsVisible = true;
                 var tasks = new List<Task>();
                 if (ItemsLayout.ViewItems != null)
                 {
-                    tasks.Add(OpacityFilter.FadeTo(0, 500));
-                    tasks.Add(ItemsLayout.FadeTo(0, 500));
-
-                    for (int i = ItemsLayout.ViewItems.Count - 1; i >= 0; i--)
+                    tasks.Add(OpacityFilter.FadeTo(0, animationDuration));
+                    for (int index = 0; index < ItemsLayout.ViewItems.Count; index++)
                     {
-                        tasks.Add(ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i), 100, Easing.BounceOut));
+                        var currentItem = ItemsLayout.ViewItems[index];
+
+                        var position = CalculateItemClosedPosition(currentItem, index);
+                        tasks.Add(currentItem.TranslateTo(0, position, animationDuration, easing: Easing.BounceIn));
+                        tasks.Add(currentItem.FadeTo(0, animationDuration, easing: Easing.BounceIn));
                     }
 
-                    _firstClose = true;
                     await Task.WhenAll(tasks.ToArray());
-                    ItemsLayout.IsVisible = false;
-                    OpacityFilter.IsVisible = false;
+
+                    // if user didn't reopen the FAM during animation
+                    if (_isOpening == false)
+                    {
+                        ItemsLayout.IsVisible = false;
+                        OpacityFilter.IsVisible = false;
+                    }
                 }
             }
         }
 
-        protected override void OnSizeAllocated(double width, double height)
+        private double CalculateItemClosedPosition(View item, int index)
         {
-            base.OnSizeAllocated(width, height);
-            if (!_firstClose)
-            {
-                CloseAnimationOnFab();
-            }
+            return 2 * (item.Height + 10);
         }
 
         private void OpenFABAnimation()
         {
+            const int animationDuration = 100;
+            const int animationFadeDuration = 500;
+            _isOpening = true;
+            for (int index = 0; index < ItemsLayout.ViewItems.Count; index++)
+            {
+                var currentItem = ItemsLayout.ViewItems[index];
+
+                var position = CalculateItemClosedPosition(currentItem, index);
+                currentItem.TranslationY = position;
+                currentItem.Opacity = 0;
+            }
+
+            ItemsLayout.IsVisible = true;
+            OpacityFilter.IsVisible = true;
+            OpacityFilter.Opacity = 0;
+            OpacityFilter.FadeTo(0.5, animationFadeDuration);
             if (IsRotateAnimationEnabled)
             {
                 FAB.RotateAnimation();
             }
 
-            OpacityFilter.FadeTo(0.5, 500);
-            ItemsLayout.FadeTo(1, 500);
-            OpacityFilter.IsVisible = true;
-            ItemsLayout.IsVisible = true;
             foreach (var item in ItemsLayout.ViewItems)
             {
-                item.TranslateTo(0, 0);
+                item.TranslateTo(0, 0, animationDuration, easing: Easing.BounceIn);
+                item.FadeTo(1, animationDuration, easing: Easing.BounceIn);
             }
         }
 

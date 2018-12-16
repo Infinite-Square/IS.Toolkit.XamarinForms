@@ -44,7 +44,8 @@
                         CascadeInputTransparent="False"
                         HorizontalOptions="End"
                         VerticalOptions="End"
-                        ItemsSource="{Binding Items, Source={x:Reference this}}">
+                        ItemsSource="{Binding Items, Source={x:Reference this}}"
+                        IsVisible="False">
         <ctrls:ItemsControl.ItemTemplate>
             <DataTemplate>
                 <StackLayout Orientation="Horizontal"
