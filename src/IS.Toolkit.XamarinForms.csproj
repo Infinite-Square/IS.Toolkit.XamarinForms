@@ -50,6 +50,9 @@
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Controls\SnackBar\SnackBar.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   
   <ItemGroup>

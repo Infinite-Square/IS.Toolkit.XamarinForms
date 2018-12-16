@@ -3,32 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
-    <Grid>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Margin="10">
+                <controls:TextBox Placeholder="Name"/>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackLayout Margin="10">            
-            <controls:TextBox Placeholder="Name"/>
-
-            <controls:TextBox Placeholder="Error" 
+                <controls:TextBox Placeholder="Error" 
                             ErrorText="An Error occured"
                             HasError="True"/>
 
-            <controls:Expander HeaderText="HeaderText"
+                <controls:Expander HeaderText="HeaderText"
                             HeaderTextColor="Black"
                             BackgroundColor="WhiteSmoke"
                             LeftIcon="Icon.png"
                             CornerRadius="10"
                             IsOpen="False"
                             Animated="True">
-                <controls:Expander.ExtendedContent>
-                    <Label Text="CONTENT"
+                    <controls:Expander.ExtendedContent>
+                        <Label Text="CONTENT"
                         FontAttributes="Bold" />
-                </controls:Expander.ExtendedContent>
-            </controls:Expander>
+                    </controls:Expander.ExtendedContent>
+                </controls:Expander>
 
-            <controls:SegmentedControl
+                <controls:SegmentedControl
                 x:Name="segmentedControl" 
                 SelectedItem="Item 1"
                 CornerRadius="10"
@@ -38,39 +39,39 @@
                 SelectedItemTextColor="White"
                 BorderWidth="3"
                 BorderColor="#e6e0e0">
-                <controls:SegmentedControl.Items>
-                    <x:Array Type="{x:Type x:String}" x:Key="array">
-                        <x:String>Item 1</x:String>
-                        <x:String>Item 2</x:String>
-                        <x:String>Item 3</x:String>
-                    </x:Array>
-                </controls:SegmentedControl.Items>
-            </controls:SegmentedControl>
+                    <controls:SegmentedControl.Items>
+                        <x:Array Type="{x:Type x:String}" x:Key="array">
+                            <x:String>Item 1</x:String>
+                            <x:String>Item 2</x:String>
+                            <x:String>Item 3</x:String>
+                        </x:Array>
+                    </controls:SegmentedControl.Items>
+                </controls:SegmentedControl>
 
-            <controls:ItemsControl x:Name="_itemsControl">
-                <controls:ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Text}"/>
-                    </DataTemplate>
-                </controls:ItemsControl.ItemTemplate>
-            </controls:ItemsControl>
+                <controls:ItemsControl x:Name="_itemsControl">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Text}"/>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
 
-            <controls:ItemsControl x:Name="_itemsWrappedControl">
-                <controls:ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Text}"/>
-                    </DataTemplate>
-                </controls:ItemsControl.ItemTemplate>
-                <controls:ItemsControl.ItemsLayout>
-                    <DataTemplate>
-                        <controls:WrapLayout 
+                <controls:ItemsControl x:Name="_itemsWrappedControl">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Text}"/>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                    <controls:ItemsControl.ItemsLayout>
+                        <DataTemplate>
+                            <controls:WrapLayout 
                                 Spacing="10"
                                 UniformColumns="3" />
-                    </DataTemplate>
-                </controls:ItemsControl.ItemsLayout>
-            </controls:ItemsControl>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemsLayout>
+                </controls:ItemsControl>
 
-            <controls:Picker x:Name="_picker"
+                <controls:Picker x:Name="_picker"
                             SelectedItemChanged="Picker_SelectedItemChanged"
                             Placeholder="Select a value..."
                             Title="Picker : "
@@ -79,17 +80,17 @@
                             BorderColor="Red"
                             Type="TimePicker"/>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Checkbox"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Checkbox"
                     VerticalOptions="Center"
                     Grid.Column="0"/>
-            </Grid>
+                </Grid>
 
-            <controls:Picker x:Name="_btnPicker"
+                <controls:Picker x:Name="_btnPicker"
                             Placeholder="Select a value..."
                             Title="Picker button : "
                             IsClearable="True"
@@ -97,9 +98,27 @@
                             BorderColor="Red"
                             Type="Button" />
 
-        </StackLayout>
+            </StackLayout>
 
-        <controls:FloatingActionMenu
+            <Grid Grid.Row="1" Margin="0,0,0,100">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button x:Name="Obutton" 
+                    Text="OpenButton"
+                    Clicked="Button_Clicked"/>
+
+                <controls:SnackBar x:Name="SnackB" 
+                               HeightRequest="50" 
+                               VerticalOptions="End"
+                               FontSize="12" 
+                               BackgroundColor="#323232"
+                               TextColor="White" 
+                               ButtonTextColor="Orange"
+                               CloseButtonText="ANNULER"/>
+            </Grid>
+
+            <controls:FloatingActionMenu
             x:Name="fab"
             Size="60"
             ItemSize="50"
@@ -107,34 +126,37 @@
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
             IsRotateAnimationEnabled="True"
+            Grid.RowSpan="2"
             IsVisible="True">
-            <controls:FloatingActionMenu.Items>
-                <x:Array
+                <controls:FloatingActionMenu.Items>
+                    <x:Array
                     Type="{x:Type controls:FloatingActionMenuItem}" 
                         x:Key="array">
-                    <controls:FloatingActionMenuItem 
+                        <controls:FloatingActionMenuItem 
                     BackgroundColor="#B3ffffff"
                     Color="Green"
                     Label="Text 1"
                     Icon="Icon.png"/>
-                    <controls:FloatingActionMenuItem  BackgroundColor="DarkGray"
+                        <controls:FloatingActionMenuItem  BackgroundColor="DarkGray"
                             Color="Red"
                             Label="Text 2"
                             Icon="Icon.png"/>
-                    <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
+                        <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
                             Color="Yellow"
                             Label="Text 3" 
                             Icon="Icon.png"/>
-                    <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
+                        <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
                             Color="Orange"
                             Label="Text 4" 
                             Icon="Icon.png"/>
-                    <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
+                        <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
                             Color="Violet"
                             Label="Text 4" 
                             Icon="Icon.png"/>
-                </x:Array>
-            </controls:FloatingActionMenu.Items>
-        </controls:FloatingActionMenu>
-    </Grid>
+                    </x:Array>
+                </controls:FloatingActionMenu.Items>
+            </controls:FloatingActionMenu>
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

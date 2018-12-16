@@ -61,6 +61,12 @@ namespace Sample
         {
             var newValue = e as string;
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            SnackB.Message = "1 Conversation archivee";
+            SnackB.IsOpen = true;
+        }
     }
 
     public class Data
