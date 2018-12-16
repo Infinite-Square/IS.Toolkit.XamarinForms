@@ -67,7 +67,6 @@
         </ctrls:ItemsControl.ItemTemplate>
     </ctrls:ItemsControl>
 
-    <Grid Grid.Row="1" BackgroundColor="Pink"/>
     <ctrls:FloatingActionButton Grid.Row="1"
                                 Grid.Column="1"
                                 x:Name="FAB"
