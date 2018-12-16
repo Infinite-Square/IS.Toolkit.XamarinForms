@@ -37,10 +37,10 @@ namespace Sample
             // _picker.ItemsSource = list;
             // _picker.SelectedItem = list[2];
             // _picker.SelectedItem = DateTime.Now.AddDays(-15);
-            foreach (var item in fab.Items)
-            {
-                item.Command = ItemSelectedCommand;
-            }
+            ////foreach (var item in fab.Items)
+            ////{
+            ////    item.Command = ItemSelectedCommand;
+            ////}
 
             _btnPicker.SelectedItem = "Salut";
             _btnPicker.Command = new Command(() =>
@@ -63,12 +63,6 @@ namespace Sample
         private void Picker_SelectedItemChanged(object sender, object e)
         {
             var newValue = e as string;
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            SnackB.Message = "1 Conversation archivee";
-            SnackB.IsOpen = true;
         }
     }
 
