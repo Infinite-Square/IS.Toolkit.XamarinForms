@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,9 +9,7 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenu : Grid
     {
-        private int _animationSpeed = 500;
-        private bool _canClose = true;
-        private bool _firstClose = false;
+        private bool _firstClose;
 
         public FloatingActionMenu()
         {
@@ -80,12 +76,14 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        #region IsRotateAnimationEnabled
         public static readonly BindableProperty IsRotateAnimationEnabledProperty = BindableProperty.Create(nameof(IsRotateAnimationEnabled), typeof(bool), typeof(FloatingActionButton), default(bool));
         public bool IsRotateAnimationEnabled
         {
             get { return (bool)GetValue(IsRotateAnimationEnabledProperty); }
             set { SetValue(IsRotateAnimationEnabledProperty, value); }
         }
+        #endregion
 
         #region FilterBackgroundColor
         public static readonly BindableProperty FilterBackgroundColorProperty = BindableProperty.Create(
@@ -135,6 +133,18 @@ namespace IS.Toolkit.XamarinForms.Controls
             defaultValue: false,
             propertyChanged: IsOpenPropertyChanged);
 
+        public bool IsOpen
+        {
+            get
+            {
+                return (bool)GetValue(IsOpenProperty);
+            }
+            set
+            {
+                SetValue(IsOpenProperty, value);
+            }
+        }
+
         private static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (bindable != null && newValue != null)
@@ -163,19 +173,15 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             if (ItemsLayout != null)
             {
-                List<Task> tasks = new List<Task>();
+                var tasks = new List<Task>();
                 if (ItemsLayout.ViewItems != null)
                 {
                     tasks.Add(OpacityFilter.FadeTo(0, 500));
-                    int nAnimationCount = 0;
+                    tasks.Add(ItemsLayout.FadeTo(0, 500));
+
                     for (int i = ItemsLayout.ViewItems.Count - 1; i >= 0; i--)
                     {
-                        for (int j = ItemsLayout.ViewItems.Count - i; j > 0; j--)
-                        {
-                            nAnimationCount++;
-                        }
-
-                        tasks.Add(ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i)));
+                        tasks.Add(ItemsLayout.ViewItems[i].TranslateTo(0, (ItemsLayout.ViewItems[i].Height + 10) * (ItemsLayout.ViewItems.Count - i), 100, Easing.BounceOut));
                     }
 
                     _firstClose = true;
@@ -203,6 +209,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
 
             OpacityFilter.FadeTo(0.5, 500);
+            ItemsLayout.FadeTo(1, 500);
             OpacityFilter.IsVisible = true;
             ItemsLayout.IsVisible = true;
             foreach (var item in ItemsLayout.ViewItems)
@@ -211,17 +218,6 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
-        public bool IsOpen
-        {
-            get
-            {
-                return (bool)GetValue(IsOpenProperty);
-            }
-            set
-            {
-                SetValue(IsOpenProperty, value);
-            }
-        }
         #endregion
 
         #region Size
@@ -229,7 +225,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Size),
             returnType: typeof(double),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: 70.0);
+            defaultValue: 70.0d);
 
         public double Size
         {
@@ -242,41 +238,25 @@ namespace IS.Toolkit.XamarinForms.Controls
                 SetValue(SizeProperty, value);
             }
         }
-
-        public double ItemSize { get; set; } = 50;
-        public Thickness ItemsMargin { get; set; } = new Thickness(0, 0, 10, 0);
         #endregion
 
-        #region ItemsPadding
-        public static readonly BindableProperty ItemsPaddingProperty = BindableProperty.Create(
-            propertyName: nameof(ItemsPadding),
-            returnType: typeof(Thickness),
-            declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(Thickness));
-
-        public Thickness ItemsPadding
+        #region ItemSize
+        public static readonly BindableProperty ItemSizeProperty = BindableProperty.Create(
+           propertyName: nameof(ItemSize),
+           returnType: typeof(double),
+           declaringType: typeof(FloatingActionMenu),
+           defaultValue: 50d);
+        public double ItemSize
         {
             get
             {
-                return (Thickness)GetValue(ItemsPaddingProperty);
+                return (double)GetValue(ItemSizeProperty);
             }
             set
             {
-                SetValue(ItemsPaddingProperty, value);
+                SetValue(ItemSizeProperty, value);
             }
         }
-        #endregion
-
-        #region MainButtonToItemMargin
-
-        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, 0, 0, 0));
-
-        public Thickness MainButtonToItemMargin
-        {
-            get { return (Thickness)GetValue(MainButtonToItemMarginProperty); }
-            set { SetValue(MainButtonToItemMarginProperty, value); }
-        }
-
         #endregion
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)

@@ -75,9 +75,5 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Controls\CheckBox\" />
-  </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>
