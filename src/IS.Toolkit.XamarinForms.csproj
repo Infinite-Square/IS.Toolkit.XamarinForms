@@ -11,8 +11,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\Expander\dropdown.png" />
     <EmbeddedResource Include="Controls\Picker\close.png" />
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_empty.png" />
-    <EmbeddedResource Include="Controls\Checkbox\checkbox_fill.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,9 +38,6 @@
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\FloatingMenu\FloatingActionMenu.xaml.cs">
-      <DependentUpon>FloatingActionMenu.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   
   <ItemGroup>
@@ -54,9 +49,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenu.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   
