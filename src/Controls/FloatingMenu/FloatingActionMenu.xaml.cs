@@ -176,7 +176,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
             if (ItemsLayout != null)
             {
-                const int animationDuration = 100;
+                const int animationDuration = 250;
                 ItemsLayout.IsVisible = true;
                 var tasks = new List<Task>();
                 if (ItemsLayout.ViewItems != null)

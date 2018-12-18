@@ -53,7 +53,8 @@
                              Margin="0,5">
                     <ContentView BackgroundColor="{Binding BackgroundColor, Mode=OneWay}"
                                  VerticalOptions="Center">
-                        <Label Text="{Binding Label, Mode=OneWay}"
+                        <Label Text="{Binding Path=Label, Mode=OneWay}"
+                               Margin="10,2,10,2"
                                TextColor="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"
                                VerticalOptions="Center" />
                     </ContentView>
