@@ -107,6 +107,7 @@
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
             IsRotateAnimationEnabled="True"
+            RotationAngle="360"
             IsVisible="True">
             <controls:FloatingActionMenu.Items>
                 <x:Array

@@ -78,6 +78,14 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        public static readonly BindableProperty RotationAngleProperty =
+            BindableProperty.Create(nameof(RotationAngle), typeof(float), typeof(FloatingActionButton), 45.0f);
+        public float RotationAngle
+        {
+            get => (float)GetValue(RotationAngleProperty);
+            set => SetValue(RotationAngleProperty, value);
+        }
+
         #region IsRotateAnimationEnabled
         public static readonly BindableProperty IsRotateAnimationEnabledProperty = BindableProperty.Create(nameof(IsRotateAnimationEnabled), typeof(bool), typeof(FloatingActionButton), default(bool));
         public bool IsRotateAnimationEnabled

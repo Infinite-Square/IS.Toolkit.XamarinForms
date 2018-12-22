@@ -72,6 +72,7 @@
                                 x:Name="FAB"
                                 Margin="0,0,0,10"
                                 VerticalOptions="End"
+                                RotationAngle="{Binding RotationAngle, Source={x:Reference this}}"
                                 HorizontalOptions="End"
                                 Size="{Binding Size, Source={x:Reference this}}"
                                 Color="{Binding Color, Source={x:Reference this}}"

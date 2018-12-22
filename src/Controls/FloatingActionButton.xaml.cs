@@ -15,6 +15,8 @@ namespace IS.Toolkit.XamarinForms.Controls
              InitializeComponent();
         }
 
+        public static readonly BindableProperty RotationAngleProperty =
+            BindableProperty.Create(nameof(RotationAngle), typeof(float), typeof(FloatingActionButton), 45.0f);
         public static readonly BindableProperty ColorProperty =
            BindableProperty.Create(nameof(Color), typeof(Color), typeof(FloatingActionButton), Color.Accent);
         public static readonly BindableProperty ImageProperty =
@@ -27,6 +29,12 @@ namespace IS.Toolkit.XamarinForms.Controls
             BindableProperty.Create(nameof(Size), typeof(double), typeof(FloatingActionButton), 50.0);
         public static readonly BindableProperty ItemPaddingProperty =
             BindableProperty.Create(nameof(ItemPadding), typeof(Thickness), typeof(FloatingActionButton), default(Thickness));
+
+        public float RotationAngle
+        {
+            get => (float)GetValue(RotationAngleProperty);
+            set => SetValue(RotationAngleProperty, value);
+        }
 
         public Color Color
         {
@@ -115,7 +123,7 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public async void RotateAnimation()
         {
-            await this.RotateTo(45, 90);
+            await this.RotateTo(RotationAngle, 90);
         }
 
         public async void RestoreRotationAnimation()
