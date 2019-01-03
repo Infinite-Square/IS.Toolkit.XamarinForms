@@ -21,13 +21,12 @@
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition Width="20"/>
+        <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
 
     <BoxView BackgroundColor="{Binding FilterBackgroundColor, Source={x:Reference this}}"
              Grid.RowSpan="2"
-             Grid.ColumnSpan="3"
+             Grid.ColumnSpan="2"
              IsVisible="False"
              InputTransparent="True"
              x:Name="OpacityFilter">
@@ -38,7 +37,6 @@
     </BoxView>
 
     <ctrls:ItemsControl x:Name="ItemsLayout"
-                        Margin="0,5,5,5"
                         Grid.Column="1"
                         InputTransparent="True" 
                         CascadeInputTransparent="False"
@@ -71,7 +69,6 @@
     <ctrls:FloatingActionButton Grid.Row="1"
                                 Grid.Column="1"
                                 x:Name="FAB"
-                                Margin="0,0,0,10"
                                 VerticalOptions="End"
                                 HorizontalOptions="End"
                                 Size="{Binding Size, Source={x:Reference this}}"

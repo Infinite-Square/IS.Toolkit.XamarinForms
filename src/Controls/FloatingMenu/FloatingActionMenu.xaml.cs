@@ -112,7 +112,19 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Padding),
             returnType: typeof(Thickness),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(Thickness));
+            defaultValue: default(Thickness),
+            propertyChanged: OnPaddingPropertyChanged);
+
+        private static void OnPaddingPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var padding = (Thickness)newValue;
+            var control = bindable as FloatingActionMenu;
+            if (control != null)
+            {
+                control.FAB.Padding = new Thickness(padding.Left, 0, padding.Right, padding.Bottom);
+                control.ItemsLayout.Padding = new Thickness(padding.Left, padding.Top, padding.Right, 0);
+            }
+        }
 
         public new Thickness Padding
         {
