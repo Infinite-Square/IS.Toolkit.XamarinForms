@@ -120,6 +120,7 @@
 
             <controls:FloatingActionMenu
             x:Name="fab"
+                Padding="20"
             Size="60"
             ItemSize="50"
             IsOpen="False"
@@ -157,6 +158,14 @@
                 </controls:FloatingActionMenu.Items>
             </controls:FloatingActionMenu>
 
+            <controls:FloatingActionButton VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Size="60"
+                                           Margin="20"
+                                           Color="Red"
+                                           Image="Icon.png"
+                                           Grid.RowSpan="2"
+                                           IsVisible="False" />
         </Grid>
     </ScrollView>
 </ContentPage>
