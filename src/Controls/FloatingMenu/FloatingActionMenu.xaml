@@ -60,6 +60,7 @@
                                                 Image="{Binding Icon, Mode=OneWay}"
                                                 Command="{Binding Command, Mode=OneWay}"
                                                 Size="{Binding ItemSize, Source={x:Reference this}, Mode=OneWay}"
+                                                ItemPadding="{Binding IconPadding, Mode=OneWay}}"
                                                 Clicked="ItemClicked"/>
                 </StackLayout>
             </DataTemplate>

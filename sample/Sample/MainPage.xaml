@@ -130,30 +130,30 @@
             Grid.RowSpan="2"
             IsVisible="True">
                 <controls:FloatingActionMenu.Items>
-                    <x:Array
-                    Type="{x:Type controls:FloatingActionMenuItem}" 
-                        x:Key="array">
-                        <controls:FloatingActionMenuItem 
-                    BackgroundColor="#B3ffffff"
-                    Color="Green"
-                    Label="Text 1"
-                    Icon="Icon.png"/>
+                    <x:Array Type="{x:Type controls:FloatingActionMenuItem}"
+                             x:Key="array">
+                        <controls:FloatingActionMenuItem BackgroundColor="#B3ffffff"
+                                                         Color="Green"
+                                                         Label="Text 1"
+                                                         Icon="Icon.png" />
                         <controls:FloatingActionMenuItem  BackgroundColor="DarkGray"
-                            Color="Red"
-                            Label="Text 2"
-                            Icon="Icon.png"/>
+                                                          Color="Red"
+                                                          Label="Text 2"
+                                                          Icon="Icon.png"
+                                                          IconPadding="10" />
                         <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
-                            Color="Yellow"
-                            Label="Text 3" 
-                            Icon="Icon.png"/>
+                                                          Color="Yellow"
+                                                          Label="Text 3"
+                                                          Icon="Icon.png"
+                                                          IconPadding="2,5" />
                         <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
-                            Color="Orange"
-                            Label="Text 4" 
-                            Icon="Icon.png"/>
+                                                          Color="Orange"
+                                                          Label="Text 4"
+                                                          Icon="Icon.png" />
                         <controls:FloatingActionMenuItem  BackgroundColor="#B3ffffff"
-                            Color="Violet"
-                            Label="Text 4" 
-                            Icon="Icon.png"/>
+                                                          Color="Violet"
+                                                          Label="Text 4"
+                                                          Icon="Icon.png" />
                     </x:Array>
                 </controls:FloatingActionMenu.Items>
             </controls:FloatingActionMenu>
