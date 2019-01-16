@@ -85,6 +85,26 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        #region IconPadding
+        public static readonly BindableProperty IconPaddingProperty = BindableProperty.Create(
+            propertyName: nameof(IconPadding),
+            returnType: typeof(Thickness),
+            declaringType: typeof(FloatingActionMenuItem),
+            defaultValue: default(Thickness));
+
+        public Thickness IconPadding
+        {
+            get
+            {
+                return (Thickness)GetValue(IconPaddingProperty);
+            }
+            set
+            {
+                SetValue(IconPaddingProperty, value);
+            }
+        }
+        #endregion
+
         #region Command
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(
             propertyName: nameof(Command),

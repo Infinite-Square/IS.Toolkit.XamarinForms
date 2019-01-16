@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
-    <Version>1.0.0-alpha021</Version>
+    <Version>1.0.0-alpha023</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <Authors>Infinite Square</Authors>
     <Description>
