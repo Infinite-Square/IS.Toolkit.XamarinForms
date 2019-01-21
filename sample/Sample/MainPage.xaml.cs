@@ -39,7 +39,7 @@ namespace Sample
                 item.Command = ItemSelectedCommand;
             }
 
-            _btnPicker.SelectedItem = "Salut";
+            _btnPicker.SelectedItem = "SalutSalutSalutSalutSalutSalutSalutSalutSalut SalutSalutSalutSalut";
             _btnPicker.Command = new Command(() =>
             {
                 DisplayAlert("Title", "Do whatever you want", "Ok");
