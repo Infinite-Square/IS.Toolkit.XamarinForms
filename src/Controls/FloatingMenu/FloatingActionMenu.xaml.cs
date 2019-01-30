@@ -225,28 +225,32 @@ namespace IS.Toolkit.XamarinForms.Controls
             const int animationDuration = 100;
             const int animationFadeDuration = 500;
             _isOpening = true;
-            for (int index = 0; index < ItemsLayout.ViewItems.Count; index++)
-            {
-                var currentItem = ItemsLayout.ViewItems[index];
 
-                var position = CalculateItemClosedPosition(currentItem, index);
-                currentItem.TranslationY = position;
-                currentItem.Opacity = 0;
-            }
-
-            ItemsLayout.IsVisible = true;
-            OpacityFilter.IsVisible = true;
-            OpacityFilter.Opacity = 0;
-            OpacityFilter.FadeTo(0.5, animationFadeDuration);
-            if (IsRotateAnimationEnabled)
+            if (ItemsLayout != null)
             {
-                FAB.RotateAnimation();
-            }
+                for (int index = 0; index < ItemsLayout.ViewItems.Count; index++)
+                {
+                    var currentItem = ItemsLayout.ViewItems[index];
 
-            foreach (var item in ItemsLayout.ViewItems)
-            {
-                item.TranslateTo(0, 0, animationDuration, easing: Easing.BounceIn);
-                item.FadeTo(1, animationDuration, easing: Easing.BounceIn);
+                    var position = CalculateItemClosedPosition(currentItem, index);
+                    currentItem.TranslationY = position;
+                    currentItem.Opacity = 0;
+                }
+
+                ItemsLayout.IsVisible = true;
+                OpacityFilter.IsVisible = true;
+                OpacityFilter.Opacity = 0;
+                OpacityFilter.FadeTo(0.5, animationFadeDuration);
+                if (IsRotateAnimationEnabled)
+                {
+                    FAB.RotateAnimation();
+                }
+
+                foreach (var item in ItemsLayout.ViewItems)
+                {
+                    item.TranslateTo(0, 0, animationDuration, easing: Easing.BounceIn);
+                    item.FadeTo(1, animationDuration, easing: Easing.BounceIn);
+                }
             }
         }
 
