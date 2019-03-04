@@ -44,6 +44,9 @@
   </ItemGroup>
   
   <ItemGroup>
+    <EmbeddedResource Update="Controls\EditLabel.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\Expander\Expander.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
