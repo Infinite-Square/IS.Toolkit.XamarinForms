@@ -281,6 +281,10 @@ namespace IS.Toolkit.XamarinForms.Controls
             control.OnPropertyChanged(nameof(control.SelectedText));
             control.OnPropertyChanged(nameof(control.ShowPlaceholder));
             control.RaiseSelectedItemChanged(control.SelectedItem);
+            if (control.IsClearableAndHasValue)
+            {
+                control.pickerFrame.Padding = new Thickness(10, 10, 60, 10);
+            }
         }
         #endregion
 

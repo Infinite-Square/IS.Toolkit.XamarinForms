@@ -26,16 +26,18 @@
                    IsVisible="{Binding HasTitle, Source={x:Reference this}}" />
 
             <Frame HasShadow="False"
-                   Padding="10"
+                   Padding="10,10,40,10"
                    BorderColor="{Binding BorderColor, Source={x:Reference this}}"
                    CornerRadius="{Binding CornerRadius, Source={x:Reference this}}"
                    BackgroundColor="{Binding BackgroundColor, Source={x:Reference this}}"
                    Grid.Row="1"
                    Grid.Column="0"
-                   Grid.ColumnSpan="3">
+                   Grid.ColumnSpan="3"
+                   x:Name="pickerFrame">
                 <Grid x:Name="content">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0"
