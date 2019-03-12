@@ -30,29 +30,17 @@ namespace Sample.UWP.Renderers
 
                     checkBox.IsChecked = Element.IsChecked;
                     checkBox.Checked += CheckBox_Checked;
-                    checkBox.Unchecked += CheckBox_Unchecked;
-                    ////_contentText.FontSize = Element.FontSize;
-                    ////_contentText.Text = Element.Text;
-                    ////UpdateTextColor();
+                    checkBox.Unchecked += CheckBox_Checked;
                     checkBox.Content = _contentText;
                     SetNativeControl(checkBox);
-                    ////UpdateAccentColor(checkBox);
                 }
             }
-        }
-
-        private void CheckBox_Unchecked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Element.IsChecked = (bool)Control.IsChecked;
-            Element.InvokeCheckChanged((bool)Control.IsChecked);
-            ////Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Element.IsChecked = (bool)Control.IsChecked;
             Element.InvokeCheckChanged((bool)Control.IsChecked);
-            ////Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
