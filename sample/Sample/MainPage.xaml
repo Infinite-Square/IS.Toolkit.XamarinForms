@@ -6,11 +6,11 @@
 
     <Grid >
         <!-- Place new controls here -->
-
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+      <ScrollView>
         <Grid Padding="10">            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -107,7 +107,7 @@
                 <Label Text="Checkbox"
                    VerticalOptions="Center"
                    Grid.Column="0"/>
-                <!--<controls:CheckBox Grid.Column="1" IsChecked="True" HeightRequest="100" WidthRequest="100" TextColor="Blue" Text="Nera"/>-->
+                <controls:CheckBox Grid.Column="1" CheckedColor="Red" UncheckedColor="Blue" IsChecked="True" HeightRequest="100" WidthRequest="100"/>
             </Grid>
 
             <controls:Picker x:Name="_btnPicker" Grid.Row="8"
@@ -150,6 +150,8 @@
                 </controls:FloatingActionMenu.Items>
             </controls:FloatingActionMenu>
         </Grid>
+        
+      </ScrollView>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
