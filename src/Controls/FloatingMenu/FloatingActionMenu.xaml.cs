@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,7 +9,9 @@ namespace IS.Toolkit.XamarinForms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FloatingActionMenu : Grid
     {
-        private double _originalContentHeight;
+        #region Fields
+        private bool _isOpening;
+        #endregion
 
         public FloatingActionMenu()
         {
@@ -21,17 +23,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Items),
             returnType: typeof(IEnumerable<FloatingActionMenuItem>),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(IEnumerable<FloatingActionMenuItem>),
-            propertyChanged: ItemsPropertyChanged);
-
-        private static void ItemsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable != null && newValue != null)
-            {
-                var control = (FloatingActionMenu)bindable;
-                control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
-            }
-        }
+            defaultValue: default(IEnumerable<FloatingActionMenuItem>));
 
         public IEnumerable<FloatingActionMenuItem> Items
         {
@@ -86,6 +78,15 @@ namespace IS.Toolkit.XamarinForms.Controls
         }
         #endregion
 
+        #region IsRotateAnimationEnabled
+        public static readonly BindableProperty IsRotateAnimationEnabledProperty = BindableProperty.Create(nameof(IsRotateAnimationEnabled), typeof(bool), typeof(FloatingActionButton), default(bool));
+        public bool IsRotateAnimationEnabled
+        {
+            get { return (bool)GetValue(IsRotateAnimationEnabledProperty); }
+            set { SetValue(IsRotateAnimationEnabledProperty, value); }
+        }
+        #endregion
+
         #region FilterBackgroundColor
         public static readonly BindableProperty FilterBackgroundColorProperty = BindableProperty.Create(
             propertyName: nameof(FilterBackgroundColor),
@@ -111,7 +112,19 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Padding),
             returnType: typeof(Thickness),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(Thickness));
+            defaultValue: default(Thickness),
+            propertyChanged: OnPaddingPropertyChanged);
+
+        private static void OnPaddingPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var padding = (Thickness)newValue;
+            var control = bindable as FloatingActionMenu;
+            if (control != null)
+            {
+                control.FAB.Padding = new Thickness(padding.Left, 0, padding.Right, padding.Bottom);
+                control.ItemsLayout.Padding = new Thickness(padding.Left, padding.Top, padding.Right, 0);
+            }
+        }
 
         public new Thickness Padding
         {
@@ -131,56 +144,8 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(IsOpen),
             returnType: typeof(bool),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: true,
+            defaultValue: false,
             propertyChanged: IsOpenPropertyChanged);
-
-        private static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable != null && newValue != null)
-            {
-                var control = (FloatingActionMenu)bindable;
-                var isOpen = (bool)newValue;
-                control.IsOpenChanged(isOpen);
-            }
-        }
-
-        private void IsOpenChanged(bool isOpen)
-        {
-            // RightIconImage.RotateTo(isOpen ? 180 : 0, length: 150);
-            if (Items != null && _originalContentHeight != default)
-            {
-                var animate = new Animation(
-                    callback: d => ItemsLayout.HeightRequest = d,
-                    start: isOpen ? 0 : _originalContentHeight,
-                    end: isOpen ? _originalContentHeight : 0);
-                animate.Commit(
-                    owner: ItemsLayout,
-                    name: "ExpanderAnimation",
-                    length: 150u);
-
-                var animate2 = new Animation(
-                    callback: d => ItemsLayout.Opacity = d,
-                    start: isOpen ? 0 : 1,
-                    end: isOpen ? 1 : 0);
-                animate2.Commit(
-                    owner: ItemsLayout,
-                    name: "ExpanderFadeAnimation",
-                    length: 150u);
-
-                var animate3 = new Animation(
-                    callback: d => OpacityFilter.Opacity = d,
-                    start: isOpen ? 0 : 1,
-                    end: isOpen ? 1 : 0);
-                animate3.Commit(
-                    owner: OpacityFilter,
-                    name: "ExpanderOpacityFilterAnimation",
-                    length: 150u,
-                    finished: (arg, value) =>
-                    {
-                        OpacityFilter.InputTransparent = !isOpen;
-                    });
-            }
-        }
 
         public bool IsOpen
         {
@@ -193,6 +158,98 @@ namespace IS.Toolkit.XamarinForms.Controls
                 SetValue(IsOpenProperty, value);
             }
         }
+
+        private static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (bindable != null && newValue != null)
+            {
+                var control = (FloatingActionMenu)bindable;
+                var isOpen = (bool)newValue;
+                if (!control.IsOpen)
+                {
+                    control.CloseAnimationOnFab();
+                }
+                else
+                {
+                    control.OpenFABAnimation();
+                }
+
+                control.OpacityFilter.InputTransparent = !control.IsOpen;
+            }
+        }
+
+        private async void CloseAnimationOnFab()
+        {
+            _isOpening = false;
+            if (IsRotateAnimationEnabled)
+            {
+                FAB.RestoreRotationAnimation();
+            }
+
+            if (ItemsLayout != null)
+            {
+                const int animationDuration = 250;
+                ItemsLayout.IsVisible = true;
+                var tasks = new List<Task>();
+                if (ItemsLayout.ViewItems != null)
+                {
+                    tasks.Add(OpacityFilter.FadeTo(0, animationDuration));
+                    for (int index = 0; index < ItemsLayout.ViewItems.Count; index++)
+                    {
+                        var currentItem = ItemsLayout.ViewItems[index];
+
+                        var position = CalculateItemClosedPosition(currentItem, index);
+                        tasks.Add(currentItem.TranslateTo(0, position, animationDuration, easing: Easing.BounceIn));
+                        tasks.Add(currentItem.FadeTo(0, animationDuration, easing: Easing.BounceIn));
+                    }
+
+                    await Task.WhenAll(tasks.ToArray());
+
+                    // if user didn't reopen the FAM during animation
+                    if (_isOpening == false)
+                    {
+                        ItemsLayout.IsVisible = false;
+                        OpacityFilter.IsVisible = false;
+                    }
+                }
+            }
+        }
+
+        private double CalculateItemClosedPosition(View item, int index)
+        {
+            return 2 * (item.Height + 10);
+        }
+
+        private void OpenFABAnimation()
+        {
+            const int animationDuration = 100;
+            const int animationFadeDuration = 500;
+            _isOpening = true;
+            for (int index = 0; index < ItemsLayout.ViewItems.Count; index++)
+            {
+                var currentItem = ItemsLayout.ViewItems[index];
+
+                var position = CalculateItemClosedPosition(currentItem, index);
+                currentItem.TranslationY = position;
+                currentItem.Opacity = 0;
+            }
+
+            ItemsLayout.IsVisible = true;
+            OpacityFilter.IsVisible = true;
+            OpacityFilter.Opacity = 0;
+            OpacityFilter.FadeTo(0.5, animationFadeDuration);
+            if (IsRotateAnimationEnabled)
+            {
+                FAB.RotateAnimation();
+            }
+
+            foreach (var item in ItemsLayout.ViewItems)
+            {
+                item.TranslateTo(0, 0, animationDuration, easing: Easing.BounceIn);
+                item.FadeTo(1, animationDuration, easing: Easing.BounceIn);
+            }
+        }
+
         #endregion
 
         #region Size
@@ -200,23 +257,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             propertyName: nameof(Size),
             returnType: typeof(double),
             declaringType: typeof(FloatingActionMenu),
-            defaultValue: 70.0,
-            propertyChanged: SizeChanged);
-
-        private static new void SizeChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (bindable != null && newValue != null)
-            {
-                var control = (FloatingActionMenu)bindable;
-                control._originalContentHeight = default;
-                control.ItemSize = 2 * control.Size / 3;
-                control.ItemsMargin = new Thickness(0, 0, (control.Size / 2) - (control.ItemSize / 2), 0);
-                if (control.Items != default)
-                {
-                    control.InitOriginalContentHeight(control.Items.Count() * (control.ItemSize + 10));
-                }
-            }
-        }
+            defaultValue: 70.0d);
 
         public double Size
         {
@@ -229,60 +270,30 @@ namespace IS.Toolkit.XamarinForms.Controls
                 SetValue(SizeProperty, value);
             }
         }
-
-        public double ItemSize { get; set; } = 50;
-        public Thickness ItemsMargin { get; set; } = new Thickness(0, 0, 10, 0);
         #endregion
 
-        #region ItemsPadding
-        public static readonly BindableProperty ItemsPaddingProperty = BindableProperty.Create(
-            propertyName: nameof(ItemsPadding),
-            returnType: typeof(Thickness),
-            declaringType: typeof(FloatingActionMenu),
-            defaultValue: default(Thickness));
-
-        public Thickness ItemsPadding
+        #region ItemSize
+        public static readonly BindableProperty ItemSizeProperty = BindableProperty.Create(
+           propertyName: nameof(ItemSize),
+           returnType: typeof(double),
+           declaringType: typeof(FloatingActionMenu),
+           defaultValue: 50d);
+        public double ItemSize
         {
             get
             {
-                return (Thickness)GetValue(ItemsPaddingProperty);
+                return (double)GetValue(ItemSizeProperty);
             }
             set
             {
-                SetValue(ItemsPaddingProperty, value);
+                SetValue(ItemSizeProperty, value);
             }
         }
-        #endregion
-
-        #region MainButtonToItemMargin
-
-        public static readonly BindableProperty MainButtonToItemMarginProperty = BindableProperty.Create(nameof(MainButtonToItemMargin), typeof(Thickness), typeof(FloatingActionMenu), new Thickness(0, -33, 0, 0));
-
-        public Thickness MainButtonToItemMargin
-        {
-            get { return (Thickness)GetValue(MainButtonToItemMarginProperty); }
-            set { SetValue(MainButtonToItemMarginProperty, value); }
-        }
-
         #endregion
 
         private void FloatingActionButton_Clicked(object sender, EventArgs e)
         {
             IsOpen = !IsOpen;
-        }
-
-        private void InitOriginalContentHeight(double size)
-        {
-            _originalContentHeight = size;
-
-            if (!IsOpen)
-            {
-                ItemsLayout.HeightRequest = 0;
-                OpacityFilter.HeightRequest = 0;
-                OpacityFilter.Opacity = 0;
-                OpacityFilter.InputTransparent = true;
-                ItemsLayout.Opacity = 0;
-            }
         }
 
         private void OpacityFilter_Tapped(object sender, EventArgs e)

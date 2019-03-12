@@ -166,10 +166,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Renderers\checkbox_empty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Renderers\checkbox_fill.png" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

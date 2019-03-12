@@ -3,9 +3,19 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <DefineConstants>$(DefineConstants);</DefineConstants>
-    <Version>1.0.0-alpha017</Version>
+    <Version>1.0.0-alpha024</Version>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Authors>Infinite Square</Authors>
+    <Description>
+      Toolkit for Xamarin Forms
+    </Description>
+    <PackageLicenseUrl>https://github.com/Infinite-Square/IS.Toolkit.XamarinForms/blob/develop/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Infinite-Square/IS.Toolkit.XamarinForms</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Infinite-Square/IS.Toolkit.XamarinForms</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
  
   <ItemGroup>
@@ -38,9 +48,6 @@
     <Compile Update="Controls\FloatingActionButton.xaml.cs">
       <DependentUpon>FloatingActionButton.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\FloatingMenu\FloatingActionMenu.xaml.cs">
-      <DependentUpon>FloatingActionMenu.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   
   <ItemGroup>
@@ -52,9 +59,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SegmentedControl\SegmentedControl.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingMenu\FloatingActionMenu.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SnackBar\SnackBar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

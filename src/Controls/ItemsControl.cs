@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using Xamarin.Forms;
 
@@ -8,6 +9,7 @@ namespace IS.Toolkit.XamarinForms.Controls
     public class ItemsControl : ContentView
     {
         private Layout<View> _itemsLayout;
+        public IList<View> ViewItems => _itemsLayout?.Children;
 
         public static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ItemsControl), propertyChanged: ItemsSourceChanged);
