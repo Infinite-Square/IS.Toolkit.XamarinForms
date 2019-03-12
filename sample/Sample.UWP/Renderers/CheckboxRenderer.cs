@@ -31,12 +31,12 @@ namespace Sample.UWP.Renderers
                     checkBox.IsChecked = Element.IsChecked;
                     checkBox.Checked += CheckBox_Checked;
                     checkBox.Unchecked += CheckBox_Unchecked;
-                    _contentText.FontSize = Element.FontSize;
-                    _contentText.Text = Element.Text;
-                    UpdateTextColor();
+                    ////_contentText.FontSize = Element.FontSize;
+                    ////_contentText.Text = Element.Text;
+                    ////UpdateTextColor();
                     checkBox.Content = _contentText;
                     SetNativeControl(checkBox);
-                    UpdateAccentColor(checkBox);
+                    ////UpdateAccentColor(checkBox);
                 }
             }
         }
@@ -45,14 +45,14 @@ namespace Sample.UWP.Renderers
         {
             Element.IsChecked = (bool)Control.IsChecked;
             Element.InvokeCheckChanged((bool)Control.IsChecked);
-            Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
+            ////Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Element.IsChecked = (bool)Control.IsChecked;
             Element.InvokeCheckChanged((bool)Control.IsChecked);
-            Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
+            ////Element.CheckedCommand?.Execute(Element.CheckedCommandArguement);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -63,26 +63,6 @@ namespace Sample.UWP.Renderers
             {
                 Control.IsChecked = Element.IsChecked;
             }
-            else if (e.PropertyName.Equals(nameof(IS.Toolkit.XamarinForms.Controls.CheckBox.AccentColor)))
-            {
-                UpdateAccentColor(Control as Windows.UI.Xaml.Controls.CheckBox);
-            }
-            else if (e.PropertyName.Equals(nameof(IS.Toolkit.XamarinForms.Controls.CheckBox.Text)))
-            {
-                Control.Content = Element.Text;
-            }
-            else if (e.PropertyName.Equals(nameof(IS.Toolkit.XamarinForms.Controls.CheckBox.TextColor)))
-            {
-                UpdateTextColor();
-            }
-            else if (e.PropertyName.Equals(nameof(Element.FontSize)))
-            {
-                _contentText.FontSize = Element.FontSize;
-            }
         }
-
-        private void UpdateAccentColor(Windows.UI.Xaml.Controls.CheckBox checkBox) => checkBox.Foreground = new SolidColorBrush(Element.AccentColor.ToUwp());
-
-        private void UpdateTextColor() => _contentText.Foreground = new SolidColorBrush(Element.TextColor.ToUwp());
     }
 }
