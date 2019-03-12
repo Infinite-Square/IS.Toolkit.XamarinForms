@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -30,7 +31,12 @@ namespace IS.Toolkit.XamarinForms.Controls
         {
             if ((bool)newValue == true)
             {
-                (bindable as EditLabel).MainEntry.Focus();
+                Thread.Sleep(100);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    (bindable as EditLabel).MainEntry.Focus();
+                    (bindable as EditLabel).MainEntry.CursorPosition = (bindable as EditLabel).MainEntry.Text?.Length ?? 0;
+                });
             }
         }
 
