@@ -3,14 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:IS.Toolkit.XamarinForms.Controls;assembly=IS.Toolkit.XamarinForms"
              x:Class="Sample.MainPage">
-    <ScrollView Orientation="Vertical">
-        <Grid>
+
+    <Grid >
+        <!-- Place new controls here -->
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+      
+      <ScrollView>
+        <Grid Padding="10">            
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackLayout Margin="10">
-                <controls:TextBox Placeholder="Name"/>
 
                 <controls:TextBox Placeholder="Error" 
                             ErrorText="An Error occured"
@@ -20,6 +32,7 @@
                             HeaderTextColor="Black"
                             BackgroundColor="WhiteSmoke"
                             LeftIcon="Icon.png"
+                            Grid.Row="1"
                             CornerRadius="10"
                             IsOpen="False"
                             Animated="True">
@@ -33,6 +46,7 @@
                 x:Name="segmentedControl" 
                 SelectedItem="Item 1"
                 CornerRadius="10"
+                            Grid.Row="2"
                 BackgroundColor="#e6e0e0"
                 SelectedItemBackgroundColor="#333333"
                 TextColor="#aaaaaa"
@@ -48,7 +62,8 @@
                     </controls:SegmentedControl.Items>
                 </controls:SegmentedControl>
 
-                <controls:ItemsControl x:Name="_itemsControl">
+                <controls:ItemsControl x:Name="_itemsControl"
+                            Grid.Row="3">
                     <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding Text}"/>
@@ -56,7 +71,8 @@
                     </controls:ItemsControl.ItemTemplate>
                 </controls:ItemsControl>
 
-                <controls:ItemsControl x:Name="_itemsWrappedControl">
+                <controls:ItemsControl x:Name="_itemsWrappedControl"
+                            Grid.Row="4">
                     <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding Text}"/>
@@ -72,6 +88,7 @@
                 </controls:ItemsControl>
 
                 <controls:Picker x:Name="_picker"
+                            Grid.Row="5"
                             SelectedItemChanged="Picker_SelectedItemChanged"
                             Placeholder="Select a value..."
                             Title="Picker : "
@@ -80,15 +97,16 @@
                             BorderColor="Red"
                             Type="TimePicker"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Checkbox"
-                    VerticalOptions="Center"
-                    Grid.Column="0"/>
-                </Grid>
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Checkbox"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
+                <controls:CheckBox Grid.Column="1" CheckedColor="Red" UncheckedColor="Blue" IsChecked="True" HeightRequest="100" WidthRequest="100"/>
+            </Grid>
 
                 <controls:Picker x:Name="_btnPicker"
                             Placeholder="Select a value..."
@@ -96,27 +114,8 @@
                             IsClearable="True"
                             BackgroundColor="Wheat"
                             BorderColor="Red"
+                            Grid.Row="7"
                             Type="Button" />
-
-            </StackLayout>
-
-            <Grid Grid.Row="1" Margin="0,0,0,100">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Button x:Name="Obutton" 
-                    Text="OpenButton"
-                    Clicked="Button_Clicked"/>
-
-                <controls:SnackBar x:Name="SnackB" 
-                               HeightRequest="50" 
-                               VerticalOptions="End"
-                               FontSize="12" 
-                               BackgroundColor="#323232"
-                               TextColor="White" 
-                               ButtonTextColor="Orange"
-                               CloseButtonText="ANNULER"/>
-            </Grid>
 
             <controls:FloatingActionMenu
             x:Name="fab"
@@ -127,7 +126,7 @@
             Image="Icon.png"
             FilterBackgroundColor="#B3000000"
             IsRotateAnimationEnabled="True"
-            Grid.RowSpan="2"
+            Grid.RowSpan="8"
             IsVisible="True">
                 <controls:FloatingActionMenu.Items>
                     <x:Array Type="{x:Type controls:FloatingActionMenuItem}"
@@ -157,15 +156,20 @@
                     </x:Array>
                 </controls:FloatingActionMenu.Items>
             </controls:FloatingActionMenu>
-
-            <controls:FloatingActionButton VerticalOptions="End"
-                                           HorizontalOptions="End"
-                                           Size="60"
-                                           Margin="20"
-                                           Color="Red"
-                                           Image="Icon.png"
-                                           Grid.RowSpan="2"
-                                           IsVisible="False" />
         </Grid>
-    </ScrollView>
+        
+      </ScrollView>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <controls:SnackBar x:Name="SnackB" HeightRequest="50" FontSize="12" 
+                               BackgroundColor="#323232" TextColor="White" ButtonTextColor="Orange" CloseButtonText="ANNULER"  Grid.Row="1"
+                               />
+            <Button x:Name="Obutton" Text="OpenButton" Clicked="Button_Clicked"/>
+        </Grid>
+    </Grid>
 </ContentPage>
