@@ -163,9 +163,5 @@
       <Name>Sample</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomControl\" />
-    <Folder Include="Renderers\" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
