@@ -17,16 +17,16 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
- 
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Expander\dropdown.png" />
-    <EmbeddedResource Include="Controls\Picker\close.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.46" PrivateAssets="All" />
     <PackageReference Include="Xamarin.Forms" Version="3.5.0.169047" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Expander\dropdown.png" />
+    <EmbeddedResource Include="Controls\Picker\close.png" />
   </ItemGroup>
 
   <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
@@ -40,6 +40,10 @@
   <PropertyGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
     <DefineConstants>$(DefineConstants);UWP</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IS.Toolkit.XamarinForms.Core\IS.Toolkit.XamarinForms.Core.csproj" />
+  </ItemGroup>
   
   <ItemGroup>
     <Compile Update="Controls\Expander\Expander.xaml.Cs">
@@ -85,5 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
+  
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>
