@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS.Toolkit.XamarinForms.Controls
@@ -14,10 +10,6 @@ namespace IS.Toolkit.XamarinForms.Controls
             typeof(bool),
             typeof(CheckBox),
             false,
-            propertyChanged: (bindable, oldValue, newValue) =>
-            {
-                ////((CheckBox)bindable).CheckedChanged?.Invoke(bindable, new CheckedChangedEventArgs((bool)newValue));
-            },
             defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty CheckedColorProperty = BindableProperty.Create(nameof(CheckedColor), typeof(Color), typeof(CheckBox), Color.Default);

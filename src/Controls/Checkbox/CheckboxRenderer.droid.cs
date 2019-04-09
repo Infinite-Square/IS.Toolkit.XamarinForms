@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
+﻿#if ANDROID
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -15,12 +10,17 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using IS.Toolkit.XamarinForms;
-using Sample.Droid.Renderers;
+using IS.Toolkit.XamarinForms.Controls;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(IS.Toolkit.XamarinForms.Controls.CheckBox), typeof(CheckboxRenderer))]
-namespace Sample.Droid.Renderers
+namespace IS.Toolkit.XamarinForms.Controls
 {
     public class CheckboxRenderer : ViewRenderer<IS.Toolkit.XamarinForms.Controls.CheckBox, AppCompatCheckBox>,
         CompoundButton.IOnCheckedChangeListener
@@ -132,3 +132,4 @@ namespace Sample.Droid.Renderers
         }
     }
 }
+#endif

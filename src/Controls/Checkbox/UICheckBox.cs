@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#if IOS
 using CoreGraphics;
-using Foundation;
 using IS.Toolkit.XamarinForms.Controls;
-using Sample.IOS.Renderers;
+using System;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: Xamarin.Forms.ExportRenderer(typeof(CheckBox), typeof(CheckBoxRenderer))]
-namespace Sample.IOS.CustomControl
+[assembly: ExportRenderer(typeof(CheckBox), typeof(CheckBoxRenderer))]
+namespace IS.Toolkit.XamarinForms.Controls
 {
     public class UICheckBox : UIControl
     {
@@ -207,3 +203,4 @@ namespace Sample.IOS.CustomControl
         }
     }
 }
+#endif

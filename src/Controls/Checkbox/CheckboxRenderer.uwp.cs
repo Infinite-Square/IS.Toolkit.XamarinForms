@@ -1,5 +1,5 @@
-﻿using IS.Toolkit.XamarinForms.Controls;
-using Sample.UWP.Renderers;
+﻿#if UWP
+using IS.Toolkit.XamarinForms.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Media;
 using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(IS.Toolkit.XamarinForms.Controls.CheckBox), typeof(CheckboxRenderer))]
-namespace Sample.UWP.Renderers
+namespace IS.Toolkit.XamarinForms.Controls
 {
     public class CheckboxRenderer : ViewRenderer<IS.Toolkit.XamarinForms.Controls.CheckBox, Windows.UI.Xaml.Controls.CheckBox>
     {
@@ -47,10 +47,11 @@ namespace Sample.UWP.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(IS.Toolkit.XamarinForms.Controls.CheckBox.IsChecked)))
+            if (e.PropertyName.Equals(nameof(CheckBox.IsChecked)))
             {
                 Control.IsChecked = Element.IsChecked;
             }
         }
     }
 }
+#endif
