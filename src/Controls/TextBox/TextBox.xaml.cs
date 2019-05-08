@@ -194,7 +194,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                     PlaceholderView.FontSize = 16;
                     if (withAnimation)
                     {
-                        await ViewExtensions.TranslateTo(PlaceholderView, 0, 0, (uint)250, Easing.CubicOut);
+                        await ViewExtensions.TranslateTo(PlaceholderView, 0, 0, 250U, Easing.CubicOut);
                     }
                     else
                     {
@@ -209,7 +209,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 {
                     if (withAnimation)
                     {
-                        await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, (uint)250, Easing.CubicOut);
+                        await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, 250U, Easing.CubicOut);
                     }
                     else
                     {

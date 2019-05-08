@@ -17,7 +17,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateMeasure());
 
         /// <summary>
-        /// Spacing added between elements
+        /// Spacing added between elements.
         /// </summary>
         public double Spacing
         {
@@ -35,7 +35,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateMeasure());
 
         /// <summary>
-        ///  number for uniform child width
+        ///  number for uniform child width.
         /// </summary>
         public int UniformColumns
         {
@@ -52,7 +52,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateMeasure());
 
         /// <summary>
-        ///  make item height equal to item width when UniformColums > 0
+        ///  make item height equal to item width when UniformColums > 0.
         /// </summary>
         public bool IsSquare
         {
