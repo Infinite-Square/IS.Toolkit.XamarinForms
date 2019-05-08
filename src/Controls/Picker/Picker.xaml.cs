@@ -48,15 +48,15 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         #region Title
 
-            #region Title
-            public static readonly BindableProperty TitleProperty = BindableProperty.Create(
+        #region Title
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(
                     propertyName: nameof(Title),
                     returnType: typeof(string),
                     declaringType: typeof(Picker),
                     defaultValue: default(string),
                     propertyChanged: TitlePropertyChanged);
 
-            private static void TitlePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void TitlePropertyChanged(BindableObject bindable, object oldValue, object newValue)
             {
                 if (bindable != null)
                 {
@@ -65,7 +65,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 }
             }
 
-            public string Title
+        public string Title
             {
                 get
                 {
@@ -77,17 +77,17 @@ namespace IS.Toolkit.XamarinForms.Controls
                 }
             }
 
-            public bool HasTitle => !string.IsNullOrEmpty(Title);
-            #endregion
+        public bool HasTitle => !string.IsNullOrEmpty(Title);
+        #endregion
 
-            #region TitleTextColor
-            public static readonly BindableProperty TitleTextColorProperty = BindableProperty.Create(
+        #region TitleTextColor
+        public static readonly BindableProperty TitleTextColorProperty = BindableProperty.Create(
                 propertyName: nameof(TitleTextColor),
                 returnType: typeof(Color),
                 declaringType: typeof(Picker),
                 defaultValue: Label.TextColorProperty.DefaultValue);
 
-            public Color TitleTextColor
+        public Color TitleTextColor
             {
                 get
                 {
@@ -98,16 +98,16 @@ namespace IS.Toolkit.XamarinForms.Controls
                     SetValue(TitleTextColorProperty, value);
                 }
             }
-            #endregion
+        #endregion
 
-            #region TitleFontSize
-            public static readonly BindableProperty TitleFontSizeProperty = BindableProperty.Create(
+        #region TitleFontSize
+        public static readonly BindableProperty TitleFontSizeProperty = BindableProperty.Create(
                 propertyName: nameof(TitleFontSize),
                 returnType: typeof(double),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontSizeProperty.DefaultValue);
 
-            public double TitleFontSize
+        public double TitleFontSize
             {
                 get
                 {
@@ -120,14 +120,14 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
             #endregion
 
-            #region TitleFontFamily
-            public static readonly BindableProperty TitleFontFamilyProperty = BindableProperty.Create(
+        #region TitleFontFamily
+        public static readonly BindableProperty TitleFontFamilyProperty = BindableProperty.Create(
                 propertyName: nameof(TitleFontFamily),
                 returnType: typeof(string),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontFamilyProperty.DefaultValue);
 
-            public string TitleFontFamily
+        public string TitleFontFamily
             {
                 get
                 {
@@ -138,9 +138,9 @@ namespace IS.Toolkit.XamarinForms.Controls
                     SetValue(TitleFontFamilyProperty, value);
                 }
             }
-            #endregion
+        #endregion
 
-            #region TitleFontAttributes
+        #region TitleFontAttributes
         public static readonly BindableProperty TitleFontAttributesProperty = BindableProperty.Create(
             propertyName: nameof(TitleFontAttributes),
             returnType: typeof(FontAttributes),
@@ -235,7 +235,7 @@ namespace IS.Toolkit.XamarinForms.Controls
         /// <summary>
         /// Selected item type will be AvailableValue if Type if default.
         /// DateTime if Type is DatePicker
-        /// TimeSpan if Type if TimePicker
+        /// TimeSpan if Type if TimePicker.
         /// </summary>
         public object SelectedItem
         {
@@ -329,7 +329,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 declaringType: typeof(Picker),
                 defaultValue: Label.TextColorProperty.DefaultValue);
 
-            public Color TextColor
+        public Color TextColor
             {
                 get
                 {
@@ -343,13 +343,13 @@ namespace IS.Toolkit.XamarinForms.Controls
             #endregion
 
             #region FontSize
-            public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(
                 propertyName: nameof(FontSize),
                 returnType: typeof(double),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontSizeProperty.DefaultValue);
 
-            public double FontSize
+        public double FontSize
             {
                 get
                 {
@@ -363,13 +363,13 @@ namespace IS.Toolkit.XamarinForms.Controls
             #endregion
 
             #region FontFamily
-            public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(
                 propertyName: nameof(FontFamily),
                 returnType: typeof(string),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontFamilyProperty.DefaultValue);
 
-            public string FontFamily
+        public string FontFamily
             {
                 get
                 {
@@ -383,13 +383,13 @@ namespace IS.Toolkit.XamarinForms.Controls
             #endregion
 
             #region FontAttributes
-            public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(
                 propertyName: nameof(FontAttributes),
                 returnType: typeof(FontAttributes),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontAttributesProperty.DefaultValue);
 
-            public FontAttributes FontAttributes
+        public FontAttributes FontAttributes
             {
                 get
                 {
@@ -407,13 +407,13 @@ namespace IS.Toolkit.XamarinForms.Controls
         #region Placeholder
 
             #region Placeholder
-            public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(
+        public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(
                 propertyName: nameof(Placeholder),
                 returnType: typeof(string),
                 declaringType: typeof(Picker),
                 defaultValue: default(string));
 
-            public string Placeholder
+        public string Placeholder
             {
                 get
                 {
@@ -425,7 +425,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 }
             }
 
-            public bool ShowPlaceholder => string.IsNullOrEmpty(SelectedText);
+        public bool ShowPlaceholder => string.IsNullOrEmpty(SelectedText);
             #endregion
 
             #region PlaceholderTextColor
@@ -435,7 +435,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 declaringType: typeof(Picker),
                 defaultValue: Entry.PlaceholderColorProperty.DefaultValue);
 
-            public Color PlaceholderTextColor
+        public Color PlaceholderTextColor
             {
                 get
                 {
@@ -449,13 +449,13 @@ namespace IS.Toolkit.XamarinForms.Controls
             #endregion
 
             #region PlaceholderFontSize
-            public static readonly BindableProperty PlaceholderFontSizeProperty = BindableProperty.Create(
+        public static readonly BindableProperty PlaceholderFontSizeProperty = BindableProperty.Create(
                 propertyName: nameof(PlaceholderFontSize),
                 returnType: typeof(double),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontSizeProperty.DefaultValue);
 
-            public double PlaceholderFontSize
+        public double PlaceholderFontSize
             {
                 get
                 {
@@ -469,13 +469,13 @@ namespace IS.Toolkit.XamarinForms.Controls
             #endregion
 
             #region PlaceholderFontFamily
-            public static readonly BindableProperty PlaceholderFontFamilyProperty = BindableProperty.Create(
+        public static readonly BindableProperty PlaceholderFontFamilyProperty = BindableProperty.Create(
                 propertyName: nameof(PlaceholderFontFamily),
                 returnType: typeof(string),
                 declaringType: typeof(Picker),
                 defaultValue: Label.FontFamilyProperty.DefaultValue);
 
-            public string PlaceholderFontFamily
+        public string PlaceholderFontFamily
             {
                 get
                 {
@@ -540,7 +540,7 @@ namespace IS.Toolkit.XamarinForms.Controls
             returnType: typeof(bool),
             declaringType: typeof(Picker),
             defaultValue: default(bool),
-                propertyChanged: IsClearablePropertyChanged);
+            propertyChanged: IsClearablePropertyChanged);
 
         private static void IsClearablePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {

@@ -41,6 +41,9 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty ErrorTextProperty =
            BindableProperty.Create(nameof(ErrorText), typeof(string), typeof(TextBox), null);
 
+        public static readonly BindableProperty IsPasswordProperty =
+            BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(TextBox), null);
+
         public Keyboard Keyboard
         {
             get
@@ -137,6 +140,18 @@ namespace IS.Toolkit.XamarinForms.Controls
             }
         }
 
+        public bool IsPassword
+        {
+            get
+            {
+                return (bool)GetValue(IsPasswordProperty);
+            }
+            set
+            {
+                SetValue(IsPasswordProperty, value);
+            }
+        }
+
         private static void TextChanged(BindableObject bindableObject, object oldColor, object newColor)
         {
             (bindableObject as TextBox)?.InvalidatePlaceholderPosition(false);
@@ -179,7 +194,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                     PlaceholderView.FontSize = 16;
                     if (withAnimation)
                     {
-                        await ViewExtensions.TranslateTo(PlaceholderView, 0, 0, (uint)250, Easing.CubicOut);
+                        await ViewExtensions.TranslateTo(PlaceholderView, 0, 0, 250U, Easing.CubicOut);
                     }
                     else
                     {
@@ -194,7 +209,7 @@ namespace IS.Toolkit.XamarinForms.Controls
                 {
                     if (withAnimation)
                     {
-                        await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, (uint)250, Easing.CubicOut);
+                        await ViewExtensions.TranslateTo(PlaceholderView, 0, -20, 250U, Easing.CubicOut);
                     }
                     else
                     {
