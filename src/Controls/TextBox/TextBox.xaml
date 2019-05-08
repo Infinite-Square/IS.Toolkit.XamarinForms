@@ -19,6 +19,7 @@
                     Unfocused="Entry_Unfocused"
                     VerticalOptions="End"
                     Keyboard="{TemplateBinding Path=Keyboard, Mode=OneWay}"
+                    MaxLength="{TemplateBinding Path=MaxLength, Mode=OneWay}"
                     Text="{TemplateBinding Path=Text, Mode=TwoWay}">
                 </controls:BorderLessEntry>
 
