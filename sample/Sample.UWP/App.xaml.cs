@@ -74,10 +74,10 @@ namespace Sample.UWP
         }
 
         /// <summary>
-        /// Invoked when Navigation to a certain page fails
+        /// Invoked when Navigation to a certain page fails.
         /// </summary>
-        /// <param name="sender">The Frame which failed navigation</param>
-        /// <param name="e">Details about the navigation failure</param>
+        /// <param name="sender">The Frame which failed navigation.</param>
+        /// <param name="e">Details about the navigation failure.</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
