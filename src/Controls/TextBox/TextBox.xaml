@@ -18,6 +18,7 @@
                     Focused="Entry_Focused"
                     Unfocused="Entry_Unfocused"
                     VerticalOptions="End"
+                    IsPassword="{TemplateBinding Path=IsPassword, Mode=OneWay}"
                     Keyboard="{TemplateBinding Path=Keyboard, Mode=OneWay}"
                     Text="{TemplateBinding Path=Text, Mode=TwoWay}">
                 </controls:BorderLessEntry>
