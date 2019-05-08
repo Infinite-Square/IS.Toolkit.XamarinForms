@@ -45,6 +45,9 @@ namespace IS.Toolkit.XamarinForms.Controls
         public static readonly BindableProperty ErrorTextProperty =
            BindableProperty.Create(nameof(ErrorText), typeof(string), typeof(TextBox), null);
 
+        public static readonly BindableProperty IsPasswordProperty =
+            BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(TextBox), null);
+
         public Keyboard Keyboard
         {
             get
