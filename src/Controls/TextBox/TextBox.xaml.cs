@@ -1,4 +1,5 @@
 ﻿using IS.Toolkit.XamarinForms.Controls.Utils;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,6 +26,9 @@ namespace IS.Toolkit.XamarinForms.Controls
 
         public static readonly BindableProperty TextProperty =
             BindableProperty.Create(nameof(Text), typeof(string), typeof(TextBox), propertyChanged: TextChanged);
+
+        public static readonly BindableProperty MaxLengthProperty =
+            BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(int), int.MaxValue);
 
         public static readonly BindableProperty BorderColorProperty =
             BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(TextBox), Color.Accent, propertyChanged: BorderColorChanged);
@@ -137,6 +141,18 @@ namespace IS.Toolkit.XamarinForms.Controls
             set
             {
                 SetValue(TextProperty, value);
+            }
+        }
+
+        public int MaxLength
+        {
+            get
+            {
+                return (int)GetValue(MaxLengthProperty);
+            }
+            set
+            {
+                SetValue(MaxLengthProperty, value);
             }
         }
 

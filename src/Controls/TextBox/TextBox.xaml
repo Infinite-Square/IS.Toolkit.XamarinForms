@@ -20,6 +20,7 @@
                     VerticalOptions="End"
                     IsPassword="{TemplateBinding Path=IsPassword, Mode=OneWay}"
                     Keyboard="{TemplateBinding Path=Keyboard, Mode=OneWay}"
+                    MaxLength="{TemplateBinding Path=MaxLength, Mode=OneWay}"
                     Text="{TemplateBinding Path=Text, Mode=TwoWay}">
                 </controls:BorderLessEntry>
 
