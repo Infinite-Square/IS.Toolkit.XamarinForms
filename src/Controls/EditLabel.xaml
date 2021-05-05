@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IS.Toolkit.XamarinForms.Controls.EditLabel"
+             xmlns:local="clr-namespace:IS.Toolkit.XamarinForms.Controls"
+             Focused="MainLabel_Focused"
+             x:Name="thisEditLabel">
+
+    <ContentView.Triggers>
+        <DataTrigger Binding="{Binding IsFocusedMode, Source={x:Reference thisEditLabel}}" Value="False" TargetType="ContentView">
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Label x:Name="MainLabel" FontAttributes="{Binding FontAttributes, Source={x:Reference thisEditLabel}}"  FontFamily="{Binding FontFamily, Source={x:Reference thisEditLabel}}"
+                           Text="{Binding Text, Source={x:Reference thisEditLabel}, Mode=TwoWay}" TextColor="{Binding TextColor, Source={x:Reference thisEditLabel}}" FontSize="{Binding FontSize, Source={x:Reference thisEditLabel}}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Setter.Value>
+            </Setter>
+        </DataTrigger>
+        <DataTrigger Binding="{Binding  IsFocusedMode, Source={x:Reference thisEditLabel}}" Value="True" TargetType="local:EditLabel">
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Entry Placeholder="{Binding PlaceHolder, Source={x:Reference thisEditLabel}}" FontAttributes="{Binding FontAttributes, Source={x:Reference thisEditLabel}}" x:Name="MainEntry" 
+                           TextColor="{Binding TextColor, Source={x:Reference thisEditLabel}}"
+                           Text="{Binding Text, Source={x:Reference thisEditLabel}, Mode=TwoWay}" FontSize="{Binding FontSize, Source={x:Reference thisEditLabel}}"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContentChanged" Value="True" />
+        </DataTrigger>
+        <DataTrigger TargetType="local:EditLabel" Binding="{Binding IsFocused, Source={x:Reference MainEntry}}" Value="False">
+            <Setter Property="IsFocusedMode" Value="False"/>
+        </DataTrigger>
+    </ContentView.Triggers>
+</ContentView>
